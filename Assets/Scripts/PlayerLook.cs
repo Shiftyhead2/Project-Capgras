@@ -5,17 +5,36 @@ using UnityEngine;
 public class PlayerLook : MonoBehaviour
 {
 
+    [Header("Camera")]
     [SerializeField]
     private Camera cam;
 
     private float xRotation = 0f;
 
+
+    [Header("Mouse sensitivity settings")]
     [SerializeField]
     [Range(0f, 30f)]
     private float xSensitivity = 15f;
     [SerializeField]
     [Range(0f, 30f)]
     private float ySensitivity = 15f;
+
+    [Header("Zoom settings")]
+    [SerializeField] private float timeToZoom = 0.3f;
+    [SerializeField] private float zoomF0V = 30f;
+    private float defaultFOV;
+    private Coroutine zoomRoutine;
+    bool isZooming = false;
+
+
+    private void Start()
+    {
+        defaultFOV = cam.fieldOfView;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
 
     public void ProcessLook(Vector2 input)
     {
@@ -25,5 +44,36 @@ public class PlayerLook : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -80f, 80f);
         cam.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
         transform.Rotate(Vector3.up * (mouseX * Time.deltaTime) * xSensitivity);
+    }
+
+
+    public void HandleZoom()
+    {
+        isZooming = !isZooming;
+        if(zoomRoutine != null)
+        {
+            StopCoroutine(zoomRoutine);
+            zoomRoutine = null;
+        }
+
+        zoomRoutine = StartCoroutine(ToggleZoom(isZooming));
+    }
+
+
+    private IEnumerator ToggleZoom(bool isEnter)
+    {
+        float targetFOV = isEnter ? zoomF0V : defaultFOV;
+        float startingFOV = cam.fieldOfView;
+        float timeElapsed = 0f;
+
+        while(timeElapsed < timeToZoom)
+        {
+            cam.fieldOfView = Mathf.Lerp(startingFOV, targetFOV, timeElapsed / timeToZoom);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        cam.fieldOfView = targetFOV;
+        zoomRoutine = null;
     }
 }

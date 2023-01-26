@@ -196,16 +196,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f5fe5a2746610043b548a45fd0d26e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toggleHeadBob: 1
+  canSprint: 1
+  canMove: 1
+  canCrouch: 1
+  canJump: 1
+  cam: {fileID: 8723725554403772948}
   walkingSpeed: 5
   runningSpeed: 8
+  crouchingSpeed: 1.5
+  slopeSpeed: 8
   gravity: -9.8
   jumpHeight: 0.5
-  cam: {fileID: 8723725554403772948}
   crouchHeight: 0.5
   standingHeight: 2
   timeToCrouch: 0.25
   crouchingCenter: {x: 0, y: 0.5, z: 0}
   standingCenter: {x: 0, y: 0, z: 0}
+  walkBobSpeed: 14
+  walkBobAmount: 0.05
+  runBobSpeed: 18
+  runBobAmount: 0.1
+  crouchBobSpeed: 8
+  crouchBobAmount: 0.025
 --- !u!114 &2375940735605212280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,3 +234,5 @@ MonoBehaviour:
   cam: {fileID: 8723725554403772948}
   xSensitivity: 30
   ySensitivity: 30
+  timeToZoom: 0.3
+  zoomF0V: 30

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputManager : MonoBehaviour
+public class PlayerInputManager : MonoBehaviour
 {
     private PlayerActions playerInput;
     private PlayerActions.OnFootActions onFoot;
@@ -23,6 +23,7 @@ public class InputManager : MonoBehaviour
         onFoot.Jump.performed += ctx => motor.Jump();
         onFoot.Sprint.performed += ctx => motor.Sprint();
         onFoot.Crouch.performed += ctx => motor.Crouch();
+        onFoot.Zoom.performed += ctx => look.HandleZoom();
     }
 
 
