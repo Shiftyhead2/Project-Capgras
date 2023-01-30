@@ -84,6 +84,7 @@ public class PlayerMotor : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        cam = GetComponent<PlayerLook>().cam;
         defaultYPos = cam.transform.localPosition.y;
         speed = walkingSpeed;
     }

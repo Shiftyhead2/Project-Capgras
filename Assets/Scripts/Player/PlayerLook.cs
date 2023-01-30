@@ -5,9 +5,8 @@ using UnityEngine;
 public class PlayerLook : MonoBehaviour
 {
 
-    [Header("Camera")]
     [SerializeField]
-    private Camera cam;
+    public Camera cam { get; private set; }
 
     private float xRotation = 0f;
 
@@ -28,8 +27,9 @@ public class PlayerLook : MonoBehaviour
     bool isZooming = false;
 
 
-    private void Start()
+    private void Awake()
     {
+        cam = GetComponentInChildren<Camera>();
         defaultFOV = cam.fieldOfView;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

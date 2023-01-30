@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 8723725554607832885}
   - component: {fileID: 3595345632350515334}
   - component: {fileID: 524278118488720525}
+  - component: {fileID: 333760302}
   - component: {fileID: 2375940735605212280}
   m_Layer: 0
   m_Name: Player
@@ -201,7 +202,7 @@ MonoBehaviour:
   canMove: 1
   canCrouch: 1
   canJump: 1
-  cam: {fileID: 8723725554403772948}
+  cam: {fileID: 0}
   walkingSpeed: 5
   runningSpeed: 8
   crouchingSpeed: 1.5
@@ -219,6 +220,23 @@ MonoBehaviour:
   runBobAmount: 0.1
   crouchBobSpeed: 8
   crouchBobAmount: 0.025
+--- !u!114 &333760302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8723725554607832890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6b694b6a15f598479f9ec2091e23437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 0}
+  interactiableLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  interactionDistance: 1.5
 --- !u!114 &2375940735605212280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,7 +249,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 023483b5d9d705446a90e2fb03d0a6ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 8723725554403772948}
   xSensitivity: 30
   ySensitivity: 30
   timeToZoom: 0.3
