@@ -233,10 +233,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
-  interactiableLayerMask:
+  LayerMask:
     serializedVersion: 2
     m_Bits: 8
-  interactionDistance: 1.5
+  Distance: 2
 --- !u!114 &2375940735605212280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,6 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 023483b5d9d705446a90e2fb03d0a6ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <cam>k__BackingField: {fileID: 0}
   xSensitivity: 30
   ySensitivity: 30
   timeToZoom: 0.3

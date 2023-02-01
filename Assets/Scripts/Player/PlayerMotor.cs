@@ -17,7 +17,7 @@ public class PlayerMotor : MonoBehaviour
     [SerializeField] private bool canJump = true;
 
     [Header("Camera")]
-    [SerializeField]
+    [field:SerializeField,ReadOnlyInspector]
     private Camera cam;
 
     private CharacterController characterController;

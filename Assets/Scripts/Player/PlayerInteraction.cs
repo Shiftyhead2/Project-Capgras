@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    [SerializeField] private Camera cam;
-    [SerializeField] private LayerMask interactiableLayerMask;
-    [SerializeField] private float interactionDistance = 1f;
+    [Header("Camera")]
+    [field:SerializeField, ReadOnlyInspector] private Camera cam;
+    [Header("Interaction settings")]
+    [SerializeField] private LayerMask LayerMask;
+    [SerializeField] private float Distance = 1f;
     private PlayerInputManager playerInputManager;
     // Start is called before the first frame update
     void Start()
@@ -21,9 +23,9 @@ public class PlayerInteraction : MonoBehaviour
         if(cam != null)
         {
             Ray ray = new Ray(cam.transform.position, cam.transform.forward);
-            Debug.DrawRay(ray.origin, ray.direction * interactionDistance);
+            Debug.DrawRay(ray.origin, ray.direction * Distance);
             RaycastHit hitInfo;
-            if(Physics.Raycast(ray,out hitInfo, interactionDistance, interactiableLayerMask))
+            if(Physics.Raycast(ray,out hitInfo, Distance, LayerMask))
             {
                 IInteractable interactable = hitInfo.collider.GetComponent<IInteractable>();
 

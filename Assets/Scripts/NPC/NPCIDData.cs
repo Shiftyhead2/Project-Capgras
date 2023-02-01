@@ -6,6 +6,7 @@ public class NPCIDData : MonoBehaviour
 {
     [SerializeField]
     private List<FieldData> IdFields = new List<FieldData>();
+    [Header("Data Settings")]
     [SerializeField]
     private int amountOfFields = 1;
     [SerializeField]
@@ -28,9 +29,7 @@ public class NPCIDData : MonoBehaviour
         {
             int id = i;
             bool isCorrect = isFalse();
-            string fieldName = getFieldName(id);
-            string fieldValue = getValue(isCorrect);
-            FieldData data = new FieldData(id, fieldName, fieldValue, isCorrect);
+            FieldData data = new FieldData(id, getFieldName(id), getValue(isCorrect), isCorrect);
             IdFields.Add(data);
         }
     }
