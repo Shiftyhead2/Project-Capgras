@@ -41,11 +41,23 @@ public class PlayerInputManager : MonoBehaviour
 
     private void OnEnable()
     {
-        onFoot.Enable();
+        GameEvents.onComputerInteraction += DisableInput;
+        EnableInput();
     }
 
     private void OnDisable()
     {
+        GameEvents.onComputerInteraction -= DisableInput;
+        DisableInput();
+    }
+
+    private void DisableInput()
+    {
         onFoot.Disable();
+    }
+
+    private void EnableInput()
+    {
+        onFoot.Enable();
     }
 }

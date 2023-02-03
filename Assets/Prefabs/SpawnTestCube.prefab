@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8698186332934277164}
   - component: {fileID: 2578014193728659677}
   - component: {fileID: 6498832693300919140}
+  - component: {fileID: 317462207229664215}
   - component: {fileID: 1119655269868096879}
   m_Layer: 0
   m_Name: SpawnTestCube
@@ -98,6 +99,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &317462207229664215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5962552360003046155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf40cfceae1dc94d88f4d40c42479f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <FirstName>k__BackingField: 
+  <LastName>k__BackingField: 
+  <Gender>k__BackingField: 
 --- !u!114 &1119655269868096879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,5 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e674fd5d39c96f49bfbbc0854a0e2d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IDfields: []
-  amountOfFields: 5
+  IdFields: []
+  amountOfFields: 3
+  maxAmountOfFalseData: 1
+  currentAmountOfFalseData: 0

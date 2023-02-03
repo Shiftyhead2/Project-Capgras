@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class NPCIDData : MonoBehaviour
 {
+    private NPCInformation informatiton;
+
     [SerializeField]
     private List<FieldData> IdFields = new List<FieldData>();
     [Header("Data Settings")]
@@ -18,6 +20,7 @@ public class NPCIDData : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        informatiton = GetComponent<NPCInformation>();
         currentAmountOfFalseData = 0;
         GenerateFields();
     }
@@ -29,7 +32,8 @@ public class NPCIDData : MonoBehaviour
         {
             int id = i;
             bool isCorrect = isFalse();
-            FieldData data = new FieldData(id, getFieldName(id), getValue(isCorrect), isCorrect);
+            FieldData data = new FieldData(id, getFieldName(id), getValue(isCorrect,id), isCorrect);
+            GameEvents.onUpdateBiometricFields(data);
             IdFields.Add(data);
         }
     }
@@ -58,19 +62,50 @@ public class NPCIDData : MonoBehaviour
         switch (id)
         {
             case 0:
-                return "Name";
+                return "First Name";
+            case 1:
+                return "Last Name";
+            case 2:
+                return "Gender";
             default:
                 return "Unknown";
         }
     }
 
-    string getValue(bool isFalse)
+    string getValue(bool isFalse, int id)
     {
-        if (isFalse)
+        switch (id)
         {
-            return "Incorrect";
+            case 0:
+                //First name
+                if (isFalse)
+                {
+                    return "Incorrect";
+                }
+                return informatiton.FirstName;
+            case 1:
+                //Last name
+                if (isFalse)
+                {
+                    return "Incorrect";
+                }
+                return informatiton.LastName;
+            case 2:
+                //Gender
+                if (isFalse)
+                {
+                    if(informatiton.Gender.ToLower() == "male")
+                    {
+                        return "Female";
+                    }
+                    else
+                    {
+                        return "Male";
+                    }
+                }
+                return informatiton.Gender;
+            default:
+                return "Unknown";
         }
-
-        return "Correct";
     }
 }

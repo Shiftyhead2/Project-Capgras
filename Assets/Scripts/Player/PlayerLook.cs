@@ -32,8 +32,6 @@ public class PlayerLook : MonoBehaviour
     {
         cam = GetComponentInChildren<Camera>();
         defaultFOV = cam.fieldOfView;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
 
