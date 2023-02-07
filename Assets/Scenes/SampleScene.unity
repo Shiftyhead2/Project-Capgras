@@ -134,6 +134,9 @@ GameObject:
   - component: {fileID: 43228909}
   - component: {fileID: 43228911}
   - component: {fileID: 43228910}
+  - component: {fileID: 43228913}
+  - component: {fileID: 43228912}
+  - component: {fileID: 43228914}
   m_Layer: 5
   m_Name: ID UI
   m_TagString: Untagged
@@ -203,6 +206,42 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 43228908}
   m_CullTransparentMesh: 1
+--- !u!114 &43228912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43228908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e408d0e8e47e3d49826cba669993dca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!225 &43228913
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43228908}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &43228914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43228908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b1c233faaa639445995e76af57d1db6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &74343330
 GameObject:
   m_ObjectHideFlags: 0
@@ -5823,6 +5862,9 @@ GameObject:
   - component: {fileID: 1170692387}
   - component: {fileID: 1170692389}
   - component: {fileID: 1170692388}
+  - component: {fileID: 1170692391}
+  - component: {fileID: 1170692390}
+  - component: {fileID: 1170692392}
   m_Layer: 5
   m_Name: E-ID UI
   m_TagString: Untagged
@@ -5892,6 +5934,42 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1170692386}
   m_CullTransparentMesh: 1
+--- !u!114 &1170692390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170692386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e408d0e8e47e3d49826cba669993dca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!225 &1170692391
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170692386}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &1170692392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170692386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b1c233faaa639445995e76af57d1db6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1249617978
 GameObject:
   m_ObjectHideFlags: 0
@@ -10001,8 +10079,6 @@ GameObject:
   - component: {fileID: 1988426718}
   - component: {fileID: 1988426717}
   - component: {fileID: 1988426716}
-  - component: {fileID: 1988426720}
-  - component: {fileID: 1988426721}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -10093,30 +10169,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!225 &1988426720
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1988426715}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
---- !u!114 &1988426721
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1988426715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e408d0e8e47e3d49826cba669993dca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!43 &2036887597
 Mesh:
   m_ObjectHideFlags: 0

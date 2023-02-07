@@ -27,11 +27,22 @@ public class PlayerLook : MonoBehaviour
     private Coroutine zoomRoutine;
     bool isZooming = false;
 
+    private void OnEnable()
+    {
+        GameEvents.onComputerInteraction += EnableMouse;
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.onComputerInteraction -= EnableMouse;
+    }
+
 
     private void Awake()
     {
         cam = GetComponentInChildren<Camera>();
         defaultFOV = cam.fieldOfView;
+        DisableMouse();
     }
 
 
@@ -74,5 +85,18 @@ public class PlayerLook : MonoBehaviour
 
         cam.fieldOfView = targetFOV;
         zoomRoutine = null;
+    }
+
+
+    void DisableMouse()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    void EnableMouse()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 }

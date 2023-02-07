@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class UIController : MonoBehaviour
 {
     private CanvasGroup canvasGroup;
 
@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour
 
     private void OnDisable()
     {
-        GameEvents.onComputerInteraction -= DisableUI;
+        GameEvents.onComputerInteraction -= EnableUI;
     }
 
     void DisableUI()
@@ -23,8 +23,6 @@ public class UIManager : MonoBehaviour
         canvasGroup.alpha = 0f;
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
 
@@ -35,8 +33,6 @@ public class UIManager : MonoBehaviour
         canvasGroup.alpha = 1f;
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
     }
 
 }
