@@ -730,6 +730,34 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""DetectiveMode"",
+            ""id"": ""dbb03eca-e0c8-4aa6-bdae-bc2d73b3d1f8"",
+            ""actions"": [
+                {
+                    ""name"": ""Enter detective mode"",
+                    ""type"": ""Button"",
+                    ""id"": ""97024397-ef53-4f2b-9cc5-9281d025b886"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""af987da8-9de7-41ab-b9ce-7af3e783e659"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Enter detective mode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -755,6 +783,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        // DetectiveMode
+        m_DetectiveMode = asset.FindActionMap("DetectiveMode", throwIfNotFound: true);
+        m_DetectiveMode_Enterdetectivemode = m_DetectiveMode.FindAction("Enter detective mode", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -996,6 +1027,39 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // DetectiveMode
+    private readonly InputActionMap m_DetectiveMode;
+    private IDetectiveModeActions m_DetectiveModeActionsCallbackInterface;
+    private readonly InputAction m_DetectiveMode_Enterdetectivemode;
+    public struct DetectiveModeActions
+    {
+        private @PlayerActions m_Wrapper;
+        public DetectiveModeActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Enterdetectivemode => m_Wrapper.m_DetectiveMode_Enterdetectivemode;
+        public InputActionMap Get() { return m_Wrapper.m_DetectiveMode; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DetectiveModeActions set) { return set.Get(); }
+        public void SetCallbacks(IDetectiveModeActions instance)
+        {
+            if (m_Wrapper.m_DetectiveModeActionsCallbackInterface != null)
+            {
+                @Enterdetectivemode.started -= m_Wrapper.m_DetectiveModeActionsCallbackInterface.OnEnterdetectivemode;
+                @Enterdetectivemode.performed -= m_Wrapper.m_DetectiveModeActionsCallbackInterface.OnEnterdetectivemode;
+                @Enterdetectivemode.canceled -= m_Wrapper.m_DetectiveModeActionsCallbackInterface.OnEnterdetectivemode;
+            }
+            m_Wrapper.m_DetectiveModeActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Enterdetectivemode.started += instance.OnEnterdetectivemode;
+                @Enterdetectivemode.performed += instance.OnEnterdetectivemode;
+                @Enterdetectivemode.canceled += instance.OnEnterdetectivemode;
+            }
+        }
+    }
+    public DetectiveModeActions @DetectiveMode => new DetectiveModeActions(this);
     public interface IOnFootActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -1018,5 +1082,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+    }
+    public interface IDetectiveModeActions
+    {
+        void OnEnterdetectivemode(InputAction.CallbackContext context);
     }
 }

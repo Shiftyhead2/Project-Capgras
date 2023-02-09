@@ -708,6 +708,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "DetectiveMode",
+            "id": "dbb03eca-e0c8-4aa6-bdae-bc2d73b3d1f8",
+            "actions": [
+                {
+                    "name": "Enter detective mode",
+                    "type": "Button",
+                    "id": "97024397-ef53-4f2b-9cc5-9281d025b886",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "af987da8-9de7-41ab-b9ce-7af3e783e659",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Enter detective mode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

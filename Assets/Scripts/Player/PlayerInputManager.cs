@@ -7,6 +7,7 @@ public class PlayerInputManager : MonoBehaviour
 {
     private PlayerActions playerInput;
     public PlayerActions.OnFootActions onFoot { get; private set; }
+    private PlayerActions.DetectiveModeActions detectiveModeActions;
 
     private PlayerMotor motor;
     private PlayerLook look;
@@ -16,6 +17,7 @@ public class PlayerInputManager : MonoBehaviour
     {
         playerInput = new PlayerActions();
         onFoot = playerInput.OnFoot;
+        detectiveModeActions = playerInput.DetectiveMode;
 
         motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();
@@ -24,6 +26,7 @@ public class PlayerInputManager : MonoBehaviour
         onFoot.Sprint.performed += ctx => motor.Sprint();
         onFoot.Crouch.performed += ctx => motor.Crouch();
         onFoot.Zoom.performed += ctx => look.HandleZoom();
+        detectiveModeActions.Enterdetectivemode.performed += ctx => GameEvents.onEnterDetectiveMode?.Invoke();
     }
 
 
@@ -41,23 +44,42 @@ public class PlayerInputManager : MonoBehaviour
 
     private void OnEnable()
     {
-        GameEvents.onComputerInteraction += DisableInput;
-        EnableInput();
+        GameEvents.onComputerInteraction += DisablePlayerInput;
+        GameEvents.onComputerInteraction += EnableDetectiveInput;
+        EnablePlayerInput();
+        DisableDetectiveInput();
     }
 
     private void OnDisable()
     {
-        GameEvents.onComputerInteraction -= DisableInput;
-        DisableInput();
+        GameEvents.onComputerInteraction -= DisablePlayerInput;
+        GameEvents.onComputerInteraction -= EnableDetectiveInput;
+        GenericDisable();
     }
 
-    private void DisableInput()
+    void GenericDisable()
+    {
+        onFoot.Disable();
+        detectiveModeActions.Disable();
+    }
+
+    private void DisablePlayerInput()
     {
         onFoot.Disable();
     }
 
-    private void EnableInput()
+    private void EnablePlayerInput()
     {
         onFoot.Enable();
+    }
+
+    private void EnableDetectiveInput()
+    {
+        detectiveModeActions.Enable();
+    }
+
+    private void DisableDetectiveInput()
+    {
+        detectiveModeActions.Disable();
     }
 }
