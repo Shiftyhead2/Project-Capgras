@@ -18,4 +18,6 @@ public static class GameEvents
     public static Action<int, string> onPassField;
     public static Action<int, string> onUnselect;
     public static Action onModalClosed;
+    public static Action<bool> onNPCDocumentsChecked;
+    public static Action onNPCFullyChecked;
 }

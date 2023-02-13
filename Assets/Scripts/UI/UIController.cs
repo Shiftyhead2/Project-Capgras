@@ -10,12 +10,14 @@ public class UIController : MonoBehaviour
     {
         canvasGroup = GetComponent<CanvasGroup>();
         GameEvents.onComputerInteraction += EnableUI;
+        GameEvents.onNPCFullyChecked += DisableUI;
         DisableUI();
     }
 
     private void OnDisable()
     {
         GameEvents.onComputerInteraction -= EnableUI;
+        GameEvents.onNPCFullyChecked -= DisableUI;
     }
 
     void DisableUI()

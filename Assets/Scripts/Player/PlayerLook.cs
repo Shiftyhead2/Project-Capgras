@@ -30,11 +30,13 @@ public class PlayerLook : MonoBehaviour
     private void OnEnable()
     {
         GameEvents.onComputerInteraction += EnableMouse;
+        GameEvents.onNPCFullyChecked += DisableMouse;
     }
 
     private void OnDisable()
     {
         GameEvents.onComputerInteraction -= EnableMouse;
+        GameEvents.onNPCFullyChecked -= DisableMouse;
     }
 
 

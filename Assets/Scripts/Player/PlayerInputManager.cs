@@ -46,6 +46,8 @@ public class PlayerInputManager : MonoBehaviour
     {
         GameEvents.onComputerInteraction += DisablePlayerInput;
         GameEvents.onComputerInteraction += EnableDetectiveInput;
+        GameEvents.onNPCFullyChecked += EnablePlayerInput;
+        GameEvents.onNPCFullyChecked += DisableDetectiveInput;
         EnablePlayerInput();
         DisableDetectiveInput();
     }
@@ -54,6 +56,8 @@ public class PlayerInputManager : MonoBehaviour
     {
         GameEvents.onComputerInteraction -= DisablePlayerInput;
         GameEvents.onComputerInteraction -= EnableDetectiveInput;
+        GameEvents.onNPCFullyChecked -= EnablePlayerInput;
+        GameEvents.onNPCFullyChecked -= DisableDetectiveInput;
         GenericDisable();
     }
 

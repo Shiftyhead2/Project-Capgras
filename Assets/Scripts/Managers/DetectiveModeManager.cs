@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class DetectiveModeManager : MonoBehaviour
@@ -26,6 +25,7 @@ public class DetectiveModeManager : MonoBehaviour
         GameEvents.onEnterDetectiveMode += setDetectiveMode;
         GameEvents.onUnselect += RemoveFields;
         GameEvents.onPassField += setUp;
+        GameEvents.onNPCFullyChecked += ClearField;
     }
 
     private void OnDisable()
@@ -33,6 +33,7 @@ public class DetectiveModeManager : MonoBehaviour
         GameEvents.onEnterDetectiveMode -= setDetectiveMode;
         GameEvents.onUnselect -= RemoveFields;
         GameEvents.onPassField -= setUp;
+        GameEvents.onNPCFullyChecked -= ClearField;
     }
 
 
@@ -90,6 +91,12 @@ public class DetectiveModeManager : MonoBehaviour
             fieldIDs.Remove(ID);
             fieldValues.Remove(value);
         }
+    }
+
+    void ClearField()
+    {
+        fieldIDs.Clear();
+        fieldValues.Clear();
     }
 
 
