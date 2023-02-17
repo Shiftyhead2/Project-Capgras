@@ -98,6 +98,7 @@ public class DetectiveModeManager : MonoBehaviour
 
     void ClearField()
     {
+        inDetectiveMode = false;
         fieldIDs.Clear();
         fieldValues.Clear();
     }

@@ -25,12 +25,14 @@ public class GameManager : MonoBehaviour
     {
         GameEvents.onCallPerson += SpawnObject;
         GameEvents.onProcessPerson += ProcessPerson;
+        GameEvents.onAIWaypointReached += DespawnPerson;
     }
 
     private void OnDisable()
     {
         GameEvents.onCallPerson -= SpawnObject;
         GameEvents.onProcessPerson -= ProcessPerson;
+        GameEvents.onAIWaypointReached -= DespawnPerson;
     }
 
     private void Awake()
@@ -55,6 +57,11 @@ public class GameManager : MonoBehaviour
     {
         SpawnedPerson = true;
         Instantiate(spawnPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
+    }
+
+    private void DespawnPerson()
+    {
+        SpawnedPerson = false;
     }
 
     private void ProcessPerson(bool isInProcessing)

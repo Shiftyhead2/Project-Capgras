@@ -8,6 +8,7 @@ public class NPCAI : MonoBehaviour
 
     private StateMachine stateMachine;
     private NavMeshAgent agent;
+    private bool approvedForEntry;
     public NavMeshAgent Agent
     {
         get => agent;
@@ -16,6 +17,11 @@ public class NPCAI : MonoBehaviour
     public StateMachine StateMachine
     {
         get => stateMachine;
+    }
+
+    public bool ApprovedForEntry
+    {
+        get => approvedForEntry;
     }
 
     public Path path;
@@ -28,9 +34,26 @@ public class NPCAI : MonoBehaviour
         stateMachine.Initialise();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        
+        GameEvents.onNPCDocumentsChecked += checkApproval;
+        GameEvents.onAIWaypointReached += Despawn;
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.onNPCDocumentsChecked -= checkApproval;
+        GameEvents.onAIWaypointReached -= Despawn;
+    }
+
+
+    void checkApproval(bool approved)
+    {
+        approvedForEntry = approved;
+    }
+
+    void Despawn()
+    {
+        Destroy(gameObject);
     }
 }

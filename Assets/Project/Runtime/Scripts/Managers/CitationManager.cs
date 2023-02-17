@@ -21,29 +21,58 @@ public class CitationManager : MonoBehaviour
     }
 
 
-    private void checkFieldList(List<FieldData> fieldDatas)
+    private void checkFieldList(List<FieldData> fieldDatas, bool isSuspicious)
     {
         reasons = string.Empty;
         string fullCitationtext = "You have been given a citation for the following reasons: \n \n";
-        
 
-        foreach(FieldData fieldData in fieldDatas)
-        {
-            if (fieldData._isFalse)
-            {
-                reasons += $"{fieldData._fieldName} is incorrect! \n";
-            }
-        }
-
-            
+        giveReason(fieldDatas,isSuspicious);
 
         if(reasons != string.Empty)
         {
             fullCitationtext += reasons;
             fullCitationtext += "\n Do not dissapoint us again!";
-
-            GameEvents.showModal?.Invoke("CITATION", fullCitationtext, "OK", GameEvents.onCitationModalClosed,true);
-            GameEvents.onCitationGiven?.Invoke();
+            giveCitation(fullCitationtext); 
         }
+        
+    }
+
+    void giveReason(List<FieldData> fieldDatas,bool isSuspicious)
+    {
+
+        int incorrectInformation = 0;
+
+        foreach (FieldData fieldData in fieldDatas)
+        {
+            if (fieldData._isFalse)
+            {
+                reasons += $"{fieldData._fieldName} is incorrect! \n";
+                incorrectInformation++;
+            }
+        }
+
+        if(incorrectInformation > 0)
+        {
+            if (!isSuspicious)
+            {
+                reasons += "Suspicious person not tagged with the suspicious tag! \n";
+            }
+            else
+            {
+                reasons = string.Empty;
+            }
+        }else if(incorrectInformation == 0)
+        {
+            if (isSuspicious)
+            {
+                reasons += "Incorrect usage of the suspicious tag! \n";
+            }
+        }
+    }
+
+    void giveCitation(string fullCitationText)
+    {
+        GameEvents.showModal?.Invoke("CITATION", fullCitationText, "OK", GameEvents.onCitationModalClosed, true);
+        GameEvents.onCitationGiven?.Invoke();
     }
 }

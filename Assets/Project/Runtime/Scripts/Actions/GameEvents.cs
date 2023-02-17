@@ -11,6 +11,7 @@ public static class GameEvents
     public static Action onComputerInteraction;
     public static Action<int, string> onUpdateIDFields;
     public static Action<FieldData> onUpdateBiometricFields;
+    public static Action<bool> onSuspiciousFlag;
     public static Action<string, string, string,Action,bool> showModal;
     public static Action onEnterDetectiveMode;
     public static Action onExitDetectiveMode;
@@ -24,6 +25,7 @@ public static class GameEvents
     public static Action onNPCFullyChecked;
     public static Action<bool> onProcessPerson;
     public static Action onCitationZoneEnter;
-    public static Action<List<FieldData>> onProcessFieldData;
+    public static Action<List<FieldData>,bool> onProcessFieldData;
     public static Action onCitationGiven;
+    public static Action onAIWaypointReached;
 }

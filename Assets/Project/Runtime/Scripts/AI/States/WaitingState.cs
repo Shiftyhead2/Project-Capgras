@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WaitingState : BaseState
 {
-    private DenyState denyState = new DenyState();
-    private ApproveState approveState = new ApproveState();
+    private LeaveState leaveState = new LeaveState();
     
     public override void Enter()
     {
@@ -27,14 +24,6 @@ public class WaitingState : BaseState
 
     void CheckState(bool approved)
     {
-        if(approved)
-        {
-            npc.StateMachine.ChangeState(approveState);
-        }
-        else
-        {
-            //In case we are not approved
-            npc.StateMachine.ChangeState(denyState);
-        }
+        npc.StateMachine.ChangeState(leaveState);
     }
 }

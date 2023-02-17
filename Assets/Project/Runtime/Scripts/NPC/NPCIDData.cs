@@ -15,16 +15,20 @@ public class NPCIDData : MonoBehaviour
     private int maxAmountOfFalseData = 2;
     [SerializeField]
     private int currentAmountOfFalseData = 0;
+    [SerializeField]
+    private bool isSuspicious;
 
     private void OnEnable()
     {
         GameEvents.onCitationZoneEnter += GetData;
+        GameEvents.onSuspiciousFlag += flagSuspicious;
     }
 
 
     private void OnDisable()
     {
         GameEvents.onCitationZoneEnter -= GetData;
+        GameEvents.onSuspiciousFlag -= flagSuspicious;
     }
 
 
@@ -57,7 +61,7 @@ public class NPCIDData : MonoBehaviour
             return false;
         }
 
-        float percentChange = 50f;
+        float percentChange = 10f;
         float randomValue = Random.Range(0f, 100f);
         
         if(randomValue > percentChange)
@@ -122,6 +126,11 @@ public class NPCIDData : MonoBehaviour
 
     void GetData()
     {
-        GameEvents.onProcessFieldData?.Invoke(IdFields);
+        GameEvents.onProcessFieldData?.Invoke(IdFields,isSuspicious);
+    }
+
+    void flagSuspicious(bool suspicious)
+    {
+        isSuspicious = suspicious;
     }
 }
