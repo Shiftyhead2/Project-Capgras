@@ -31,6 +31,7 @@ public class CitationManager : MonoBehaviour
         if(reasons != string.Empty)
         {
             fullCitationtext += reasons;
+            fullCitationtext += $"\n A fine of {GameManager.instance.fine} credits has been added to your account!";
             fullCitationtext += "\n Do not dissapoint us again!";
             giveCitation(fullCitationtext); 
         }

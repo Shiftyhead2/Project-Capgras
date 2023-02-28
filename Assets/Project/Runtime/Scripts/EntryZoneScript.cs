@@ -4,13 +4,9 @@ using UnityEngine;
 
 public class EntryZoneScript : MonoBehaviour
 {
-
-    [SerializeField]
-    private int layer;
-
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer == layer)
+        if(other.gameObject.TryGetComponent(out INPC npc))
         {
             GameEvents.onProcessPerson?.Invoke(true);
         }
@@ -18,7 +14,7 @@ public class EntryZoneScript : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == layer)
+        if (other.gameObject.TryGetComponent(out INPC npc))
         {
             GameEvents.onProcessPerson?.Invoke(false);
         }

@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class CitationZoneTrigger : MonoBehaviour
 {
-    [SerializeField]
-    private int layer;
-
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer == layer)
+        if(other.gameObject.TryGetComponent(out INPC npc))
         {
             GameEvents.onCitationZoneEnter?.Invoke();
         }

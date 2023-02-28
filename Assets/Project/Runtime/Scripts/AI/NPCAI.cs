@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class NPCAI : MonoBehaviour
+public class NPCAI : MonoBehaviour,INPC
 {
 
     private StateMachine stateMachine;

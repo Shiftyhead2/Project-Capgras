@@ -21,11 +21,17 @@ public class GameManager : MonoBehaviour
 #endif
     public bool SpawnedPerson { get; private set; }
 
+    private int approvedCount;
+    private int citations;
+    public int fine { get; private set; } = 5;
+
     private void OnEnable()
     {
         GameEvents.onCallPerson += SpawnObject;
         GameEvents.onProcessPerson += ProcessPerson;
         GameEvents.onAIWaypointReached += DespawnPerson;
+        GameEvents.onNPCDocumentsChecked += IncreaseApprovedCount;
+        GameEvents.onCitationGiven += IncreaseCitationCount;
     }
 
     private void OnDisable()
@@ -33,6 +39,8 @@ public class GameManager : MonoBehaviour
         GameEvents.onCallPerson -= SpawnObject;
         GameEvents.onProcessPerson -= ProcessPerson;
         GameEvents.onAIWaypointReached -= DespawnPerson;
+        GameEvents.onNPCDocumentsChecked -= IncreaseApprovedCount;
+        GameEvents.onCitationGiven -= IncreaseCitationCount;
     }
 
     private void Awake()
@@ -48,10 +56,28 @@ public class GameManager : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+
+        
     }
 
-   
-    
+    private void Start()
+    {
+        approvedCount = 0;
+        citations = 0;
+        fine = 5;
+        UpdateText(approvedCount);
+    }
+
+
+    void IncreaseApprovedCount(bool approved)
+    {
+        if (approved)
+        {
+            approvedCount++;
+            UpdateText(approvedCount);
+        }
+    }
+
 
     private void SpawnObject()
     {
@@ -68,4 +94,19 @@ public class GameManager : MonoBehaviour
     {
         ProcessingPerson = isInProcessing;
     }
+
+    private void UpdateText(int i)
+    {
+        GameEvents.onUpdateText?.Invoke(i);
+    }
+
+    private void IncreaseCitationCount()
+    {
+        citations++;
+        if(citations % 4 == 0)
+        {
+            fine += 5;
+        }
+    }
+
 }
