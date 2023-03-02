@@ -29,4 +29,5 @@ public static class GameEvents
     public static Action onCitationGiven; //triggered when the player gets a citation
     public static Action onAIWaypointReached; //triggered when the NPC reaches a certain checkpoint
     public static Action<int> onUpdateText; //triggered when some text should be updated
+    public static Action<int, int> onTimePassed; //triggered when time has passed. Used in updating the time UI
 }
