@@ -7,7 +7,7 @@ public class TimeUI : MonoBehaviour
 {
     private TextMeshProUGUI text;
 
-    private void Start()
+    private void Awake()
     {
         text = GetComponent<TextMeshProUGUI>();
         HideText();
@@ -39,6 +39,6 @@ public class TimeUI : MonoBehaviour
 
     void UpdateTimeUI(int hour, int minute)
     {
-        text.text = $"{hour:00}:{minute:00}";
+       text.text = $"{hour:00}:{minute:00}";
     }
 }

@@ -7,6 +7,11 @@ public class UIFlagToggles : MonoBehaviour
 {
     private Toggle flagToggle;
 
+    private void Awake()
+    {
+        flagToggle = GetComponentInChildren<Toggle>();
+    }
+
     private void OnEnable()
     {
         GameEvents.onAIWaypointReached += resetFlag;
@@ -15,11 +20,6 @@ public class UIFlagToggles : MonoBehaviour
     private void OnDisable()
     {
         GameEvents.onAIWaypointReached -= resetFlag;
-    }
-
-    private void Start()
-    {
-        flagToggle = GetComponentInChildren<Toggle>();
     }
 
 
