@@ -181,6 +181,7 @@ MonoBehaviour:
   <FirstName>k__BackingField: 
   <LastName>k__BackingField: 
   <Gender>k__BackingField: 
+  beggingObject: {fileID: 11400000, guid: ee3fe1ee97a5a7a4a92961510d8a2807, type: 2}
 --- !u!114 &1119655269868096879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,3 +198,4 @@ MonoBehaviour:
   amountOfFields: 3
   maxAmountOfFalseData: 2
   currentAmountOfFalseData: 0
+  isSuspicious: 0

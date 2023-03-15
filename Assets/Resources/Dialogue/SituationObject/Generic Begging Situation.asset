@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 282d3435f203ec34e88e7728bc661851, type: 3}
+  m_Name: Generic Begging Situation
+  m_EditorClassIdentifier: 
+  dialogueTexts:
+  - {fileID: 11400000, guid: fc2d61eba43604148829253b5b36c986, type: 2}
+  dialogueChoices:
+  - {fileID: 11400000, guid: 008a96476a64a4e4185074d6cef42097, type: 2}
+  - {fileID: 11400000, guid: 95bf2b3cd8510e042afc0ee0d220d4fa, type: 2}

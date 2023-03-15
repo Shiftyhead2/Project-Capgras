@@ -30,4 +30,10 @@ public static class GameEvents
     public static Action onAIWaypointReached; //triggered when the NPC reaches a certain checkpoint
     public static Action<int> onUpdateText; //triggered when some text should be updated
     public static Action<int, int> onTimePassed; //triggered when time has passed. Used in updating the time UI
+    public static Action<SituationObject> onNPCSituation; //triggered when an NPC has a situation that needs to be resolved
+    public static Action<int> onSituationChoice; //triggered when a choice has been made
+    public static Action onSituationResolved; //triggered when the situation has been fully resolved
+    public static Action onMicrophoneInteracted; //triggered when the microphone has been interacted with
+    public static Action onDisablePlayerInput; //triggered when we need to disable the player input
+    public static Action onEnablePlayerInput; //triggered when we need to enable the player input
 }

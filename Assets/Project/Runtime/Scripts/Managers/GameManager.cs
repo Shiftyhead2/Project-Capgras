@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
 #endif
     public bool SpawnedPerson { get; private set; }
 
+    public bool NPCSituation { get; private set; } = false;
+
     private int approvedCount;
     private int citations;
     public int fine { get; private set; } = 5;
@@ -32,6 +34,8 @@ public class GameManager : MonoBehaviour
         GameEvents.onAIWaypointReached += DespawnPerson;
         GameEvents.onNPCDocumentsChecked += IncreaseApprovedCount;
         GameEvents.onCitationGiven += IncreaseCitationCount;
+        GameEvents.onNPCSituation += onNPCSituation;
+        GameEvents.onSituationResolved += onNPCSituationResolved;
     }
 
     private void OnDisable()
@@ -41,6 +45,8 @@ public class GameManager : MonoBehaviour
         GameEvents.onAIWaypointReached -= DespawnPerson;
         GameEvents.onNPCDocumentsChecked -= IncreaseApprovedCount;
         GameEvents.onCitationGiven -= IncreaseCitationCount;
+        GameEvents.onNPCSituation -= onNPCSituation;
+        GameEvents.onSituationResolved -= onNPCSituationResolved;
     }
 
     private void Awake()
@@ -65,6 +71,7 @@ public class GameManager : MonoBehaviour
         approvedCount = 0;
         citations = 0;
         fine = 5;
+        NPCSituation = false;
         UpdateText(approvedCount);
     }
 
@@ -88,6 +95,16 @@ public class GameManager : MonoBehaviour
     private void DespawnPerson()
     {
         SpawnedPerson = false;
+    }
+
+    private void onNPCSituation(SituationObject situationObject)
+    {
+        NPCSituation = true;
+    }
+
+    private void onNPCSituationResolved()
+    {
+        NPCSituation = false;
     }
 
     private void ProcessPerson(bool isInProcessing)

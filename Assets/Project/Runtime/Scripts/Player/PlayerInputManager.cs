@@ -54,6 +54,8 @@ public class PlayerInputManager : MonoBehaviour
         GameEvents.onNPCFullyChecked += DisableDetectiveInput;
         GameEvents.onCitationGiven += DisablePlayerInput;
         GameEvents.onCitationModalClosed += EnablePlayerInput;
+        GameEvents.onDisablePlayerInput += DisablePlayerInput;
+        GameEvents.onEnablePlayerInput += EnablePlayerInput;
         EnablePlayerInput();
         DisableDetectiveInput();
     }
@@ -66,6 +68,8 @@ public class PlayerInputManager : MonoBehaviour
         GameEvents.onNPCFullyChecked -= DisableDetectiveInput;
         GameEvents.onCitationGiven -= DisablePlayerInput;
         GameEvents.onCitationModalClosed -= EnablePlayerInput;
+        GameEvents.onDisablePlayerInput -= DisablePlayerInput;
+        GameEvents.onEnablePlayerInput -= EnablePlayerInput;
         GenericDisable();
     }
 

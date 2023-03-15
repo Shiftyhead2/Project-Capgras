@@ -13,8 +13,12 @@ public class NPCIDData : MonoBehaviour
     private int amountOfFields = 1;
     [SerializeField]
     private int maxAmountOfFalseData = 2;
-    [SerializeField]
-    private int currentAmountOfFalseData = 0;
+
+#if UNITY_EDITOR
+    [field:SerializeField]
+    [field:ReadOnlyInspector]
+    public int currentAmountOfFalseData { get; private set; } = 0;
+#endif
     [SerializeField]
     private bool isSuspicious;
 
