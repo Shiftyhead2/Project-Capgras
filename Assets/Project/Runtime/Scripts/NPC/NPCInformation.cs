@@ -21,7 +21,10 @@ public class NPCInformation : MonoBehaviour
     public string Gender { get; private set; }
 
     public SituationObject beggingObject;
+    public SituationObject bribeObject;
+
     public float begChance = 0.5f;
+    public float bribeChance = 0.5f;
 
     private void Start()
     {

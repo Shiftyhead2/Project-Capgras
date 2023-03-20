@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
         GameEvents.onProcessPerson += ProcessPerson;
         GameEvents.onAIWaypointReached += DespawnPerson;
         GameEvents.onNPCDocumentsChecked += IncreaseApprovedCount;
+        GameEvents.updateApprovalCount += OverrideApprovalCount;
         GameEvents.onCitationGiven += IncreaseCitationCount;
         GameEvents.onNPCSituation += onNPCSituation;
         GameEvents.onSituationResolved += onNPCSituationResolved;
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour
         GameEvents.onProcessPerson -= ProcessPerson;
         GameEvents.onAIWaypointReached -= DespawnPerson;
         GameEvents.onNPCDocumentsChecked -= IncreaseApprovedCount;
+        GameEvents.updateApprovalCount -= OverrideApprovalCount;
         GameEvents.onCitationGiven -= IncreaseCitationCount;
         GameEvents.onNPCSituation -= onNPCSituation;
         GameEvents.onSituationResolved -= onNPCSituationResolved;
@@ -83,6 +85,12 @@ public class GameManager : MonoBehaviour
             approvedCount++;
             UpdateText(approvedCount);
         }
+    }
+
+    void OverrideApprovalCount()
+    {
+        approvedCount++;
+        UpdateText(approvedCount);
     }
 
 

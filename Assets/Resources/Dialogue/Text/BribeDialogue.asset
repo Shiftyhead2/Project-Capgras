@@ -10,9 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffd93c3f19564fa469cdcfaed49b11b6, type: 3}
-  m_Name: BegDialogue1
+  m_Name: BribeDialogue
   m_EditorClassIdentifier: 
-  openingText: Please let me in
-  type: 0
-  minBrideAmount: 0
-  maxBrideAmount: 0
+  openingText: 'Let''s strike a deal. '
+  type: 1
+  openingBribeVariation:
+  - {fileID: 11400000, guid: dd3d3286870f9b049a9899d361379a1d, type: 2}
+  closingBribeVariation:
+  - {fileID: 11400000, guid: 9a2065440ad0cd8439c06bb3ec9e4ba2, type: 2}
+  minBribeAmount: 4
+  maxBribeAmount: 25

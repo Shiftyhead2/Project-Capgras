@@ -9,13 +9,14 @@ public class DialogueUI : MonoBehaviour
     public CanvasGroup canvasGroup;
     public TextMeshProUGUI dialogueText;
     public Button[] buttons;
-    public List<TextMeshProUGUI> buttonTexts;
+    public List<ChoiceButton> buttonScripts;
+    private int bribeAmount = 0;
 
     private void Start()
     {
         foreach(var button in buttons)
         {
-            buttonTexts.Add(button.GetComponentInChildren<TextMeshProUGUI>());
+            buttonScripts.Add(button.GetComponent<ChoiceButton>());
         }
         HideUI();
     }
@@ -26,6 +27,7 @@ public class DialogueUI : MonoBehaviour
         GameEvents.onNPCSituation += SetUpDialogue;
         GameEvents.onMicrophoneInteracted += ShowUI;
         GameEvents.onSituationResolved += HideUI;
+        GameEvents.onChoiceButtonClicked += ChoiceMade;
     }
 
     private void OnDisable()
@@ -33,12 +35,24 @@ public class DialogueUI : MonoBehaviour
         GameEvents.onNPCSituation -= SetUpDialogue;
         GameEvents.onMicrophoneInteracted -= ShowUI;
         GameEvents.onSituationResolved -= HideUI;
+        GameEvents.onChoiceButtonClicked -= ChoiceMade;
     }
 
 
     void SetUpDialogue(SituationObject situationObject)
     {
-        dialogueText.text = situationObject.dialogueTexts[Random.Range(0,situationObject.dialogueTexts.Length-1)].text;
+        DialogueText dialogue = situationObject.dialogueTexts[Random.Range(0, situationObject.dialogueTexts.Length - 1)];
+        switch (dialogue.type)
+        {
+            case DialogueType.BRIBE:
+                bribeAmount = Random.Range(dialogue.minBribeAmount, dialogue.maxBribeAmount);
+                break;
+            default:
+                bribeAmount = 0;
+                break;
+        }
+        
+        dialogueText.text = dialogue.SetUpText(bribeAmount);
 
         for(int i = 0; i < buttons.Length; i++)
         {
@@ -48,7 +62,7 @@ public class DialogueUI : MonoBehaviour
         for(int i = 0; i < situationObject.dialogueChoices.Length; i++)
         {
             buttons[i].gameObject.SetActive(true);
-            buttonTexts[i].text = situationObject.dialogueChoices[i].choiceText;
+            buttonScripts[i].SetUpText(situationObject.dialogueChoices[i].choiceText, situationObject.dialogueChoices[i].ID);
         }
     }
 

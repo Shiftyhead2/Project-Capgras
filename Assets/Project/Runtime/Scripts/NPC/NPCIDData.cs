@@ -65,7 +65,7 @@ public class NPCIDData : MonoBehaviour
             return false;
         }
 
-        float percentChange = 10f;
+        float percentChange = 50f;
         float randomValue = Random.Range(0f, 100f);
         
         if(randomValue > percentChange)
