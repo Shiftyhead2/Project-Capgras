@@ -25,7 +25,7 @@ public static class GameEvents
     public static Action onNPCFullyChecked; //triggered when the NPC documents have been checked regardless if the NPC has been approved or not
     public static Action<bool> onProcessPerson; //triggered when the NPC enters or exists the trigger zone
     public static Action onCitationZoneEnter; //triggered when the NPC enters the citation zone trigger
-    public static Action<List<FieldData>,bool> onProcessFieldData; //triggered when the NPC enter the citation zone trigger passing the required list of field data for checking if the player should recieve a citation
+    public static Action<List<FieldData>,bool,bool> onProcessFieldData; //triggered when the NPC enter the citation zone trigger passing the required list of field data for checking if the player should recieve a citation
     public static Action onCitationGiven; //triggered when the player gets a citation
     public static Action onAIWaypointReached; //triggered when the NPC reaches a certain checkpoint
     public static Action<int> onUpdateText; //triggered when some text should be updated

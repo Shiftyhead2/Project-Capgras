@@ -21,12 +21,12 @@ public class CitationManager : MonoBehaviour
     }
 
 
-    private void checkFieldList(List<FieldData> fieldDatas, bool isSuspicious)
+    private void checkFieldList(List<FieldData> fieldDatas, bool isSuspicious, bool doppleganger)
     {
         reasons = string.Empty;
         string fullCitationtext = "You have been given a citation for the following reasons: \n \n";
 
-        giveReason(fieldDatas,isSuspicious);
+        giveReason(fieldDatas,isSuspicious,doppleganger);
 
         if(reasons != string.Empty)
         {
@@ -38,7 +38,7 @@ public class CitationManager : MonoBehaviour
         
     }
 
-    void giveReason(List<FieldData> fieldDatas,bool isSuspicious)
+    void giveReason(List<FieldData> fieldDatas,bool isSuspicious, bool doppleganger)
     {
 
         int incorrectInformation = 0;
@@ -58,16 +58,21 @@ public class CitationManager : MonoBehaviour
             {
                 reasons += "Suspicious person not tagged with the suspicious tag! \n";
             }
-            else
+            else if(doppleganger)
             {
                 reasons = string.Empty;
             }
         }else if(incorrectInformation == 0)
         {
-            if (isSuspicious)
+            if (isSuspicious && !doppleganger)
             {
                 reasons += "Incorrect usage of the suspicious tag! \n";
             }
+
+            if (doppleganger)
+            {
+                reasons += "Possible doppleganger! \n";
+            }  
         }
     }
 

@@ -20,6 +20,12 @@ public class NPCInformation : MonoBehaviour
 #endif
     public string Gender { get; private set; }
 
+    [field: SerializeField]
+#if UNITY_EDITOR
+    [field: ReadOnlyInspector]
+#endif
+    public bool isDoppleganger { get; private set; }
+
     public SituationObject beggingObject;
     public SituationObject bribeObject;
 
@@ -37,7 +43,7 @@ public class NPCInformation : MonoBehaviour
         GetFirstName();
         GetLastName();
         GetGender();
-       
+        isDoppleganger = IsDoppleganger();
     }
 
     void GetFirstName()
@@ -56,6 +62,12 @@ public class NPCInformation : MonoBehaviour
     {
         Gender = GameEvents.onGenderGenerated?.Invoke();
         GameEvents.onUpdateIDFields?.Invoke(2,Gender);
+    }
+
+    bool IsDoppleganger()
+    {
+        float chance = Random.Range(0f, 1f);
+        return chance >= 0.5f;
     }
 
 }

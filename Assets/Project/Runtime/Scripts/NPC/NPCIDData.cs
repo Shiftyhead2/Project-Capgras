@@ -60,6 +60,11 @@ public class NPCIDData : MonoBehaviour
 
     bool isFalse()
     {
+        if (informatiton.isDoppleganger)
+        {
+            return false;
+        }
+
         if(currentAmountOfFalseData >= maxAmountOfFalseData)
         {
             return false;
@@ -130,7 +135,7 @@ public class NPCIDData : MonoBehaviour
 
     void GetData()
     {
-        GameEvents.onProcessFieldData?.Invoke(IdFields,isSuspicious);
+        GameEvents.onProcessFieldData?.Invoke(IdFields,isSuspicious,informatiton.isDoppleganger);
     }
 
     void flagSuspicious(bool suspicious)
