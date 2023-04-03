@@ -46,15 +46,16 @@ public class IDUIField : MonoBehaviour,IPointerClickHandler
         switch (ID)
         {
             case 0:
+                //Gender
+                fieldText.text = $"Gender: {fieldValue}";
+                break;
+            case 1:
                 //First name
                 fieldText.text = $"First name: {fieldValue}";
                 break;
-            case 1:
-                //Last name
-                fieldText.text = $"Last name: {fieldValue}";
-                break;
             case 2:
-                fieldText.text = $"Gender: {fieldValue}";
+                //Last Name
+                fieldText.text = $"Last name: {fieldValue}";
                 break;
             default:
                 break;

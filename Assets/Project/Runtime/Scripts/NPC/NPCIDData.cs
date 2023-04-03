@@ -22,6 +22,8 @@ public class NPCIDData : MonoBehaviour
     [SerializeField]
     private bool isSuspicious;
 
+    private string currentGender;
+
     private void OnEnable()
     {
         GameEvents.onCitationZoneEnter += GetData;
@@ -86,11 +88,11 @@ public class NPCIDData : MonoBehaviour
         switch (id)
         {
             case 0:
-                return "First Name";
-            case 1:
-                return "Last Name";
-            case 2:
                 return "Gender";
+            case 1:
+                return "First Name";
+            case 2:
+                return "Last Name";
             default:
                 return "Unknown";
         }
@@ -101,33 +103,37 @@ public class NPCIDData : MonoBehaviour
         switch (id)
         {
             case 0:
-                //First name
-                if (isFalse)
-                {
-                    return "Incorrect";
-                }
-                return informatiton.FirstName;
-            case 1:
-                //Last name
-                if (isFalse)
-                {
-                    return "Incorrect";
-                }
-                return informatiton.LastName;
-            case 2:
                 //Gender
                 if (isFalse)
                 {
-                    if(informatiton.Gender.ToLower() == "male")
+                    if (informatiton.Gender.ToLower() == "male")
                     {
+                        currentGender = "Female";
                         return "Female";
                     }
                     else
                     {
+                        currentGender = "Male";
                         return "Male";
                     }
                 }
+                currentGender = informatiton.Gender;
                 return informatiton.Gender;
+            case 1:
+                //First name
+                if (isFalse)
+                {
+                    var firstName = GameEvents.onFirstNameGenerated?.Invoke(currentGender);
+                    return firstName;
+                }
+                return informatiton.FirstName;
+            case 2:
+                //Last Name
+                if (isFalse)
+                {
+                    return GameEvents.onLastNameGenerated?.Invoke();
+                }
+                return informatiton.LastName;
             default:
                 return "Unknown";
         }

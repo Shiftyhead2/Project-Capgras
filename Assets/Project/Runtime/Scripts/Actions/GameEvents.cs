@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public static class GameEvents
 {
-    public static Func<string> onFirstNameGenerated; //triggered when first name has been generated
+    public static Func<string,string> onFirstNameGenerated; //triggered when first name has been generated
     public static Func<string> onLastNameGenerated; //triggered when last name has been generated
     public static Func<string> onGenderGenerated; //triggered when gender has been generated
     public static Action onCallPerson; //triggered when the player interacts with an object that spawns the person

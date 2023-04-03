@@ -1,9 +1,22 @@
+using Codice.CM.Triggers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DatabaseManager : MonoBehaviour
 {
+
+    private List<NamesScript> _firstMaleNames = new List<NamesScript>();
+    private List<NamesScript> _firstFemaleNames = new List<NamesScript>();
+    private List<NamesScript> _surNames = new List<NamesScript>();
+
+    private void Awake()
+    {
+        GetFirstNames();
+    }
+
+
+
     private void OnEnable()
     {
         GameEvents.onFirstNameGenerated += GetFirstName;
@@ -19,14 +32,19 @@ public class DatabaseManager : MonoBehaviour
     }
 
 
-    string GetFirstName()
+    string GetFirstName(string gender)
     {
-        return "FirstName";
+        if(gender.ToLower() == "male")
+        {
+            return _firstMaleNames[Random.Range(0,_firstMaleNames.Count)].nameText;
+        }
+
+        return _firstFemaleNames[Random.Range(0, _firstFemaleNames.Count)].nameText;
     }
 
     string GetLastName()
     {
-        return "LastName";
+        return _surNames[Random.Range(0,_surNames.Count)].nameText;
     }
 
     string GetGender()
@@ -40,6 +58,28 @@ public class DatabaseManager : MonoBehaviour
                 return "Female";
             default:
                 return "Unknown";
+        }
+    }
+
+    void GetFirstNames()
+    {
+        var maleNames = Resources.LoadAll<NamesScript>("Data/Names/FirstNames/Male");
+        var femaleNames = Resources.LoadAll<NamesScript>("Data/Names/FirstNames/Female");
+        var surNames = Resources.LoadAll<NamesScript>("Data/Names/Surnames");
+
+        foreach(var maleName in maleNames)
+        {
+            _firstMaleNames.Add(maleName);
+        }
+
+        foreach(var femaleName in femaleNames)
+        {
+            _firstFemaleNames.Add(femaleName);
+        }
+
+        foreach(var surName in surNames)
+        {
+            _surNames.Add(surName);
         }
     }
 }

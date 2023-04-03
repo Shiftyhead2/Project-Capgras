@@ -58,7 +58,7 @@ public class CitationManager : MonoBehaviour
             {
                 reasons += "Suspicious person not tagged with the suspicious tag! \n";
             }
-            else if(doppleganger)
+            else
             {
                 reasons = string.Empty;
             }
