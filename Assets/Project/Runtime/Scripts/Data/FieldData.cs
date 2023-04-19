@@ -4,35 +4,58 @@ using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
 
+/// <summary>
+/// A base struct for generating field data 
+/// </summary>
 [Serializable]
 public struct FieldData
 {
-    [field: SerializeField]
+  /// <summary>
+  /// The ID of the field
+  /// </summary>
+  [field: SerializeField]
 #if UNITY_EDITOR
-    [field: ReadOnlyInspector]
+  [field: ReadOnlyInspector]
 #endif
-    public int _id { get; private set; }
-    [field:SerializeField]
+  public int Id { get; private set; }
+  /// <summary>
+  /// The name of the field
+  /// </summary>
+  [field: SerializeField]
 #if UNITY_EDITOR
-    [field: ReadOnlyInspector]
+  [field: ReadOnlyInspector]
 #endif
-    public string _fieldName { get; private set; }
-    [field:SerializeField]
+  public string FieldName { get; private set; }
+  /// <summary>
+  /// The value of the field
+  /// </summary>
+  [field: SerializeField]
 #if UNITY_EDITOR
-    [field: ReadOnlyInspector]
+  [field: ReadOnlyInspector]
 #endif
-    public string _value { get; private set; }
-    [field:SerializeField]
+  public string Value { get; private set; }
+  /// <summary>
+  /// A bool if the field is false or not
+  /// </summary>
+  [field: SerializeField]
 #if UNITY_EDITOR
-    [field: ReadOnlyInspector]
+  [field: ReadOnlyInspector]
 #endif
-    public bool _isFalse { get; private set; }
+  public bool IsFalse { get; private set; }
 
-    public FieldData(int id,string fieldName,string value,bool isFalse)
-    {
-        _id = id;
-        _value = value;
-        _fieldName = fieldName;
-        _isFalse = isFalse;
-    }
+  /// <summary>
+  /// A base constructor for the struct. It needs <paramref name = "id" />, <paramref name = "fieldName"/>, <paramref name = "value" /> and <paramref name = "isFalse" /> 
+  /// to be correctly constructed
+  /// </summary>
+  /// <param name="id">The ID of the field passed as an int</param>
+  /// <param name="fieldName">The name of the field passed as an string</param>
+  /// <param name="value">The field value passed as an string</param>
+  /// <param name="isFalse">The bool that will tell if the field is false or not</param>
+  public FieldData(int id, string fieldName, string value, bool isFalse)
+  {
+    Id = id;
+    Value = value;
+    FieldName = fieldName;
+    IsFalse = isFalse;
+  }
 }

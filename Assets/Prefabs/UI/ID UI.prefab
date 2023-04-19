@@ -880,6 +880,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlagToggles
       objectReference: {fileID: 0}
+    - target: {fileID: 248327917422087275, guid: c063b29eaa0dfce4e845bee6bf24a88c,
+        type: 3}
+      propertyPath: m_Type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 248327917422087275, guid: c063b29eaa0dfce4e845bee6bf24a88c,
+        type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 248327917422087285, guid: c063b29eaa0dfce4e845bee6bf24a88c,
         type: 3}
       propertyPath: m_AnchorMax.y

@@ -5,80 +5,81 @@ using UnityEngine;
 public class CitationManager : MonoBehaviour
 {
 
-    [SerializeField]
-    [TextArea(10, 100)]
-    private string reasons;
-    
+  [SerializeField]
+  [TextArea(10, 100)]
+  private string reasons;
 
-    private void OnEnable()
+
+  private void OnEnable()
+  {
+    GameEvents.onProcessFieldData += checkFieldList;
+  }
+
+  private void OnDisable()
+  {
+    GameEvents.onProcessFieldData -= checkFieldList;
+  }
+
+
+  private void checkFieldList(List<FieldData> fieldDatas, bool isSuspicious, bool doppleganger)
+  {
+    reasons = string.Empty;
+    string fullCitationtext = "You have been given a citation for the following reasons: \n \n";
+
+    giveReason(fieldDatas, isSuspicious, doppleganger);
+
+    if (reasons != string.Empty)
     {
-        GameEvents.onProcessFieldData += checkFieldList;
+      fullCitationtext += reasons;
+      fullCitationtext += $"\n A fine of {GameManager.instance.fine} credits has been added to your account!";
+      fullCitationtext += "\n Do not dissapoint us again!";
+      giveCitation(fullCitationtext);
     }
 
-    private void OnDisable()
+  }
+
+  void giveReason(List<FieldData> fieldDatas, bool isSuspicious, bool doppleganger)
+  {
+
+    int incorrectInformation = 0;
+
+    foreach (FieldData fieldData in fieldDatas)
     {
-        GameEvents.onProcessFieldData -= checkFieldList;
+      if (fieldData.IsFalse)
+      {
+        reasons += $"{fieldData.FieldName} is incorrect! \n";
+        incorrectInformation++;
+      }
     }
 
-
-    private void checkFieldList(List<FieldData> fieldDatas, bool isSuspicious, bool doppleganger)
+    if (incorrectInformation > 0)
     {
+      if (!isSuspicious)
+      {
+        reasons += "Suspicious person not tagged with the suspicious tag! \n";
+      }
+      else
+      {
         reasons = string.Empty;
-        string fullCitationtext = "You have been given a citation for the following reasons: \n \n";
-
-        giveReason(fieldDatas,isSuspicious,doppleganger);
-
-        if(reasons != string.Empty)
-        {
-            fullCitationtext += reasons;
-            fullCitationtext += $"\n A fine of {GameManager.instance.fine} credits has been added to your account!";
-            fullCitationtext += "\n Do not dissapoint us again!";
-            giveCitation(fullCitationtext); 
-        }
-        
+      }
     }
-
-    void giveReason(List<FieldData> fieldDatas,bool isSuspicious, bool doppleganger)
+    else if (incorrectInformation == 0)
     {
+      if (isSuspicious && !doppleganger)
+      {
+        reasons += "Incorrect usage of the suspicious tag! \n";
+      }
 
-        int incorrectInformation = 0;
-
-        foreach (FieldData fieldData in fieldDatas)
-        {
-            if (fieldData._isFalse)
-            {
-                reasons += $"{fieldData._fieldName} is incorrect! \n";
-                incorrectInformation++;
-            }
-        }
-
-        if(incorrectInformation > 0)
-        {
-            if (!isSuspicious)
-            {
-                reasons += "Suspicious person not tagged with the suspicious tag! \n";
-            }
-            else
-            {
-                reasons = string.Empty;
-            }
-        }else if(incorrectInformation == 0)
-        {
-            if (isSuspicious && !doppleganger)
-            {
-                reasons += "Incorrect usage of the suspicious tag! \n";
-            }
-
-            if (doppleganger)
-            {
-                reasons += "Possible doppleganger! \n";
-            }  
-        }
+      if (doppleganger)
+      {
+        reasons += "Possible doppleganger! \n";
+      }
     }
+  }
 
-    void giveCitation(string fullCitationText)
-    {
-        GameEvents.showModal?.Invoke("CITATION", fullCitationText, "OK", GameEvents.onCitationModalClosed, true);
-        GameEvents.onCitationGiven?.Invoke();
-    }
+  void giveCitation(string fullCitationText)
+  {
+    GameEvents.showModal?.Invoke("CITATION", fullCitationText, "OK", GameEvents.onCitationModalClosed, true);
+    GameEvents.onCitationGiven?.Invoke();
+  }
 }
