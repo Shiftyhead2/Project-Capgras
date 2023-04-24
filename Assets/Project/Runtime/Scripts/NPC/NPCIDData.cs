@@ -20,8 +20,9 @@ public class NPCIDData : MonoBehaviour
 #if UNITY_EDITOR
   [field: SerializeField]
   [field: ReadOnlyInspector]
-  public int CurrentAmountOfFalseData { get; private set; } = 0;
 #endif
+    public int CurrentAmountOfFalseData { get; private set; } = 0;
+
   [SerializeField]
   private bool isSuspicious;
 
@@ -104,9 +105,7 @@ public class NPCIDData : MonoBehaviour
       case 0:
         return "Gender";
       case 1:
-        return "First Name";
-      case 2:
-        return "Last Name";
+        return "Name";
       default:
         return "Unknown";
     }
@@ -143,17 +142,10 @@ public class NPCIDData : MonoBehaviour
         //First name
         if (isFalse)
         {
-          var firstName = GameEvents.onFirstNameGenerated?.Invoke(currentGender);
-          return firstName;
+          var name = GameEvents.onNameGenerated?.Invoke(currentGender, isFalse, informatiton.Gender);
+          return name;
         }
-        return informatiton.FirstName;
-      case 2:
-        //Last Name
-        if (isFalse)
-        {
-          return GameEvents.onLastNameGenerated?.Invoke();
-        }
-        return informatiton.LastName;
+        return informatiton.Name;
       default:
         return "Unknown";
     }
@@ -176,4 +168,5 @@ public class NPCIDData : MonoBehaviour
   {
     isSuspicious = suspicious;
   }
+
 }

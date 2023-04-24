@@ -7,8 +7,7 @@ using System.Collections.Generic;
 /// </summary>
 public static class GameEvents
 {
-  public static Func<string, string> onFirstNameGenerated; //triggered when first name has been generated
-  public static Func<string> onLastNameGenerated; //triggered when last name has been generated
+  public static Func<string, bool, string, string> onNameGenerated; //triggered when the name has been generated
   public static Func<string> onGenderGenerated; //triggered when gender has been generated
   public static Action onCallPerson; //triggered when the player interacts with an object that spawns the person
   public static Action onComputerInteraction; // triggered when the player interacts with the computer

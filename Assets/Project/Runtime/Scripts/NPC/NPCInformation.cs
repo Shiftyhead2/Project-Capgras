@@ -4,70 +4,61 @@ using UnityEngine;
 
 public class NPCInformation : MonoBehaviour
 {
-    [field:SerializeField]
+  [field: SerializeField]
 #if UNITY_EDITOR
-    [field:ReadOnlyInspector]
+  [field: ReadOnlyInspector]
 #endif
-    public string FirstName {get; private set; }
-    [field:SerializeField]
+  public string Name { get; private set; }
+
+  [field: SerializeField]
 #if UNITY_EDITOR
-    [field: ReadOnlyInspector]
+  [field: ReadOnlyInspector]
 #endif
-    public string LastName { get; private set;}
-    [field: SerializeField]
+  public string Gender { get; private set; }
+
+  [field: SerializeField]
 #if UNITY_EDITOR
-    [field: ReadOnlyInspector]
+  [field: ReadOnlyInspector]
 #endif
-    public string Gender { get; private set; }
+  public bool isDoppleganger { get; private set; }
 
-    [field: SerializeField]
-#if UNITY_EDITOR
-    [field: ReadOnlyInspector]
-#endif
-    public bool isDoppleganger { get; private set; }
+  public SituationObject beggingObject;
+  public SituationObject bribeObject;
 
-    public SituationObject beggingObject;
-    public SituationObject bribeObject;
+  public float begChance = 0.5f;
+  public float bribeChance = 0.5f;
 
-    public float begChance = 0.5f;
-    public float bribeChance = 0.5f;
-
-    private void Awake()
-    {
-        GenerateInformation();
-    }
+  private void Awake()
+  {
+    GenerateInformation();
+  }
 
 
-    void GenerateInformation()
-    {
-        GetGender();
-        GetFirstName();
-        GetLastName();
-        isDoppleganger = IsDoppleganger();
-    }
+  void GenerateInformation()
+  {
+    GetGender();
+    GetName();
+    isDoppleganger = IsDoppleganger();
+  }
 
-    void GetFirstName()
-    {
-        FirstName = GameEvents.onFirstNameGenerated?.Invoke(Gender);
-        GameEvents.onUpdateIDFields?.Invoke(1, FirstName);
-    }
+  void GetName()
+  {
+    Name = GameEvents.onNameGenerated?.Invoke(Gender, false, Gender);
+    GameEvents.onUpdateIDFields?.Invoke(1, Name);
+  }
 
-    void GetLastName() 
-    {
-        LastName = GameEvents.onLastNameGenerated?.Invoke();
-        GameEvents.onUpdateIDFields?.Invoke(2, LastName);
-    }
 
-    void GetGender()
-    {
-        Gender = GameEvents.onGenderGenerated?.Invoke();
-        GameEvents.onUpdateIDFields?.Invoke(0,Gender);
-    }
 
-    bool IsDoppleganger()
-    {
-        float chance = Random.Range(0f, 1f);
-        return chance <= 0.3f;
-    }
+  void GetGender()
+  {
+    Gender = GameEvents.onGenderGenerated?.Invoke();
+    GameEvents.onUpdateIDFields?.Invoke(0, Gender);
+  }
+
+  bool IsDoppleganger()
+  {
+    float chance = Random.Range(0f, 1f);
+    return chance <= 0.3f;
+  }
 
 }

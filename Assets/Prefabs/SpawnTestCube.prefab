@@ -178,9 +178,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caf40cfceae1dc94d88f4d40c42479f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <FirstName>k__BackingField: 
-  <LastName>k__BackingField: 
+  <Name>k__BackingField: 
   <Gender>k__BackingField: 
+  <isDoppleganger>k__BackingField: 0
   beggingObject: {fileID: 11400000, guid: ee3fe1ee97a5a7a4a92961510d8a2807, type: 2}
   bribeObject: {fileID: 11400000, guid: 57a226b834d5b1c45aac253357151d96, type: 2}
   begChance: 0.5
@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IdFields: []
-  amountOfFields: 3
+  amountOfFields: 2
   maxAmountOfFalseData: 2
-  <currentAmountOfFalseData>k__BackingField: 0
+  <CurrentAmountOfFalseData>k__BackingField: 0
   isSuspicious: 0
