@@ -52,24 +52,17 @@ public class NPCAI : MonoBehaviour, INPC
   private void OnEnable()
   {
     GameEvents.onNPCDocumentsChecked += CheckApproval;
-    GameEvents.onAIWaypointReached += Despawn;
   }
 
   private void OnDisable()
   {
     GameEvents.onNPCDocumentsChecked -= CheckApproval;
-    GameEvents.onAIWaypointReached -= Despawn;
   }
 
 
   void CheckApproval(bool approved)
   {
     approvedForEntry = approved;
-  }
-
-  void Despawn()
-  {
-    Destroy(gameObject);
   }
 
   public void OverrideApproval(bool overrideApproval)

@@ -2,37 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class DatabaseManager : MonoBehaviour
 {
 
-  private List<NamesScript> _firstMaleNames = new List<NamesScript>();
-  private List<NamesScript> _firstFemaleNames = new List<NamesScript>();
-  private List<NamesScript> _surNames = new List<NamesScript>();
+    private List<NamesScript> _firstMaleNames = new List<NamesScript>();
+    private List<NamesScript> _firstFemaleNames = new List<NamesScript>();
+    private List<NamesScript> _surNames = new List<NamesScript>();
 
-  private string _generatedFirstName;
-  private string _generatedLastName;
-
-  private void Awake()
-  {
-    GetFirstNames();
-  }
-
-  private void OnEnable()
-  {
-    GameEvents.onNameGenerated += GetName;
-    GameEvents.onGenderGenerated += GetGender;
-  }
-
-  private void OnDisable()
-  {
-    GameEvents.onNameGenerated -= GetName;
-    GameEvents.onGenderGenerated -= GetGender;
-  }
+    [SerializeField] private AssetLabelReference _femaleNameLabel;
+    [SerializeField] private AssetLabelReference _surnameLabel;
+    [SerializeField] private AssetLabelReference _maleNameLabel;
 
 
-  string GetName(string gender, bool isFalse, string actualGender)
-  {
+    private string _generatedFirstName;
+    private string _generatedLastName;
+
+
+    private void Awake()
+    {
+        GetNames();
+    }
+
+    private void OnEnable()
+    {
+        GameEvents.onNameGenerated += GetName;
+        GameEvents.onGenderGenerated += GetGender;
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.onNameGenerated -= GetName;
+        GameEvents.onGenderGenerated -= GetGender;
+    }
+
+
+    string GetName(string gender, bool isFalse, string actualGender)
+    {
         float chance = 0.5f;
         float randomChance = Random.value;
 
@@ -41,7 +49,7 @@ public class DatabaseManager : MonoBehaviour
             if (gender.ToLower() == actualGender.ToLower())
             {
                 if (chance >= randomChance)
-                {   
+                {
                     _generatedFirstName = GetFirstName(actualGender);
                 }
                 else
@@ -61,63 +69,59 @@ public class DatabaseManager : MonoBehaviour
         else
         {
             _generatedFirstName = GetFirstName(gender);
-           _generatedLastName = GetLastName(false);
+            _generatedLastName = GetLastName(false);
         }
 
         return $"{_generatedFirstName} {_generatedLastName}";
-  }
-
-
-  string GetFirstName(string gender)
-  {
-    if (gender.ToLower() == "male")
-    {
-      return ReturnNonDuplicatedMaleNames(_generatedFirstName);
     }
 
-     return ReturnNonDuplicatedFemaleNames(_generatedFirstName);
-  }
 
-  string GetLastName(bool shouldGenerateNonDuplicate)
-  {
-    return ReturnNonDuplicatedSurNames(_generatedLastName,shouldGenerateNonDuplicate);
-  }
-
-  string GetGender()
-  {
-    int gender = Random.Range(0, 2);
-    switch (gender)
+    string GetFirstName(string gender)
     {
-      case 0:
-        return "Male";
-      case 1:
-        return "Female";
-      default:
-        return "Unknown";
-    }
-  }
+        if (gender.ToLower() == "male")
+        {
+            return ReturnNonDuplicatedMaleNames(_generatedFirstName);
+        }
 
-  void GetFirstNames()
-  {
-    var maleNames = Resources.LoadAll<NamesScript>("Data/Names/FirstNames/Male");
-    var femaleNames = Resources.LoadAll<NamesScript>("Data/Names/FirstNames/Female");
-    var surNames = Resources.LoadAll<NamesScript>("Data/Names/Surnames");
-
-    foreach (var maleName in maleNames)
-    {
-      _firstMaleNames.Add(maleName);
+        return ReturnNonDuplicatedFemaleNames(_generatedFirstName);
     }
 
-    foreach (var femaleName in femaleNames)
+    string GetLastName(bool shouldGenerateNonDuplicate)
     {
-      _firstFemaleNames.Add(femaleName);
+        return ReturnNonDuplicatedSurNames(_generatedLastName, shouldGenerateNonDuplicate);
     }
 
-    foreach (var surName in surNames)
+    string GetGender()
     {
-      _surNames.Add(surName);
+        int gender = Random.Range(0, 2);
+        switch (gender)
+        {
+            case 0:
+                return "Male";
+            case 1:
+                return "Female";
+            default:
+                return "Unknown";
+        }
     }
-  }
+
+    void GetNames()
+    {
+        Addressables.LoadAssetsAsync<NamesScript>(_femaleNameLabel, (femaleName) =>
+        {
+            _firstFemaleNames.Add(femaleName);
+        });
+
+        Addressables.LoadAssetsAsync<NamesScript>(_maleNameLabel, (maleName) => 
+        {
+            _firstMaleNames.Add(maleName);
+        });
+
+        Addressables.LoadAssetsAsync<NamesScript>(_surnameLabel, (surname) =>
+        {
+            _surNames.Add(surname);
+        });
+    }
 
     string ReturnNonDuplicatedMaleNames(string currentMaleName)
     {
@@ -129,7 +133,7 @@ public class DatabaseManager : MonoBehaviour
         return _firstFemaleNames.FirstOrDefault(name => name.nameText != currentFemaleName)?.nameText;
     }
 
-    string ReturnNonDuplicatedSurNames(string currentLastName,bool shouldGenerateNonDuplicate)
+    string ReturnNonDuplicatedSurNames(string currentLastName, bool shouldGenerateNonDuplicate)
     {
         if (shouldGenerateNonDuplicate)
         {
@@ -138,5 +142,7 @@ public class DatabaseManager : MonoBehaviour
 
         return _surNames[Random.Range(0, _surNames.Count)].nameText;
     }
+
+
 
 }

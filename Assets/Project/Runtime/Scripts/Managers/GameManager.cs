@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,7 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject spawnPoint;
     [SerializeField]
-    private GameObject spawnPrefab;
+    private AssetReferenceGameObject spawnPrefab;
     [field: SerializeField]
 #if UNITY_EDITOR
     [field: ReadOnlyInspector]
@@ -26,6 +28,8 @@ public class GameManager : MonoBehaviour
     private int approvedCount;
     private int citations;
     public int fine { get; private set; } = 5;
+
+    private GameObject _spawnedGameObject;
 
     private void OnEnable()
     {
@@ -97,12 +101,13 @@ public class GameManager : MonoBehaviour
     private void SpawnObject()
     {
         SpawnedPerson = true;
-        Instantiate(spawnPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
+        spawnPrefab.InstantiateAsync(spawnPoint.transform.position, Quaternion.identity).Completed += (asyncOperation) => _spawnedGameObject = asyncOperation.Result;
     }
 
     private void DespawnPerson()
     {
         SpawnedPerson = false;
+        spawnPrefab.ReleaseInstance(_spawnedGameObject);
     }
 
     private void onNPCSituation(SituationObject situationObject)
