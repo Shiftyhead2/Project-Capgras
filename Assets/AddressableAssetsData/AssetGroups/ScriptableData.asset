@@ -22,16 +22,19 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Female First Names
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4ce21c8a3d1540140bb4086a4d5b8715
     m_Address: Names/FirstNames/Male
     m_ReadOnly: 0
     m_SerializedLabels:
     - Male First Names
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4ce4f4d69eed2414eaea94c4696221a0
     m_Address: Names/Surnames
     m_ReadOnly: 0
     m_SerializedLabels:
     - Surnames
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 5224a01f8188a8646a1c880201f0a091, type: 2}
   m_SchemaSet:

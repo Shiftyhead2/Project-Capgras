@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The main class responsible for managing the player movement logic
+/// </summary>
 public class PlayerMotor : MonoBehaviour
 {
 

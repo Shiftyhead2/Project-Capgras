@@ -26,11 +26,13 @@ public class UIController : MonoBehaviour
         GameEvents.onNPCFullyChecked -= DisableUI;
     }
 
-    void DisableUI()
+    public void DisableUI()
     {
         canvasGroup.alpha = 0f;
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
+        GameEvents.onComputerShutDown?.Invoke();
+        GameEvents.onHideMouse?.Invoke();
     }
 
 

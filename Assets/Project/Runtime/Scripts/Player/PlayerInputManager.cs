@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// The main class that is responsible for managing the player input
+/// </summary>
 public class PlayerInputManager : MonoBehaviour
 {
     private PlayerActions playerInput;
@@ -50,12 +53,10 @@ public class PlayerInputManager : MonoBehaviour
     {
         GameEvents.onComputerInteraction += DisablePlayerInput;
         GameEvents.onComputerInteraction += EnableDetectiveInput;
-        GameEvents.onNPCFullyChecked += EnablePlayerInput;
-        GameEvents.onNPCFullyChecked += DisableDetectiveInput;
-        GameEvents.onCitationGiven += DisablePlayerInput;
-        GameEvents.onCitationModalClosed += EnablePlayerInput;
         GameEvents.onDisablePlayerInput += DisablePlayerInput;
         GameEvents.onEnablePlayerInput += EnablePlayerInput;
+        GameEvents.onComputerShutDown += EnablePlayerInput;
+        GameEvents.onComputerShutDown += DisableDetectiveInput;
         EnablePlayerInput();
         DisableDetectiveInput();
     }
@@ -64,12 +65,10 @@ public class PlayerInputManager : MonoBehaviour
     {
         GameEvents.onComputerInteraction -= DisablePlayerInput;
         GameEvents.onComputerInteraction -= EnableDetectiveInput;
-        GameEvents.onNPCFullyChecked -= EnablePlayerInput;
-        GameEvents.onNPCFullyChecked -= DisableDetectiveInput;
-        GameEvents.onCitationGiven -= DisablePlayerInput;
-        GameEvents.onCitationModalClosed -= EnablePlayerInput;
         GameEvents.onDisablePlayerInput -= DisablePlayerInput;
         GameEvents.onEnablePlayerInput -= EnablePlayerInput;
+        GameEvents.onComputerShutDown -= EnablePlayerInput;
+        GameEvents.onComputerShutDown -= DisableDetectiveInput;
         GenericDisable();
     }
 

@@ -11,6 +11,7 @@ public static class GameEvents
   public static Func<string> onGenderGenerated; //triggered when gender has been generated
   public static Action onCallPerson; //triggered when the player interacts with an object that spawns the person
   public static Action onComputerInteraction; // triggered when the player interacts with the computer
+    public static Action onComputerShutDown; //triggered when the player clicks the shut down button on the computer desktop UI
   public static Action<int, string> onUpdateIDFields; //triggered when the field UI needs to be updated
   public static Action<FieldData> onUpdateBiometricFields; // triggered when the biometrics field UI needs to be updated
   public static Action<bool> onSuspiciousFlag; //triggered when the player flags the NPC as suspicious
@@ -21,8 +22,7 @@ public static class GameEvents
   public static Action onHideMouse; //triggered when the game needs to hide the mouse cursor
   public static Action<int, string> onPassField; //triggered when a field is selected passing it's contents like id and it's value
   public static Action<int, string> onUnselect; //triggered when an UI element was unselected
-  public static Action onDetectiveModalClosed; //triggered when the modal closes(this action is passed to the modal script)
-  public static Action onCitationModalClosed;//triggered when the modal closes(this action is passed to the modal script)
+  public static Action onDetectiveModalClosed; //triggered when the modal closes(this action is passed to the modal script) and triggers only things related to the detective mode
   public static Action<bool> onNPCDocumentsChecked; //triggered when the NPC documents have been checked. The bool is if the NPC has been approved or not
   public static Action onNPCFullyChecked; //triggered when the NPC documents have been checked regardless if the NPC has been approved or not
   public static Action<bool> onProcessPerson; //triggered when the NPC enters or exists the trigger zone

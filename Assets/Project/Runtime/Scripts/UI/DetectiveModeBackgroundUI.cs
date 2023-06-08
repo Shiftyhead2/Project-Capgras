@@ -5,18 +5,19 @@ using UnityEngine.UI;
 using DG.Tweening;
 
 
-public class UIIDContainer : MonoBehaviour
+public class DetectiveModeBackgroundUI : MonoBehaviour
 {
+
     private bool selected = false;
-    private Image image;
 
     [SerializeField]
-    private Color transparentColor;
+    private CanvasGroup canvasGroup;
 
-    private void Awake()
+    private void Start()
     {
-        selected = false;
-        image = GetComponent<Image>();
+        canvasGroup.alpha = 0f;
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
     }
 
     private void OnEnable()
@@ -32,7 +33,6 @@ public class UIIDContainer : MonoBehaviour
         GameEvents.onEnterDetectiveMode -= OnSelected;
         GameEvents.onNPCFullyChecked -= DisableUI;
     }
-
 
     void OnSelected()
     {
@@ -51,18 +51,26 @@ public class UIIDContainer : MonoBehaviour
     {
         if (selected)
         {
-            image.DOFade(0.5f, 0.5f);
+            BlockRaycasts(true);
+            canvasGroup.DOFade(0.5f, 0.5f);
         }
         else
         {
-            image.DOFade(0f, 0.5f);
+            
+            canvasGroup.DOFade(0f, 0.5f).OnComplete(() => BlockRaycasts(false));
         }
     }
+
 
     void DisableUI()
     {
         selected = false;
-        image.color = transparentColor;
+        TwerpImage();
     }
 
+    void BlockRaycasts(bool block)
+    {
+        canvasGroup.blocksRaycasts = block;
+        canvasGroup.interactable = block;
+    }
 }

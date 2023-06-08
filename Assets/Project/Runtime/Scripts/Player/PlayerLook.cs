@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The main class responsible for handling the mouse movement
+/// </summary>
 public class PlayerLook : MonoBehaviour
 {
 

@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Main class that is responsible for managing the way the player interacts with the game world
+/// </summary>
 public class PlayerInteraction : MonoBehaviour
 {
     [Header("Camera")]
