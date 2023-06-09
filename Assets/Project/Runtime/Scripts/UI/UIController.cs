@@ -14,16 +14,18 @@ public class UIController : MonoBehaviour
 
     private void OnEnable()
     {
-        
+
         GameEvents.onComputerInteraction += EnableUI;
         GameEvents.onNPCFullyChecked += DisableUI;
-        
+        GameEvents.onExitComputerPressed += DisableUI;
+
     }
 
     private void OnDisable()
     {
         GameEvents.onComputerInteraction -= EnableUI;
         GameEvents.onNPCFullyChecked -= DisableUI;
+        GameEvents.onExitComputerPressed -= DisableUI;
     }
 
     public void DisableUI()

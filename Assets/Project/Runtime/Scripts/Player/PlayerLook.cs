@@ -67,7 +67,10 @@ public class PlayerLook : MonoBehaviour
 
     public void HandleZoom()
     {
+      
         isZooming = !isZooming;
+        
+
         if(zoomRoutine != null)
         {
             StopCoroutine(zoomRoutine);

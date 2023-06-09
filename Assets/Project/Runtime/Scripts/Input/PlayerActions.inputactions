@@ -173,7 +173,7 @@
                     "name": "",
                     "id": "adb10a6b-b395-436a-8cee-a46ff4ec7112",
                     "path": "<Mouse>/rightButton",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Zoom",
@@ -721,6 +721,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Exit computer",
+                    "type": "Button",
+                    "id": "8fce904e-95a9-4980-aa8e-10ce426d3f48",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -732,6 +741,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Enter detective mode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "34aab26a-466b-4a97-9902-f69b24db532e",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Exit computer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
