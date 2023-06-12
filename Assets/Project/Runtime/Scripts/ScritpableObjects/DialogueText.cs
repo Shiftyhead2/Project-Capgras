@@ -9,7 +9,7 @@ public enum DialogueType
     BRIBE
 }
 
-[CreateAssetMenu(fileName = "New dialogue text", menuName = "Dialogue/New Dialogue", order = 0)]
+[CreateAssetMenu(fileName = "New dialogue text", menuName = "Data/Dialogue/New Dialogue", order = 0)]
 public class DialogueText : ScriptableObject
 {
     public string openingText;

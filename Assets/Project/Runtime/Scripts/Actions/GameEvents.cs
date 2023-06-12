@@ -9,6 +9,9 @@ public static class GameEvents
 {
     public static Func<string, bool, string, string> onNameGenerated; //triggered when the name has been generated
     public static Func<string> onGenderGenerated; //triggered when gender has been generated
+    public static Func<bool, StatusScriptableObject> onStatusGenerated; // triggered when status has been generated
+    public static Func<StatusScriptableObject> onSearchFinished; //triggered when the C.DB.Q search has been finished
+    public static Func<string> onGetName; //triggered when C.DB.Q is trying to get the name of the citizen
     public static Action onCallPerson; //triggered when the player interacts with an object that spawns the person
     public static Action onComputerInteraction; // triggered when the player interacts with the computer
     public static Action onComputerShutDown; //triggered when the player clicks the shut down button on the computer desktop UI

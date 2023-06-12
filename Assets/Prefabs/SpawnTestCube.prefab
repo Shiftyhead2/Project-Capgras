@@ -98,9 +98,17 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5962552360003046155}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &-4253683251074468361
@@ -110,10 +118,21 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5962552360003046155}
-  serializedVersion: 2
+  serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -183,6 +202,11 @@ MonoBehaviour:
   <isDoppleganger>k__BackingField: 0
   beggingObject: {fileID: 11400000, guid: ee3fe1ee97a5a7a4a92961510d8a2807, type: 2}
   bribeObject: {fileID: 11400000, guid: 57a226b834d5b1c45aac253357151d96, type: 2}
+  StatusObjects:
+  - {fileID: 11400000, guid: a9e8e21c8637d6c4cbabef4ddac7010e, type: 2}
+  - {fileID: 11400000, guid: 907bc2ff848bd274f86f4392d25c6b7a, type: 2}
+  - {fileID: 11400000, guid: 6adb352260edf6946bee598ae017d954, type: 2}
+  - {fileID: 11400000, guid: a9c62e06b1ea45249a7e87bc81e1d261, type: 2}
   begChance: 0.5
   bribeChance: 0.5
 --- !u!114 &1119655269868096879

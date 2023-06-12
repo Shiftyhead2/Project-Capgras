@@ -39,7 +39,7 @@ public class PlayerInteraction : MonoBehaviour
             {
                 if (hitInfo.collider.TryGetComponent(out IInteractable interactable))
                 {
-                    if (playerInputManager.playerInput.actions[INTERACT_ACTION].triggered)
+                    if (playerInputManager.playerInput.actions[INTERACT_ACTION].IsPressed())
                     {
                         interactable.Interact();
                     }

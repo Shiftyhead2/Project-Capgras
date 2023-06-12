@@ -11,6 +11,7 @@ public class DatabaseManager : MonoBehaviour
     private List<NamesScript> _firstMaleNames = new List<NamesScript>();
     private List<NamesScript> _firstFemaleNames = new List<NamesScript>();
     private List<NamesScript> _surNames = new List<NamesScript>();
+    [SerializeField] private List<StatusScriptableObject> _statusObjects = new List<StatusScriptableObject>();
 
     [SerializeField] private AssetLabelReference _femaleNameLabel;
     [SerializeField] private AssetLabelReference _surnameLabel;
@@ -30,12 +31,14 @@ public class DatabaseManager : MonoBehaviour
     {
         GameEvents.onNameGenerated += GetName;
         GameEvents.onGenderGenerated += GetGender;
+        GameEvents.onStatusGenerated += ReturnStatusScriptableObject;
     }
 
     private void OnDisable()
     {
         GameEvents.onNameGenerated -= GetName;
         GameEvents.onGenderGenerated -= GetGender;
+        GameEvents.onStatusGenerated -= ReturnStatusScriptableObject;
     }
 
 
@@ -143,6 +146,14 @@ public class DatabaseManager : MonoBehaviour
         return _surNames[Random.Range(0, _surNames.Count)].nameText;
     }
 
+    StatusScriptableObject ReturnStatusScriptableObject(bool isDoppleganger)
+    {
+        if (isDoppleganger)
+        {
+            return _statusObjects[Random.Range(0, _statusObjects.Count)];
+        }
 
+        return _statusObjects[Random.Range(0, 2)];
+    }
 
 }
