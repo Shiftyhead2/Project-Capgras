@@ -11,7 +11,7 @@ public class CitzensDatabaseUI : MonoBehaviour
     [SerializeField] private GameObject searchingPanel;
     [SerializeField] private GameObject statusPanel;
 
-    [SerializeField] private CanvasGroup canvasGroup;
+    [SerializeField] private UIPanelEnabler panelEnabler;
     [SerializeField] private Image fillImage;
 
     [SerializeField] private TextMeshProUGUI searchNameText;
@@ -45,9 +45,7 @@ public class CitzensDatabaseUI : MonoBehaviour
 
     public void disableUI()
     {
-        canvasGroup.alpha = 0f;
-        canvasGroup.blocksRaycasts = false;
-        canvasGroup.interactable = false;
+        panelEnabler.DisableThisUI();
 
         referencedStatus = null;
 
@@ -56,9 +54,9 @@ public class CitzensDatabaseUI : MonoBehaviour
 
     public void enableUI()
     {
-        canvasGroup.alpha = 1f;
-        canvasGroup.blocksRaycasts = true;
-        canvasGroup.interactable = true; 
+        panelEnabler.EnableThisUI();
+
+        transform.SetAsLastSibling();
     }
 
     void SetDefault()

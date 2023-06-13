@@ -1555,6 +1555,7 @@ GameObject:
   - component: {fileID: 1304885064217218411}
   - component: {fileID: 1391579923733897995}
   - component: {fileID: 2195911059936556189}
+  - component: {fileID: 5064811327511140650}
   - component: {fileID: 8880520497197730566}
   m_Layer: 5
   m_Name: C.DB.Q UI
@@ -1709,6 +1710,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 1
   m_VerticalFit: 2
+--- !u!114 &5064811327511140650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5063956667695672418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2eff63d9f858374096aa12bbe728dee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8880520497197730566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1724,7 +1737,7 @@ MonoBehaviour:
   searchPanel: {fileID: 2213140961036208753}
   searchingPanel: {fileID: 2636041611671107638}
   statusPanel: {fileID: 5513418860031689491}
-  canvasGroup: {fileID: 2602580841985488187}
+  panelEnabler: {fileID: 5064811327511140650}
   fillImage: {fileID: 7662744353989027534}
   searchNameText: {fileID: 5097710708510804145}
   citizenNameText: {fileID: 7907450663476381436}

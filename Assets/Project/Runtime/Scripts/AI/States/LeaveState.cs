@@ -4,6 +4,8 @@ public class LeaveState : BaseState
 {
     public override void Enter()
     {
+
+        Debug.Log("Entering LeaveState");
         if (npc.ApprovedForEntry)
         {
             npc.Agent.SetDestination(npc.path.approveWaypoint.position);
@@ -16,19 +18,11 @@ public class LeaveState : BaseState
 
     public override void Perform()
     {
-        CheckDistance();
+       
     }
 
     public override void Exit() 
-    { 
-
-    }
-
-    void CheckDistance()
     {
-        if (npc.Agent.hasPath && npc.Agent.remainingDistance <= 0.2f)
-        {
-            GameEvents.onAIWaypointReached?.Invoke();
-        }
+        Debug.Log("Exitting LeaveState");
     }
 }
