@@ -14,6 +14,10 @@ public class CitationManager : MonoBehaviour
     List<FieldCitationReason> fieldCitationReasons = new List<FieldCitationReason>();
     [SerializeField]
     private DoppleGangerCitation genericCitation;
+    [SerializeField]
+    private StatusCitationReason statusCitation;
+    [SerializeField]
+    private DaysSinceUpdateCitationReason daysSinceUpdateCitationReason;
 
 
     private void OnEnable()
@@ -27,12 +31,12 @@ public class CitationManager : MonoBehaviour
     }
 
 
-    private void checkFieldList(List<FieldData> fieldDatas, bool isSuspicious, bool doppleganger)
+    private void checkFieldList(List<FieldData> fieldDatas, bool isSuspicious, bool doppleganger, int daysSinceUpdate, StatusScriptableObject currentStatus)
     {
         reasons = string.Empty;
         string fullCitationtext = "You have been given a citation for the following reasons: \n \n";
 
-        giveReason(fieldDatas, isSuspicious, doppleganger);
+        giveReason(fieldDatas, isSuspicious, doppleganger, daysSinceUpdate,currentStatus);
 
         if (reasons != string.Empty)
         {
@@ -44,11 +48,21 @@ public class CitationManager : MonoBehaviour
 
     }
 
-    void giveReason(List<FieldData> fieldDatas, bool isSuspicious, bool doppleganger)
+    void giveReason(List<FieldData> fieldDatas, bool isSuspicious, bool doppleganger, int daysSinceUpdate, StatusScriptableObject currentStatus)
     {
 
         int incorrectInformation = 0;
         FieldCitationReason _citation;
+
+        if (statusCitation.CheckStatus(currentStatus))
+        {
+            reasons += $"This person is reported with the status of <color=#{ColorUtility.ToHtmlStringRGBA(currentStatus.statusColor)}>{currentStatus.statusText}</color> in our citizens database \n";
+        }
+
+        if (daysSinceUpdateCitationReason.CheckDays(daysSinceUpdate))
+        {
+            reasons += daysSinceUpdateCitationReason.ReturnString();
+        }
 
 
         foreach (FieldData data in fieldDatas)
@@ -85,6 +99,8 @@ public class CitationManager : MonoBehaviour
                 reasons += "Possible doppleganger! \n";
             }
         }
+
+        
     }
 
     void giveCitation(string fullCitationText)

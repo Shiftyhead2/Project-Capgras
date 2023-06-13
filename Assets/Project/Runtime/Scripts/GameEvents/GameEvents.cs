@@ -12,7 +12,10 @@ public static class GameEvents
     public static Func<bool, StatusScriptableObject> onStatusGenerated; // triggered when status has been generated
     public static Func<StatusScriptableObject> onSearchFinished; //triggered when the C.DB.Q search has been finished
     public static Func<string> onGetName; //triggered when C.DB.Q is trying to get the name of the citizen
+    public static Func<int> onGetDaysSinceUpdate; //triggered when C.DB.Q is trying to get the days since last update of the citizen
+
     public static Action onCallPerson; //triggered when the player interacts with an object that spawns the person
+    public static Action<int> onPersonInformationGenerationDone; //triggered because we want to generate the numbers of days since the last update variable for NPC ID data
     public static Action onComputerInteraction; // triggered when the player interacts with the computer
     public static Action onComputerShutDown; //triggered when the player clicks the shut down button on the computer desktop UI
     public static Action onExitComputerPressed; //triggered when the player presses the exit computer button
@@ -31,7 +34,7 @@ public static class GameEvents
     public static Action onNPCFullyChecked; //triggered when the NPC documents have been checked regardless if the NPC has been approved or not
     public static Action<bool> onProcessPerson; //triggered when the NPC enters or exists the trigger zone
     public static Action onCitationZoneEnter; //triggered when the NPC enters the citation zone trigger
-    public static Action<List<FieldData>, bool, bool> onProcessFieldData; //triggered when the NPC enter the citation zone trigger passing the required list of field data for checking if the player should recieve a citation
+    public static Action<List<FieldData>, bool, bool,int,StatusScriptableObject> onProcessFieldData; //triggered when the NPC enter the citation zone trigger passing the required list of field data for checking if the player should recieve a citation
     public static Action onCitationGiven; //triggered when the player gets a citation
     public static Action onAIWaypointReached; //triggered when the NPC reaches a certain checkpoint
     public static Action<int> onUpdateText; //triggered when some text should be updated

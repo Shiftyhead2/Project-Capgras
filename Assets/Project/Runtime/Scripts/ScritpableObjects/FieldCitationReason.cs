@@ -9,6 +9,11 @@ public class FieldCitationReason : CitationReasonBase
     public int fieldID = 0;
     public string fieldName;
 
+    public override bool CheckDays(int days = 0)
+    {
+        return false;
+    }
+
     public override bool CheckIfDoppleGanger(bool doppleGanger)
     {
         if (doppleGanger)
@@ -44,6 +49,11 @@ public class FieldCitationReason : CitationReasonBase
         {
             return true;
         }
+        return false;
+    }
+
+    public override bool CheckStatus(StatusScriptableObject status = null)
+    {
         return false;
     }
 

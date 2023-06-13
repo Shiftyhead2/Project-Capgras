@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statusText: Dead
   statusColor: {r: 1, g: 0.039931342, b: 0, a: 1}
+  ID: 101

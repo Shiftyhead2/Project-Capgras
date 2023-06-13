@@ -9,5 +9,8 @@ public abstract class CitationReasonBase : ScriptableObject
     public abstract bool CheckIfDoppleGanger(bool doppleGanger);
 
     public abstract bool CheckIfIDMatches(int id);
+
+    public abstract bool CheckStatus(StatusScriptableObject status);
+    public abstract bool CheckDays(int days);
     public abstract string ReturnString();
 }

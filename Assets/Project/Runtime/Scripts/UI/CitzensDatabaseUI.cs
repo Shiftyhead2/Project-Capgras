@@ -23,6 +23,7 @@ public class CitzensDatabaseUI : MonoBehaviour
     [SerializeField] private float maxWaitTime = 5f;
 
     private string citizensName;
+    private int daysSinceLastUpdate;
 
     private Coroutine searchCoroutine;
 
@@ -48,6 +49,7 @@ public class CitzensDatabaseUI : MonoBehaviour
         panelEnabler.DisableThisUI();
 
         referencedStatus = null;
+        daysSinceLastUpdate = 0;
 
         StopAllCoroutines();
     }
@@ -95,6 +97,7 @@ public class CitzensDatabaseUI : MonoBehaviour
         searchingPanel.SetActive(false);
         statusPanel.SetActive(true);
         referencedStatus = GameEvents.onSearchFinished?.Invoke();
+        daysSinceLastUpdate = (int)GameEvents.onGetDaysSinceUpdate?.Invoke();
         SetUpStatusText();
     }
 
@@ -104,6 +107,8 @@ public class CitzensDatabaseUI : MonoBehaviour
         {
             statusText.text = $"Status: {referencedStatus.returnStatus()}";
         }
+
+        daysSinceUpdateText.text = $"Days since last update: \n {daysSinceLastUpdate}";
     }
 
     void SetUpCitizenNameTexts()

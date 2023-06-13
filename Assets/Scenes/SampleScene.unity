@@ -7782,6 +7782,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3105bc9f9f8deca4c9dde038f612ec11, type: 2}
   - {fileID: 11400000, guid: 5ae904913eaafa54a9d1dc267dddd6c6, type: 2}
   genericCitation: {fileID: 11400000, guid: 7456c383d50960b44889f50a5a1f3dfe, type: 2}
+  statusCitation: {fileID: 11400000, guid: c31fb1c1c0490a14198a49720ef821b7, type: 2}
+  daysSinceUpdateCitationReason: {fileID: 11400000, guid: 353713bc8e984124d927c7db12e396da,
+    type: 2}
 --- !u!1 &1249617978
 GameObject:
   m_ObjectHideFlags: 0

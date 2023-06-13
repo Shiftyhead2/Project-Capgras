@@ -9,9 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faf76c6be299da6469dfb0cc320c2ab0, type: 3}
-  m_Name: Missing
+  m_Script: {fileID: 11500000, guid: 647e9a8bff5200842b210f7bc90c52e5, type: 3}
+  m_Name: DaysSinceUpdateCitation
   m_EditorClassIdentifier: 
-  statusText: Missing
-  statusColor: {r: 1, g: 0.78845626, b: 0, a: 1}
-  ID: 102

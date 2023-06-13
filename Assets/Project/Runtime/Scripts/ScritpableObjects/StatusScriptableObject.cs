@@ -7,6 +7,7 @@ public class StatusScriptableObject : ScriptableObject
 {
     public string statusText;
     public Color statusColor;
+    public int ID;
 
     public string returnStatus()
     {

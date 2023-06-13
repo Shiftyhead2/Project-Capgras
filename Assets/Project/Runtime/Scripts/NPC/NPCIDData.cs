@@ -65,6 +65,7 @@ public class NPCIDData : MonoBehaviour
             idFields.Add(data);
             GameEvents.onUpdateBiometricFields(data);
         }
+        GameEvents.onPersonInformationGenerationDone?.Invoke(CurrentAmountOfFalseData);
     }
 
     /// <summary>
@@ -153,7 +154,7 @@ public class NPCIDData : MonoBehaviour
     /// </summary>
     void GetData()
     {
-        GameEvents.onProcessFieldData?.Invoke(idFields, isSuspicious, npcInformation.isDoppleganger);
+        GameEvents.onProcessFieldData?.Invoke(idFields, isSuspicious, npcInformation.isDoppleganger,npcInformation.daysSinceUpdate,npcInformation.currentStatus);
     }
 
 

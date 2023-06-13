@@ -2,20 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New DoopleGanger Citation Reason", menuName = "Data/Citation reasons/DoopleGanger Citation", order = 0)]
-public class DoppleGangerCitation : CitationReasonBase
+[CreateAssetMenu(fileName = "New Status Citation Reason", menuName = "Data/Citation reasons/Status Citation", order = 0)]
+public class StatusCitationReason : CitationReasonBase
 {
-    public override bool CheckDays(int days = 0)
+    public override bool CheckDays(int days)
     {
         return false;
     }
 
     public override bool CheckIfDoppleGanger(bool doppleGanger)
     {
-        if (doppleGanger)
-        {
-            return true;
-        }
         return false;
     }
 
@@ -31,15 +27,16 @@ public class DoppleGangerCitation : CitationReasonBase
 
     public override bool CheckIfSuspicous(bool suspicious)
     {
-        if (suspicious)
-        {
-            return true;
-        }
         return false;
     }
 
-    public override bool CheckStatus(StatusScriptableObject status = null)
+    public override bool CheckStatus(StatusScriptableObject status)
     {
+        if(status.ID != 100)
+        {
+            return true;
+        }
+
         return false;
     }
 

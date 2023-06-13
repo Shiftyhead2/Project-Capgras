@@ -1,9 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class NPCInformation : MonoBehaviour
 {
+
+
+
     [field: SerializeField]
 #if UNITY_EDITOR
     [field: ReadOnlyInspector]
@@ -27,6 +28,12 @@ public class NPCInformation : MonoBehaviour
 
     public StatusScriptableObject currentStatus { get; private set; }
 
+    [field: SerializeField]
+#if UNITY_EDITOR
+    [field: ReadOnlyInspector]
+#endif
+    public int daysSinceUpdate { get; private set; }
+
 
     public float begChance = 0.5f;
     public float bribeChance = 0.5f;
@@ -35,6 +42,8 @@ public class NPCInformation : MonoBehaviour
     {
         GenerateInformation();
     }
+
+    
 
 
     void GenerateInformation()
@@ -49,12 +58,16 @@ public class NPCInformation : MonoBehaviour
     {
         GameEvents.onSearchFinished += getCurrentStatus;
         GameEvents.onGetName += getName;
+        GameEvents.onPersonInformationGenerationDone += setUpDays;
+        GameEvents.onGetDaysSinceUpdate += getDaysSinceUpdate;
     }
 
     private void OnDisable()
     {
         GameEvents.onSearchFinished -= getCurrentStatus;
         GameEvents.onGetName -= getName;
+        GameEvents.onPersonInformationGenerationDone -= setUpDays;
+        GameEvents.onGetDaysSinceUpdate -= getDaysSinceUpdate;
     }
 
     void GetName()
@@ -77,6 +90,33 @@ public class NPCInformation : MonoBehaviour
         return chance <= 0.3f;
     }
 
+    void setUpDays(int currentAmountOfFalseData)
+    {
+        if(currentStatus.ID == 103)
+        {
+            daysSinceUpdate = -1;
+            return;
+        }
+
+
+        if (!isDoppleganger)
+        {
+            if(currentAmountOfFalseData == 0)
+            {
+                daysSinceUpdate = Random.Range(0, 8);
+            }
+            else
+            {
+                daysSinceUpdate = Random.Range(0, 32);
+            }
+        }
+        else
+        {
+            daysSinceUpdate = Random.Range(0, 8);
+        }
+        
+    }
+
     void setUpStatus()
     {
         currentStatus = GameEvents.onStatusGenerated?.Invoke(isDoppleganger);
@@ -90,6 +130,11 @@ public class NPCInformation : MonoBehaviour
     string getName()
     {
         return Name;
+    }
+
+    int getDaysSinceUpdate()
+    {
+        return daysSinceUpdate;
     }
 
 }
