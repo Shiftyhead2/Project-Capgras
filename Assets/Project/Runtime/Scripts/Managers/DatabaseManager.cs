@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class DatabaseManager : MonoBehaviour
 {
+
+    private const string Characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
     private List<NamesScript> _firstMaleNames = new List<NamesScript>();
     private List<NamesScript> _firstFemaleNames = new List<NamesScript>();
@@ -32,6 +35,10 @@ public class DatabaseManager : MonoBehaviour
         GameEvents.onNameGenerated += GetName;
         GameEvents.onGenderGenerated += GetGender;
         GameEvents.onStatusGenerated += ReturnStatusScriptableObject;
+        GameEvents.onAgeGenerated += GetAge;
+        GameEvents.onWeightGenerated += GetWeight;
+        GameEvents.onHeightGenerated += GetHeight;
+        GameEvents.onBiometricIDGenerated += GetRandomString;
     }
 
     private void OnDisable()
@@ -39,11 +46,16 @@ public class DatabaseManager : MonoBehaviour
         GameEvents.onNameGenerated -= GetName;
         GameEvents.onGenderGenerated -= GetGender;
         GameEvents.onStatusGenerated -= ReturnStatusScriptableObject;
+        GameEvents.onAgeGenerated -= GetAge;
+        GameEvents.onWeightGenerated -= GetWeight;
+        GameEvents.onHeightGenerated -= GetHeight;
+        GameEvents.onBiometricIDGenerated -= GetRandomString;
     }
 
 
     string GetName(string gender, bool isFalse, string actualGender)
-    {;
+    {
+        
 
         if (isFalse)
         {
@@ -89,6 +101,35 @@ public class DatabaseManager : MonoBehaviour
         return gender == 0 ? "Male" : "Female";
     }
 
+    string GetAge()
+    {
+        return Random.Range(21, 71).ToString();
+    }
+
+    string GetWeight()
+    {
+        return Random.Range(48, 201).ToString();
+    }
+
+    int GetHeight()
+    {
+        return Random.Range(161, 176);
+    }
+
+    string GetRandomString(bool isFalse)
+    {
+
+        if (isFalse)
+        {
+            //Do something else
+            return regenerateRandomString(GameEvents.onGetOriginalBiometricIDValue?.Invoke(), Random.Range(1, 5));
+        }
+
+
+        return getRandomString(9);
+
+    }
+
     void GetNames()
     {
         Addressables.LoadAssetsAsync<NamesScript>(_femaleNameLabel, _firstFemaleNames.Add);
@@ -109,6 +150,33 @@ public class DatabaseManager : MonoBehaviour
         }
 
         return _statusObjects[Random.Range(0, 2)];
+    }
+
+    string getRandomString(int length)
+    {
+        string generatedString = string.Empty;
+        for (int i = 0; i < length; i++)
+        {
+            int randomIndex = Random.Range(0, Characters.Length);
+            generatedString += Characters[randomIndex];
+        }
+        return generatedString;
+    }
+
+    string regenerateRandomString(string originalString, int numSteps)
+    {
+        string regeneratedString = originalString;
+        int steps = Mathf.Min(numSteps, originalString.Length);
+
+        for (int i = 0; i < steps; i++)
+        {
+            int randomIndex = Random.Range(0, originalString.Length);
+            char newChar = Characters[Random.Range(0, Characters.Length)];
+            regeneratedString = regeneratedString.Remove(randomIndex, 1).Insert(randomIndex, newChar.ToString());
+        }
+
+        return regeneratedString;
+
     }
 
 }

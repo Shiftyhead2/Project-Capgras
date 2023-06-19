@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class NPCInformation : MonoBehaviour
 {
-
+    [SerializeField]
+    private DynamicModelAdjuster modelAdjuster;
 
 
     [field: SerializeField]
@@ -16,6 +17,36 @@ public class NPCInformation : MonoBehaviour
     [field: ReadOnlyInspector]
 #endif
     public string Gender { get; private set; }
+
+    [field: SerializeField]
+#if UNITY_EDITOR
+    [field: ReadOnlyInspector]
+#endif
+    public string Age { get; private set; }
+
+    [field: SerializeField]
+#if UNITY_EDITOR
+    [field: ReadOnlyInspector]
+#endif
+    public string Weight { get; private set; }
+
+    [field: SerializeField]
+#if UNITY_EDITOR
+    [field: ReadOnlyInspector]
+#endif
+    public string Height { get; private set; }
+
+    private int _nonStringHeight;
+
+    [field: SerializeField]
+#if UNITY_EDITOR
+    [field: ReadOnlyInspector]
+#endif
+    public string BiometricID { get; private set; }
+
+
+
+
 
     [field: SerializeField]
 #if UNITY_EDITOR
@@ -38,8 +69,9 @@ public class NPCInformation : MonoBehaviour
     public float begChance = 0.5f;
     public float bribeChance = 0.5f;
 
-    private void Start()
+    private void Awake()
     {
+        modelAdjuster = GetComponentInChildren<DynamicModelAdjuster>();
         GenerateInformation();
     }
 
@@ -50,6 +82,10 @@ public class NPCInformation : MonoBehaviour
     {
         GetGender();
         GetName();
+        GetAge();
+        GetWeight();
+        GetHeight();
+        GetBioID();
         isDoppleganger = IsDoppleganger();
         setUpStatus();
     }
@@ -60,6 +96,7 @@ public class NPCInformation : MonoBehaviour
         GameEvents.onGetName += getName;
         GameEvents.onPersonInformationGenerationDone += setUpDays;
         GameEvents.onGetDaysSinceUpdate += getDaysSinceUpdate;
+        GameEvents.onGetOriginalBiometricIDValue += getOriginalBiometricID;
     }
 
     private void OnDisable()
@@ -68,6 +105,7 @@ public class NPCInformation : MonoBehaviour
         GameEvents.onGetName -= getName;
         GameEvents.onPersonInformationGenerationDone -= setUpDays;
         GameEvents.onGetDaysSinceUpdate -= getDaysSinceUpdate;
+        GameEvents.onGetOriginalBiometricIDValue -= getOriginalBiometricID;
     }
 
     void GetName()
@@ -82,6 +120,32 @@ public class NPCInformation : MonoBehaviour
     {
         Gender = GameEvents.onGenderGenerated?.Invoke();
         GameEvents.onUpdateIDFields?.Invoke(0, Gender);
+    }
+
+    void GetAge()
+    {
+        Age = GameEvents.onAgeGenerated?.Invoke();
+        GameEvents.onUpdateIDFields?.Invoke(2, Age);
+    }
+
+    void GetWeight()
+    {
+        Weight = GameEvents.onWeightGenerated?.Invoke();
+        GameEvents.onUpdateIDFields?.Invoke(3, Weight);
+    }
+
+    void GetHeight()
+    {
+        _nonStringHeight = (int)GameEvents.onHeightGenerated?.Invoke();
+        Height = _nonStringHeight.ToString();
+        GameEvents.onUpdateIDFields?.Invoke(4, Height);
+        modelAdjuster.AdjustBaseOffset(_nonStringHeight);
+    }
+
+    void GetBioID()
+    {
+        BiometricID = GameEvents.onBiometricIDGenerated?.Invoke(false);
+        GameEvents.onUpdateIDFields?.Invoke(5, BiometricID);
     }
 
     bool IsDoppleganger()
@@ -135,6 +199,11 @@ public class NPCInformation : MonoBehaviour
     int getDaysSinceUpdate()
     {
         return daysSinceUpdate;
+    }
+
+    string getOriginalBiometricID()
+    {
+        return BiometricID;
     }
 
 }

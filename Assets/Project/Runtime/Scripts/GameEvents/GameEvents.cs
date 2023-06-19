@@ -9,6 +9,11 @@ public static class GameEvents
 {
     public static Func<string, bool, string, string> onNameGenerated; //triggered when the name has been generated
     public static Func<string> onGenderGenerated; //triggered when gender has been generated
+    public static Func<string> onAgeGenerated; //triggered when age has been generated
+    public static Func<string> onWeightGenerated; //triggered when weight has been generated
+    public static Func<int> onHeightGenerated; //triggered when height has been generated
+    public static Func<bool,string> onBiometricIDGenerated; //triggered when we want to generate a biometric ID
+    public static Func<string> onGetOriginalBiometricIDValue; //triggered when we want to generate a new biometric ID from the original value
     public static Func<bool, StatusScriptableObject> onStatusGenerated; // triggered when status has been generated
     public static Func<StatusScriptableObject> onSearchFinished; //triggered when the C.DB.Q search has been finished
     public static Func<string> onGetName; //triggered when C.DB.Q is trying to get the name of the citizen

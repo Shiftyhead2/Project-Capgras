@@ -14,7 +14,7 @@ public class NPCIDData : MonoBehaviour
 
     [Header("Data Settings")]
     [SerializeField]
-    private int amountOfFields = 1;
+    private int amountOfFields = 6;
     [SerializeField]
     private int maxAmountOfFalseData = 2;
 
@@ -48,6 +48,7 @@ public class NPCIDData : MonoBehaviour
     {
         npcInformation = GetComponent<NPCInformation>();
         CurrentAmountOfFalseData = 0;
+        amountOfFields = 6;
         GenerateFields();
     }
 
@@ -82,7 +83,7 @@ public class NPCIDData : MonoBehaviour
         float percentChange = 50f;
         float randomValue = Random.Range(0f, 100f);
 
-        if (randomValue > percentChange)
+        if (randomValue <= percentChange)
         {
             CurrentAmountOfFalseData++;
             return true;
@@ -112,6 +113,14 @@ public class NPCIDData : MonoBehaviour
                 return "Gender";
             case 1:
                 return "Name";
+            case 2:
+                return "Age";
+            case 3:
+                return "Weight";
+            case 4:
+                return "Height";
+            case 5:
+                return "Biometric ID";
             default:
                 return "Unknown";
         }
@@ -139,11 +148,40 @@ public class NPCIDData : MonoBehaviour
                 }
                 return currentGender;
             case 1:
+                //Name
                 if (isFalse)
                 {
                     return GameEvents.onNameGenerated?.Invoke(currentGender, true, npcInformation.Gender) ?? npcInformation.Name;
                 }
                 return npcInformation.Name;
+            case 2:
+                //Age
+                if (isFalse)
+                {
+                    return GameEvents.onAgeGenerated?.Invoke();
+                }
+                return npcInformation.Age;
+            case 3:
+                //Weight
+                if (isFalse)
+                {
+                    return GameEvents.onWeightGenerated?.Invoke();
+                }
+                return npcInformation.Weight;
+            case 4:
+                //Height
+                if (isFalse)
+                {
+                    return GameEvents.onHeightGenerated?.Invoke().ToString();
+                }
+                return npcInformation.Height;
+            case 5:
+                //Biometric ID
+                if (isFalse)
+                {
+                    return GameEvents.onBiometricIDGenerated?.Invoke(true);
+                }
+                return npcInformation.BiometricID;
             default:
                 return "Unknown";
         }
