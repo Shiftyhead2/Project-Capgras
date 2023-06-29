@@ -5,6 +5,8 @@ using TMPro;
 using DG.Tweening;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 public class IDUIField : MonoBehaviour, IPointerClickHandler
 {
@@ -47,23 +49,23 @@ public class IDUIField : MonoBehaviour, IPointerClickHandler
         {
             case 0:
                 //Gender
-                fieldText.text = $"Gender: {fieldValue}";
+                fieldText.text = $"{LocalizationSettings.StringDatabase.GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME,LocatilazitionStrings.GENDER_FIELD_LOCALIZATION_KEY)}: {fieldValue}";
                 break;
             case 1:
                 //First name
-                fieldText.text = $"Name: {fieldValue}";
+                fieldText.text = $"{LocalizationSettings.StringDatabase.GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME, LocatilazitionStrings.NAME_FIELD_LOCALIZATION_KEY)}: {fieldValue}";
                 break;
             case 2:
-                fieldText.text = $"Age: {fieldValue}";
+                fieldText.text = $"{LocalizationSettings.StringDatabase.GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME, LocatilazitionStrings.AGE_FIELD_LOCALIZATION_KEY)}: {fieldValue}";
                 break;
             case 3:
-                fieldText.text = $"Weight: {fieldValue}kg";
+                fieldText.text = $"{LocalizationSettings.StringDatabase.GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME, LocatilazitionStrings.WEIGHT_FIELD_LOCALIZATION_KEY)}: {fieldValue}kg";
                 break;
             case 4:
-                fieldText.text = $"Height: {fieldValue}cm";
+                fieldText.text = $"{LocalizationSettings.StringDatabase.GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME, LocatilazitionStrings.HEIGHT_FIELD_LOCALIZATION_KEY)}: {fieldValue}cm";
                 break;
             case 5:
-                fieldText.text = $"Biometric ID: {fieldValue}";
+                fieldText.text = $"{LocalizationSettings.StringDatabase.GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME, LocatilazitionStrings.BIOMETRICID_FIELD_LOCALIZATION_KEY)}: {fieldValue}";
                 break;
             default:
                 break;

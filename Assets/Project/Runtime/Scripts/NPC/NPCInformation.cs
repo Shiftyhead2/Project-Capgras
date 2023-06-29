@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 public class NPCInformation : MonoBehaviour
 {
@@ -37,6 +38,7 @@ public class NPCInformation : MonoBehaviour
     public string Height { get; private set; }
 
     private int _nonStringHeight;
+    private int _genderID;
 
     [field: SerializeField]
 #if UNITY_EDITOR
@@ -97,6 +99,7 @@ public class NPCInformation : MonoBehaviour
         GameEvents.onPersonInformationGenerationDone += setUpDays;
         GameEvents.onGetDaysSinceUpdate += getDaysSinceUpdate;
         GameEvents.onGetOriginalBiometricIDValue += getOriginalBiometricID;
+        GameEvents.onGetGenderID += getGenderID;
     }
 
     private void OnDisable()
@@ -106,11 +109,12 @@ public class NPCInformation : MonoBehaviour
         GameEvents.onPersonInformationGenerationDone -= setUpDays;
         GameEvents.onGetDaysSinceUpdate -= getDaysSinceUpdate;
         GameEvents.onGetOriginalBiometricIDValue -= getOriginalBiometricID;
+        GameEvents.onGetGenderID -= getGenderID;
     }
 
     void GetName()
     {
-        Name = GameEvents.onNameGenerated?.Invoke(Gender, false, Gender);
+        Name = GameEvents.onNameGenerated?.Invoke(_genderID, false, _genderID);
         GameEvents.onUpdateIDFields?.Invoke(1, Name);
     }
 
@@ -118,7 +122,8 @@ public class NPCInformation : MonoBehaviour
 
     void GetGender()
     {
-        Gender = GameEvents.onGenderGenerated?.Invoke();
+        _genderID = (int)GameEvents.onGenderGenerated?.Invoke();
+        Gender = _genderID == 0 ? LocalizationSettings.StringDatabase.GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME,LocatilazitionStrings.GENDER_MALE_KEY) : LocalizationSettings.StringDatabase.GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME, LocatilazitionStrings.GENDER_FEMALE_KEY);
         GameEvents.onUpdateIDFields?.Invoke(0, Gender);
     }
 
@@ -204,6 +209,11 @@ public class NPCInformation : MonoBehaviour
     string getOriginalBiometricID()
     {
         return BiometricID;
+    }
+
+    int getGenderID()
+    {
+        return _genderID;
     }
 
 }

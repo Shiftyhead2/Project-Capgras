@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -19,6 +18,7 @@ public class DatabaseManager : MonoBehaviour
     [SerializeField] private AssetLabelReference _femaleNameLabel;
     [SerializeField] private AssetLabelReference _surnameLabel;
     [SerializeField] private AssetLabelReference _maleNameLabel;
+
 
 
     private string _generatedFirstName;
@@ -53,13 +53,13 @@ public class DatabaseManager : MonoBehaviour
     }
 
 
-    string GetName(string gender, bool isFalse, string actualGender)
+    string GetName(int gender, bool isFalse, int actualGender)
     {
         
 
         if (isFalse)
         {
-            if (gender.ToLower() == actualGender.ToLower())
+            if (gender == actualGender)
             {
                 _generatedFirstName = GetFirstName(actualGender);
                 _generatedLastName = GetLastName(true);
@@ -80,9 +80,9 @@ public class DatabaseManager : MonoBehaviour
     }
 
 
-    string GetFirstName(string gender)
+    string GetFirstName(int gender)
     {
-        return gender.ToLower() == "male"
+        return gender == 0
             ? ReturnNonDuplicatedName(_firstMaleNames, _generatedFirstName)
             : ReturnNonDuplicatedName(_firstFemaleNames, _generatedFirstName);
     }
@@ -95,10 +95,10 @@ public class DatabaseManager : MonoBehaviour
         return _surNames[Random.Range(0, _surNames.Count)].nameText;
     }
 
-    string GetGender()
+    int GetGender()
     {
         int gender = Random.Range(0, 2);
-        return gender == 0 ? "Male" : "Female";
+        return gender;
     }
 
     string GetAge()

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 /// <summary>
 /// Base class for generating biometric field data
@@ -22,6 +24,7 @@ public class NPCIDData : MonoBehaviour
     private bool isSuspicious;
 
     private string currentGender;
+    private int currentGenderID;
 
 #if UNITY_EDITOR
     [field: SerializeField]
@@ -64,7 +67,7 @@ public class NPCIDData : MonoBehaviour
             bool isCorrect = IsFalse();
             FieldData data = GenerateFieldData(id,isCorrect);
             idFields.Add(data);
-            GameEvents.onUpdateBiometricFields(data);
+            GameEvents.onUpdateBiometricFields?.Invoke(data);
         }
         GameEvents.onPersonInformationGenerationDone?.Invoke(CurrentAmountOfFalseData);
     }
@@ -110,17 +113,17 @@ public class NPCIDData : MonoBehaviour
         switch (id)
         {
             case 0:
-                return "Gender";
+                return LocalizationSettings.StringDatabase.GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME,LocatilazitionStrings.GENDER_FIELD_LOCALIZATION_KEY);
             case 1:
-                return "Name";
+                return LocalizationSettings.StringDatabase.GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME, LocatilazitionStrings.NAME_FIELD_LOCALIZATION_KEY); 
             case 2:
-                return "Age";
+                return LocalizationSettings.StringDatabase.GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME, LocatilazitionStrings.AGE_FIELD_LOCALIZATION_KEY); 
             case 3:
-                return "Weight";
+                return LocalizationSettings.StringDatabase.GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME, LocatilazitionStrings.WEIGHT_FIELD_LOCALIZATION_KEY); 
             case 4:
-                return "Height";
+                return LocalizationSettings.StringDatabase.GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME, LocatilazitionStrings.HEIGHT_FIELD_LOCALIZATION_KEY); 
             case 5:
-                return "Biometric ID";
+                return LocalizationSettings.StringDatabase.GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME, LocatilazitionStrings.BIOMETRICID_FIELD_LOCALIZATION_KEY);
             default:
                 return "Unknown";
         }
@@ -140,7 +143,9 @@ public class NPCIDData : MonoBehaviour
                 //Gender
                 if (isFalse)
                 {
-                    currentGender = npcInformation.Gender.ToLower() == "male" ? "Female" : "Male";
+                    int _falseGender = (int)GameEvents.onGetGenderID?.Invoke();
+                    currentGenderID = _falseGender == 0 ? 1 : 0;
+                    currentGender = currentGenderID == 1 ? LocalizationSettings.StringDatabase.GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME, LocatilazitionStrings.GENDER_FEMALE_KEY) : LocalizationSettings.StringDatabase.GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME, LocatilazitionStrings.GENDER_MALE_KEY);
                 }
                 else
                 {
@@ -151,7 +156,7 @@ public class NPCIDData : MonoBehaviour
                 //Name
                 if (isFalse)
                 {
-                    return GameEvents.onNameGenerated?.Invoke(currentGender, true, npcInformation.Gender) ?? npcInformation.Name;
+                    return GameEvents.onNameGenerated?.Invoke(currentGenderID, true, (int)GameEvents.onGetGenderID?.Invoke()) ?? npcInformation.Name;
                 }
                 return npcInformation.Name;
             case 2:

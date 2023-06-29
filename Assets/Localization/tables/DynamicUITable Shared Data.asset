@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: DynamicUITable Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: DynamicUITable
+  m_TableCollectionNameGuidString: bd61162a29d28ea40912687a95cd721e
+  m_Entries:
+  - m_Id: 66185736192
+    m_Key: key_dynamic_gender_field
+    m_Metadata:
+      m_Items: []
+  - m_Id: 212977987584
+    m_Key: key_dynamic_name_field
+    m_Metadata:
+      m_Items: []
+  - m_Id: 363335397376
+    m_Key: key_dynamic_age_field
+    m_Metadata:
+      m_Items: []
+  - m_Id: 521208999936
+    m_Key: key_dynamic_weight_field
+    m_Metadata:
+      m_Items: []
+  - m_Id: 608819621888
+    m_Key: key_dynamic_height_field
+    m_Metadata:
+      m_Items: []
+  - m_Id: 744719265792
+    m_Key: key_dynamic_biometricID_field
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13244953145344
+    m_Key: key_dynamic_gender_male
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13244953145345
+    m_Key: key_dynamic_gender_female
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 5563695531929370678
+  references:
+    version: 2
+    RefIds:
+    - rid: 5563695531929370678
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
+        asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1688047934653
