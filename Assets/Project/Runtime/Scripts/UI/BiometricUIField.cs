@@ -43,11 +43,11 @@ public class BiometricUIField : MonoBehaviour, IPointerClickHandler
 
         if (fieldID == 3)
         {
-            fieldText.text = $"{data.FieldName}: {data.Value}kg";
+            fieldText.text = $"{data.FieldName}: {data.Value} kg";
         }
         else if(fieldID == 4)
         {
-            fieldText.text = $"{data.FieldName}: {data.Value}cm";
+            fieldText.text = $"{data.FieldName}: {data.Value} cm";
         }
         else
         {

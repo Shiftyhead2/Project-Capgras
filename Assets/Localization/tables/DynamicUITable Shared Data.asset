@@ -47,6 +47,54 @@ MonoBehaviour:
     m_Key: key_dynamic_gender_female
     m_Metadata:
       m_Items: []
+  - m_Id: 5391194246492160
+    m_Key: key_dynamic_alive_status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5391194271657984
+    m_Key: key_dynamic_dead_status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5391194271657985
+    m_Key: key_dynamic_missing_status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5391194271657986
+    m_Key: key_dynamic_unknown_status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5413840023597056
+    m_Key: key_dynamic_citation_fine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5419717107527680
+    m_Key: key_dynamic_citation_status_reason
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5423181187395584
+    m_Key: key_dynamic_citation_header
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5423181187395585
+    m_Key: key_dynamic_citation_suspicious_reason
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5423181187395586
+    m_Key: key_dynamic_citation_incorrect_usage_reason
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5423181187395587
+    m_Key: key_dynamic_citation_doppleganger_reason
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5426353368870912
+    m_Key: key_dynamic_citation_field_reason
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5430231900499968
+    m_Key: key_dynamic_citation_outdated_database
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

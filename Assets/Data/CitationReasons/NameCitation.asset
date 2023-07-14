@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: NameCitation
   m_EditorClassIdentifier: 
   fieldID: 1
-  fieldName: Name
+  fieldKey: key_dynamic_name_field

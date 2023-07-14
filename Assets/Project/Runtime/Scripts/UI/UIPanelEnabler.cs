@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class UIPanelEnabler : MonoBehaviour
 {
+    [SerializeField]
     private CanvasGroup canvasGroup;
 
-    private void Awake()
-    {
-        canvasGroup = GetComponent<CanvasGroup>();
-    }
 
 
     public void EnableThisUI()

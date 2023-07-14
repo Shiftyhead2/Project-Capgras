@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 647e9a8bff5200842b210f7bc90c52e5, type: 3}
   m_Name: DaysSinceUpdateCitation
   m_EditorClassIdentifier: 
+  citationReasonKey: key_dynamic_citation_outdated_database

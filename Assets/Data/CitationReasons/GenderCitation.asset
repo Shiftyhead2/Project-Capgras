@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: GenderCitation
   m_EditorClassIdentifier: 
   fieldID: 0
-  fieldName: Gender
+  fieldKey: key_dynamic_gender_field

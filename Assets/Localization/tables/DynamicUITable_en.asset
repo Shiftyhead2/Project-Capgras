@@ -16,7 +16,8 @@ MonoBehaviour:
     m_Code: en
   m_SharedData: {fileID: 11400000, guid: bd61162a29d28ea40912687a95cd721e, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 1567346455918411778
   m_TableData:
   - m_Id: 66185736192
     m_Localized: Gender
@@ -50,6 +51,61 @@ MonoBehaviour:
     m_Localized: Female
     m_Metadata:
       m_Items: []
+  - m_Id: 5391194246492160
+    m_Localized: Alive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5391194271657984
+    m_Localized: Dead
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5391194271657985
+    m_Localized: Missing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5391194271657986
+    m_Localized: Unknown
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5413840023597056
+    m_Localized: A fine of {0} credits has been added to your account
+    m_Metadata:
+      m_Items:
+      - rid: 1567346455918411778
+  - m_Id: 5419717107527680
+    m_Localized: This person is reported with the status of {0} in our citizen database!
+    m_Metadata:
+      m_Items:
+      - rid: 1567346455918411778
+  - m_Id: 5423181187395584
+    m_Localized: 'You have been given a citation for the following reasons:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5423181187395585
+    m_Localized: Suspicious person not tagged with the suspicious tag!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5423181187395586
+    m_Localized: Incorrect usage of the suspicious tag!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5423181187395587
+    m_Localized: Possible doppelganger!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5426353368870912
+    m_Localized: '{0} is incorrect!'
+    m_Metadata:
+      m_Items:
+      - rid: 1567346455918411778
+  - m_Id: 5430231900499968
+    m_Localized: Outdated citizens database!
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 1567346455918411778
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00307adbdb3b13000030fa38344113000030fa583d471300

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faf76c6be299da6469dfb0cc320c2ab0, type: 3}
   m_Name: Unknown
   m_EditorClassIdentifier: 
-  statusText: Unknown
+  statusKey: key_dynamic_unknown_status
   statusColor: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
   ID: 103

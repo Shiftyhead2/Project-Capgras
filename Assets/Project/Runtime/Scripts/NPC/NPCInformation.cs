@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Localization.Settings;
 
 public class NPCInformation : MonoBehaviour
 {
@@ -123,7 +122,7 @@ public class NPCInformation : MonoBehaviour
     void GetGender()
     {
         _genderID = (int)GameEvents.onGenderGenerated?.Invoke();
-        Gender = _genderID == 0 ? LocalizationSettings.StringDatabase.GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME,LocatilazitionStrings.GENDER_MALE_KEY) : LocalizationSettings.StringDatabase.GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME, LocatilazitionStrings.GENDER_FEMALE_KEY);
+        Gender = _genderID == 0 ? GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME,LocatilazitionStrings.GENDER_MALE_KEY) : GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME,LocatilazitionStrings.GENDER_FEMALE_KEY);
         GameEvents.onUpdateIDFields?.Invoke(0, Gender);
     }
 
@@ -216,4 +215,8 @@ public class NPCInformation : MonoBehaviour
         return _genderID;
     }
 
+    string GetLocalizedString(string table_key, string string_key)
+    {
+        return LocalizationEventManager.GetLocalizedString(table_key, string_key);
+    }
 }
