@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: AgeCitationReason
   m_EditorClassIdentifier: 
   fieldID: 2
-  fieldName: Age
+  fieldKey: key_dynamic_age_field

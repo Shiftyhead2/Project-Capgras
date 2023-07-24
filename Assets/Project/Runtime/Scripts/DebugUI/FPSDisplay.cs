@@ -11,9 +11,22 @@ public class FPSDisplay : MonoBehaviour
     private float time;
     private int frameCount;
 
+
+    private void Start()
+    {
+        #if UNITY_EDITOR
+        fpsText.enabled = false;
+        #else
+        fpsText.enabled = true;
+        #endif
+
+    }
+
+
     // Update is called once per frame
     void Update()
     {
+        #if !UNITY_EDITOR
         time += Time.unscaledDeltaTime;
 
         frameCount++;
@@ -25,6 +38,7 @@ public class FPSDisplay : MonoBehaviour
 
             time -= poolingTime;
             frameCount = 0;
-        } 
+        }
+        #endif
     }
 }

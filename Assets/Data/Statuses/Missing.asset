@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faf76c6be299da6469dfb0cc320c2ab0, type: 3}
   m_Name: Missing
   m_EditorClassIdentifier: 
-  statusText: Missing
+  statusKey: key_dynamic_missing_status
   statusColor: {r: 1, g: 0.78845626, b: 0, a: 1}
   ID: 102

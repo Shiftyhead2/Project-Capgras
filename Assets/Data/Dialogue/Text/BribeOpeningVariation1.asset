@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ecf81fcd55e36247af084553d6f8185, type: 3}
   m_Name: BribeOpeningVariation1
   m_EditorClassIdentifier: 
-  text: I will give you
+  key: key_dialogue_bride_middle_1

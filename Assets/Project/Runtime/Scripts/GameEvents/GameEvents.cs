@@ -7,8 +7,8 @@ using System.Collections.Generic;
 /// </summary>
 public static class GameEvents
 {
-    public static Func<string, bool, string, string> onNameGenerated; //triggered when the name has been generated
-    public static Func<string> onGenderGenerated; //triggered when gender has been generated
+    public static Func<int, bool, int, string> onNameGenerated; //triggered when the name has been generated
+    public static Func<int> onGenderGenerated; //triggered when gender has been generated
     public static Func<string> onAgeGenerated; //triggered when age has been generated
     public static Func<string> onWeightGenerated; //triggered when weight has been generated
     public static Func<int> onHeightGenerated; //triggered when height has been generated
@@ -18,6 +18,9 @@ public static class GameEvents
     public static Func<StatusScriptableObject> onSearchFinished; //triggered when the C.DB.Q search has been finished
     public static Func<string> onGetName; //triggered when C.DB.Q is trying to get the name of the citizen
     public static Func<int> onGetDaysSinceUpdate; //triggered when C.DB.Q is trying to get the days since last update of the citizen
+    public static Func<int> onGetGenderID; //triggered when we want to get the gender ID
+    public static Func<int> onGetFine; //triggered when we want to get the current fine
+    public static Func<bool> onGetDetectiveMode; //triggered when we want to get the current status of the detective mode
 
     public static Action onCallPerson; //triggered when the player interacts with an object that spawns the person
     public static Action<int> onPersonInformationGenerationDone; //triggered because we want to generate the numbers of days since the last update variable for NPC ID data

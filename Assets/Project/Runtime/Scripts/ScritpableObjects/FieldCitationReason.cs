@@ -7,7 +7,7 @@ public class FieldCitationReason : CitationReasonBase
 {
 
     public int fieldID = 0;
-    public string fieldName;
+    public string fieldKey;
 
     public override bool CheckDays(int days = 0)
     {
@@ -59,6 +59,11 @@ public class FieldCitationReason : CitationReasonBase
 
     public override string ReturnString()
     {
-        return $"{fieldName} is incorrect! \n";
+        return $"{GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME,LocatilazitionStrings.CITATION_REASON_FIELD_REASON_KEY, new object[] {GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME,fieldKey)})} \n";
+    }
+
+    private string GetLocalizedString(string table_key, string string_key, object[] args = null)
+    {
+        return LocalizationEventManager.GetLocalizedString(table_key, string_key, args);
     }
 }

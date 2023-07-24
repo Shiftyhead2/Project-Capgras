@@ -34,15 +34,14 @@ public class CitationManager : MonoBehaviour
     private void checkFieldList(List<FieldData> fieldDatas, bool isSuspicious, bool doppleganger, int daysSinceUpdate, StatusScriptableObject currentStatus)
     {
         reasons = string.Empty;
-        string fullCitationtext = "You have been given a citation for the following reasons: \n \n";
+        string fullCitationtext = $"{GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME,LocatilazitionStrings.CITATION_HEADER_KEY)} \n \n";
 
         giveReason(fieldDatas, isSuspicious, doppleganger, daysSinceUpdate,currentStatus);
 
         if (reasons != string.Empty)
         {
             fullCitationtext += reasons;
-            fullCitationtext += $"\n A fine of {GameManager.instance.fine} credits has been added to your account!";
-            fullCitationtext += "\n Do not dissapoint us again!";
+            fullCitationtext += $"\n {GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME,LocatilazitionStrings.FINE_CITATION_KEY, new object[] {GetFine()})} \n";
             giveCitation(fullCitationtext);
         }
 
@@ -56,7 +55,7 @@ public class CitationManager : MonoBehaviour
 
         if (statusCitation.CheckStatus(currentStatus))
         {
-            reasons += $"This person is reported with the status of <color=#{ColorUtility.ToHtmlStringRGBA(currentStatus.statusColor)}>{currentStatus.statusText}</color> in our citizens database \n";
+            reasons += $"{GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME, LocatilazitionStrings.CITATION_REASON_STATUS_KEY, new object[] {currentStatus.returnStatus()})} \n";
         }
 
         if (daysSinceUpdateCitationReason.CheckDays(daysSinceUpdate))
@@ -80,7 +79,7 @@ public class CitationManager : MonoBehaviour
         {
             if (!genericCitation.CheckIfSuspicous(isSuspicious))
             {
-                reasons += "Suspicious person not tagged with the suspicious tag! \n";
+                reasons += $"{GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME, LocatilazitionStrings.CITATION_REASON_SUSPICIOUS_KEY)} \n";
             }
             else
             {
@@ -91,12 +90,12 @@ public class CitationManager : MonoBehaviour
         {
             if (genericCitation.CheckIfSuspicous(isSuspicious) && !genericCitation.CheckIfDoppleGanger(doppleganger))
             {
-                reasons += "Incorrect usage of the suspicious tag! \n";
+                reasons += $"{GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME, LocatilazitionStrings.CITATION_REASON_INCORRECT_USAGE_KEY)} \n";
             }
 
             if (genericCitation.CheckIfDoppleGanger(doppleganger))
             {
-                reasons += "Possible doppleganger! \n";
+                reasons += $"{GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME,LocatilazitionStrings.CITATION_REASON_DOPPELGANGER_KEY)} \n";
             }
         }
 
@@ -105,8 +104,28 @@ public class CitationManager : MonoBehaviour
 
     void giveCitation(string fullCitationText)
     {
-        GameEvents.showModal?.Invoke("CITATION", fullCitationText, "OK", GameEvents.onEnablePlayerInput, true);
+        GameEvents.showModal?.Invoke(GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME,LocatilazitionStrings.MODUL_CITATION_HEADER_KEY), fullCitationText, "OK", GameEvents.onEnablePlayerInput, true);
         GameEvents.onCitationGiven?.Invoke();
         GameEvents.onDisablePlayerInput?.Invoke();
+    }
+
+    string GetLocalizedString(string table_key, string string_key, object[] args = null)
+    {
+        return LocalizationEventManager.GetLocalizedString(table_key, string_key, args);
+    }
+
+
+    int GetFine()
+    {
+        int currentFine;
+
+        if(GameEvents.onGetFine?.Invoke() == null)
+        {
+            currentFine = 0;
+            return currentFine;
+        }
+
+        currentFine = (int)GameEvents.onGetFine?.Invoke();
+        return currentFine;
     }
 }
