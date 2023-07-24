@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffd93c3f19564fa469cdcfaed49b11b6, type: 3}
   m_Name: BegDialogue1
   m_EditorClassIdentifier: 
-  openingText: Please let me in
+  openingKey: key_dialogue_beg_opening_1
   type: 0
-  minBrideAmount: 0
-  maxBrideAmount: 0
+  openingBribeVariation: []
+  closingBribeVariation: []
+  minBribeAmount: 0
+  maxBribeAmount: 0

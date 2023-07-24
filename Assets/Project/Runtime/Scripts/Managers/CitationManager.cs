@@ -41,7 +41,7 @@ public class CitationManager : MonoBehaviour
         if (reasons != string.Empty)
         {
             fullCitationtext += reasons;
-            fullCitationtext += $"\n {GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME,LocatilazitionStrings.FINE_CITATION_KEY, new object[] {GameManager.instance.fine})} \n";
+            fullCitationtext += $"\n {GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME,LocatilazitionStrings.FINE_CITATION_KEY, new object[] {GetFine()})} \n";
             giveCitation(fullCitationtext);
         }
 
@@ -104,7 +104,7 @@ public class CitationManager : MonoBehaviour
 
     void giveCitation(string fullCitationText)
     {
-        GameEvents.showModal?.Invoke("CITATION", fullCitationText, "OK", GameEvents.onEnablePlayerInput, true);
+        GameEvents.showModal?.Invoke(GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME,LocatilazitionStrings.MODUL_CITATION_HEADER_KEY), fullCitationText, "OK", GameEvents.onEnablePlayerInput, true);
         GameEvents.onCitationGiven?.Invoke();
         GameEvents.onDisablePlayerInput?.Invoke();
     }
@@ -112,5 +112,20 @@ public class CitationManager : MonoBehaviour
     string GetLocalizedString(string table_key, string string_key, object[] args = null)
     {
         return LocalizationEventManager.GetLocalizedString(table_key, string_key, args);
+    }
+
+
+    int GetFine()
+    {
+        int currentFine;
+
+        if(GameEvents.onGetFine?.Invoke() == null)
+        {
+            currentFine = 0;
+            return currentFine;
+        }
+
+        currentFine = (int)GameEvents.onGetFine?.Invoke();
+        return currentFine;
     }
 }

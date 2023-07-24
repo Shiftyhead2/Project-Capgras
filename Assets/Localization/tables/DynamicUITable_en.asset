@@ -102,10 +102,45 @@ MonoBehaviour:
     m_Localized: Outdated citizens database!
     m_Metadata:
       m_Items: []
+  - m_Id: 9079838702448640
+    m_Localized: 'Status: {0}'
+    m_Metadata:
+      m_Items:
+      - rid: 1567346455918411778
+  - m_Id: 9079838727614464
+    m_Localized: 'Days since last update: \n {0}'
+    m_Metadata:
+      m_Items:
+      - rid: 1567346455918411778
+  - m_Id: 9079838727614465
+    m_Localized: CITATION
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9079838727614466
+    m_Localized: No matching data found!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9079838727614467
+    m_Localized: DETECTIVE MODE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9079838727614468
+    m_Localized: Discrepancy found!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9079838727614469
+    m_Localized: No discrepancies found!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9081625278820352
+    m_Localized: 'Civilian: {0}'
+    m_Metadata:
+      m_Items:
+      - rid: 1567346455918411778
   references:
     version: 2
     RefIds:
     - rid: 1567346455918411778
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_Entries: 00307adbdb3b13000030fa38344113000030fa583d471300
+        m_Entries: 00307adbdb3b13000030fa38344113000030fa583d4713000030fab11042200000307ab0104220000030baa8b0432000

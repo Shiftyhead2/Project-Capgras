@@ -19,6 +19,8 @@ public static class GameEvents
     public static Func<string> onGetName; //triggered when C.DB.Q is trying to get the name of the citizen
     public static Func<int> onGetDaysSinceUpdate; //triggered when C.DB.Q is trying to get the days since last update of the citizen
     public static Func<int> onGetGenderID; //triggered when we want to get the gender ID
+    public static Func<int> onGetFine; //triggered when we want to get the current fine
+    public static Func<bool> onGetDetectiveMode; //triggered when we want to get the current status of the detective mode
 
     public static Action onCallPerson; //triggered when the player interacts with an object that spawns the person
     public static Action<int> onPersonInformationGenerationDone; //triggered because we want to generate the numbers of days since the last update variable for NPC ID data

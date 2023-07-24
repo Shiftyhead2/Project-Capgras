@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffd93c3f19564fa469cdcfaed49b11b6, type: 3}
   m_Name: BribeDialogue
   m_EditorClassIdentifier: 
-  openingText: 'Let''s strike a deal. '
+  openingKey: key_dialogue_bride_opening_1
   type: 1
   openingBribeVariation:
   - {fileID: 11400000, guid: dd3d3286870f9b049a9899d361379a1d, type: 2}

@@ -11,15 +11,18 @@ public class DetectiveModeManager : MonoBehaviour
     [SerializeField]
     private List<int> fieldIDs;
 
+    string detectiveModeHeader;
+
     
 
-    public static bool inDetectiveMode { get; private set; } = false;
+    private bool inDetectiveMode  = false;
     // Start is called before the first frame update
     void Start()
     {
         fieldValues = new List<string>();
         fieldIDs = new List<int>();
         inDetectiveMode = false;
+        detectiveModeHeader = ReturnString(LocatilazitionStrings.MODUL_DETECTIVE_MODE_HEADER_KEY);
     }
 
 
@@ -29,6 +32,7 @@ public class DetectiveModeManager : MonoBehaviour
         GameEvents.onUnselect += RemoveFields;
         GameEvents.onPassField += setUp;
         GameEvents.onNPCFullyChecked += ClearField;
+        GameEvents.onGetDetectiveMode += ReturnCurrentDetectiveModeStatus;
     }
 
     private void OnDisable()
@@ -37,6 +41,7 @@ public class DetectiveModeManager : MonoBehaviour
         GameEvents.onUnselect -= RemoveFields;
         GameEvents.onPassField -= setUp;
         GameEvents.onNPCFullyChecked -= ClearField;
+        GameEvents.onGetDetectiveMode -= ReturnCurrentDetectiveModeStatus;
     }
 
 
@@ -67,24 +72,27 @@ public class DetectiveModeManager : MonoBehaviour
 
     void checkForDiscrepancy()
     {
-        if(fieldValues.Count != 2 && fieldIDs.Count != 2)
+
+        detectiveModeHeader = ReturnString(LocatilazitionStrings.MODUL_DETECTIVE_MODE_HEADER_KEY);
+
+        if (fieldValues.Count != 2 && fieldIDs.Count != 2)
         {
             return;
         }
 
         if (fieldIDs[0] != fieldIDs[1])
         {
-            GetData("DETECTIVE MODE", "No matching data found!", "OK!", GameEvents.onDetectiveModalClosed, false);
+            GetData(detectiveModeHeader, ReturnString(LocatilazitionStrings.DETECTIVE_NO_MATCH_KEY), "OK!", GameEvents.onDetectiveModalClosed, false);
             return;
         }
 
         if (fieldValues[0] != fieldValues[1])
         {
-            GetData("DETECTIVE MODE", "Discrepancy found!", "OK!", GameEvents.onDetectiveModalClosed, false);
+            GetData(detectiveModeHeader,ReturnString(LocatilazitionStrings.DETECTIVE_DISCREPANCY_KEY), "OK!", GameEvents.onDetectiveModalClosed, false);
             return;
         }
 
-        GetData("DETECTIVE MODE", "No descrepancies found!", "OK!", GameEvents.onDetectiveModalClosed, false);
+        GetData(detectiveModeHeader, ReturnString(LocatilazitionStrings.DETECTIVE_NO_DISCREPANCY_KEY), "OK!", GameEvents.onDetectiveModalClosed, false);
     }
 
     void RemoveFields(int ID,string value)
@@ -106,6 +114,22 @@ public class DetectiveModeManager : MonoBehaviour
     void GetData(string headerText,string bodyText,string confirmationText,Action action, bool hideMouse)
     {
         GameEvents.showModal?.Invoke(headerText, bodyText,confirmationText, action,hideMouse);
+    }
+
+    string ReturnString(string string_key, object[] args = null)
+    {
+        return GetLocalizedText(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME, string_key, args);
+    }
+
+
+    string GetLocalizedText(string table_key, string string_key, object[] args = null)
+    {
+        return LocalizationEventManager.GetLocalizedString(table_key,string_key, args);
+    }
+
+    bool ReturnCurrentDetectiveModeStatus()
+    {
+        return inDetectiveMode;
     }
 
 

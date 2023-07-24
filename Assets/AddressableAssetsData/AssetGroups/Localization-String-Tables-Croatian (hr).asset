@@ -24,6 +24,13 @@ MonoBehaviour:
     - Locale-hr
     - Preload
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 243562a8705d1da4aaae393ec6d45185
+    m_Address: DynamicDialogueTable_hr
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-hr
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 5224a01f8188a8646a1c880201f0a091, type: 2}
   m_SchemaSet:

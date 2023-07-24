@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     private int approvedCount;
     private int citations;
-    public int fine { get; private set; } = 5;
+    private int fine = 5;
 
     private GameObject _spawnedGameObject;
 
@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
         GameEvents.onCitationGiven += IncreaseCitationCount;
         GameEvents.onNPCSituation += onNPCSituation;
         GameEvents.onSituationResolved += onNPCSituationResolved;
+        GameEvents.onGetFine += ReturnCurrentFine;
     }
 
     private void OnDisable()
@@ -53,6 +54,7 @@ public class GameManager : MonoBehaviour
         GameEvents.onCitationGiven -= IncreaseCitationCount;
         GameEvents.onNPCSituation -= onNPCSituation;
         GameEvents.onSituationResolved -= onNPCSituationResolved;
+        GameEvents.onGetFine -= ReturnCurrentFine;
     }
 
     private void Awake()
@@ -137,6 +139,11 @@ public class GameManager : MonoBehaviour
         {
             fine += 5;
         }
+    }
+
+    private int ReturnCurrentFine()
+    {
+        return fine;
     }
 
 }

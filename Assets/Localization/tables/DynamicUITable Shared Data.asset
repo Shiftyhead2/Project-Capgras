@@ -95,6 +95,38 @@ MonoBehaviour:
     m_Key: key_dynamic_citation_outdated_database
     m_Metadata:
       m_Items: []
+  - m_Id: 9079838702448640
+    m_Key: key_dynamic_database_status_text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9079838727614464
+    m_Key: key_dynamic_database_days_since_update
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9079838727614465
+    m_Key: key_dynamic_modul_cittation_header
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9079838727614466
+    m_Key: key_dynamic_modul_detective_no_match
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9079838727614467
+    m_Key: key_dynamic_modul_detective_header
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9079838727614468
+    m_Key: key_dynamic_modul_detective_discrepancy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9079838727614469
+    m_Key: key_dynamic_modul_detective_all_ok
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9081625278820352
+    m_Key: key_database_civilian_text
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

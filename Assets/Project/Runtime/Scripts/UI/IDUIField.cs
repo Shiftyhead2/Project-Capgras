@@ -75,7 +75,12 @@ public class IDUIField : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (DetectiveModeManager.inDetectiveMode && eventData.clickCount == 2)
+        if(GameEvents.onGetDetectiveMode?.Invoke() == null)
+        {
+            return;
+        }
+
+        if ((bool)GameEvents.onGetDetectiveMode?.Invoke() && eventData.clickCount == 2)
         {
             Select();
             if (selected)

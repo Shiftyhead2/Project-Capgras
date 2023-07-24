@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a01b1e1bd21d6348bb4ca56176b22eb, type: 3}
   m_Name: Accept
   m_EditorClassIdentifier: 
-  choiceText: Let them through
+  choiceKey: key_dialogue_choice_accept
   ID: 0
