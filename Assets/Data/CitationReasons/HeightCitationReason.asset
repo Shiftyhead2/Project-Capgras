@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: HeightCitationReason
   m_EditorClassIdentifier: 
   fieldID: 4
-  fieldName: Height
+  fieldKey: key_dynamic_height_field

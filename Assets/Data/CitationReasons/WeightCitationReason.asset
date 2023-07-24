@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: WeightCitationReason
   m_EditorClassIdentifier: 
   fieldID: 3
-  fieldName: Weight
+  fieldKey: key_dynamic_weight_field

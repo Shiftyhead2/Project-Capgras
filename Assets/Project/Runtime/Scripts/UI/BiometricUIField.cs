@@ -43,11 +43,11 @@ public class BiometricUIField : MonoBehaviour, IPointerClickHandler
 
         if (fieldID == 3)
         {
-            fieldText.text = $"{data.FieldName}: {data.Value}kg";
+            fieldText.text = $"{data.FieldName}: {data.Value} kg";
         }
         else if(fieldID == 4)
         {
-            fieldText.text = $"{data.FieldName}: {data.Value}cm";
+            fieldText.text = $"{data.FieldName}: {data.Value} cm";
         }
         else
         {
@@ -57,7 +57,14 @@ public class BiometricUIField : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (DetectiveModeManager.inDetectiveMode && eventData.clickCount == 2)
+        if (GameEvents.onGetDetectiveMode?.Invoke() == null)
+        {
+            return;
+        }
+
+
+
+        if ((bool)GameEvents.onGetDetectiveMode?.Invoke() && eventData.clickCount == 2)
         {
             Select();
             if (selected)

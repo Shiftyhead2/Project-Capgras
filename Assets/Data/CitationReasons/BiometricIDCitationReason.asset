@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BiometricIDCitationReason
   m_EditorClassIdentifier: 
   fieldID: 5
-  fieldName: Biometric ID
+  fieldKey: key_dynamic_biometricID_field

@@ -62,7 +62,7 @@ public class DialogueUI : MonoBehaviour
         for(int i = 0; i < situationObject.dialogueChoices.Length; i++)
         {
             buttons[i].gameObject.SetActive(true);
-            buttonScripts[i].SetUpText(situationObject.dialogueChoices[i].choiceText, situationObject.dialogueChoices[i].ID);
+            buttonScripts[i].SetUpText(situationObject.dialogueChoices[i].ReturnString(), situationObject.dialogueChoices[i].ID);
         }
     }
 

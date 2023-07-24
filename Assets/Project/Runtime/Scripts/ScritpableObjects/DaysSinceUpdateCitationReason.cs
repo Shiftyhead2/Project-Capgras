@@ -5,6 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New DaysSinceUpdate Citation Reason", menuName = "Data/Citation reasons/DaysSinceUpdate Citation", order = 0)]
 public class DaysSinceUpdateCitationReason : CitationReasonBase
 {
+
+    [SerializeField]
+    private string citationReasonKey;
+
+
     public override bool CheckDays(int days)
     {
         if(days > 7 || days == -1)
@@ -42,6 +47,11 @@ public class DaysSinceUpdateCitationReason : CitationReasonBase
 
     public override string ReturnString()
     {
-        return $"Outdated citizen database! \n";
+        return $"{GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME,citationReasonKey)} \n";
+    }
+
+    private string GetLocalizedString(string table_key, string string_key, object[] args = null)
+    {
+        return LocalizationEventManager.GetLocalizedString(table_key, string_key, args);
     }
 }

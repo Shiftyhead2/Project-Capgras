@@ -1,0 +1,146 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: DynamicUITable_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: bd61162a29d28ea40912687a95cd721e, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 1567346455918411778
+  m_TableData:
+  - m_Id: 66185736192
+    m_Localized: Gender
+    m_Metadata:
+      m_Items: []
+  - m_Id: 212977987584
+    m_Localized: Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 363335397376
+    m_Localized: Age
+    m_Metadata:
+      m_Items: []
+  - m_Id: 521208999936
+    m_Localized: Weight
+    m_Metadata:
+      m_Items: []
+  - m_Id: 608819621888
+    m_Localized: Height
+    m_Metadata:
+      m_Items: []
+  - m_Id: 744719265792
+    m_Localized: Biometric ID
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13244953145344
+    m_Localized: Male
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13244953145345
+    m_Localized: Female
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5391194246492160
+    m_Localized: Alive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5391194271657984
+    m_Localized: Dead
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5391194271657985
+    m_Localized: Missing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5391194271657986
+    m_Localized: Unknown
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5413840023597056
+    m_Localized: A fine of {0} credits has been added to your account
+    m_Metadata:
+      m_Items:
+      - rid: 1567346455918411778
+  - m_Id: 5419717107527680
+    m_Localized: This person is reported with the status of {0} in our citizen database!
+    m_Metadata:
+      m_Items:
+      - rid: 1567346455918411778
+  - m_Id: 5423181187395584
+    m_Localized: 'You have been given a citation for the following reasons:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5423181187395585
+    m_Localized: Suspicious person not tagged with the suspicious tag!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5423181187395586
+    m_Localized: Incorrect usage of the suspicious tag!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5423181187395587
+    m_Localized: Possible doppelganger!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5426353368870912
+    m_Localized: '{0} is incorrect!'
+    m_Metadata:
+      m_Items:
+      - rid: 1567346455918411778
+  - m_Id: 5430231900499968
+    m_Localized: Outdated citizens database!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9079838702448640
+    m_Localized: 'Status: {0}'
+    m_Metadata:
+      m_Items:
+      - rid: 1567346455918411778
+  - m_Id: 9079838727614464
+    m_Localized: 'Days since last update: \n {0}'
+    m_Metadata:
+      m_Items:
+      - rid: 1567346455918411778
+  - m_Id: 9079838727614465
+    m_Localized: CITATION
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9079838727614466
+    m_Localized: No matching data found!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9079838727614467
+    m_Localized: DETECTIVE MODE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9079838727614468
+    m_Localized: Discrepancy found!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9079838727614469
+    m_Localized: No discrepancies found!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9081625278820352
+    m_Localized: 'Civilian: {0}'
+    m_Metadata:
+      m_Items:
+      - rid: 1567346455918411778
+  references:
+    version: 2
+    RefIds:
+    - rid: 1567346455918411778
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00307adbdb3b13000030fa38344113000030fa583d4713000030fab11042200000307ab0104220000030baa8b0432000

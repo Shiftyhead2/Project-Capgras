@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a01b1e1bd21d6348bb4ca56176b22eb, type: 3}
   m_Name: Accept,but do not act on it
   m_EditorClassIdentifier: 
-  choiceText: Accept, but do not act on it
+  choiceKey: key_dialogue_choice_accept_do_not_act
   ID: 2

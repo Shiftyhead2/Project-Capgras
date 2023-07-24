@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ecf81fcd55e36247af084553d6f8185, type: 3}
   m_Name: BribeEndingVariation1
   m_EditorClassIdentifier: 
-  text: 'if you let me through '
+  key: key_dialogue_bride_ending_1

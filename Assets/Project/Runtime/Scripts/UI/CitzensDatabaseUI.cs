@@ -105,16 +105,27 @@ public class CitzensDatabaseUI : MonoBehaviour
     {
         if (referencedStatus != null)
         {
-            statusText.text = $"Status: {referencedStatus.returnStatus()}";
+            statusText.text = $"{ReturnString(LocatilazitionStrings.DATABASE_STATUS_TEXT_KEY, new object[] {referencedStatus.returnStatus()})}";
         }
 
-        daysSinceUpdateText.text = $"Days since last update: \n {daysSinceLastUpdate}";
+        daysSinceUpdateText.text = $"{ReturnString(LocatilazitionStrings.DATABASE_DAYS_SINCE_UPDATE_KEY, new object[] { daysSinceLastUpdate })}";
     }
 
     void SetUpCitizenNameTexts()
     {
         searchNameText.text = $"{citizensName}";
-        citizenNameText.text = $"Citizen: {citizensName}";
+        citizenNameText.text = $"{ReturnString(LocatilazitionStrings.DATABASE_CIVILIAN_TEXT_KEY, new object[] { citizensName })}";
+    }
+
+
+    string ReturnString(string string_key, object[] args = null)
+    {
+        return GetLocalizedText(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME, string_key, args);
+    }
+
+    string GetLocalizedText(string table_key, string string_key, object[] args = null)
+    {
+        return LocalizationEventManager.GetLocalizedString(table_key, string_key, args);
     }
 
 }

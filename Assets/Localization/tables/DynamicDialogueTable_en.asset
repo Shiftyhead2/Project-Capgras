@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: DynamicDialogueTable_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 7b961de34cb1a8340b1900865e36b292, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 1567346685860380683
+  m_TableData:
+  - m_Id: 4174921740288
+    m_Localized: Accept
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4174972071936
+    m_Localized: Accept, but do not act on it
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4174980460544
+    m_Localized: Refuse
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9365322608640
+    m_Localized: '{0}\n{1} {2} credits {3}'
+    m_Metadata:
+      m_Items:
+      - rid: 1567346685860380683
+  - m_Id: 9365335191552
+    m_Localized: Please let me in!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9365335191553
+    m_Localized: Let's strike a deal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9365335191554
+    m_Localized: I will give you
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9365335191555
+    m_Localized: if you let me through
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 1567346685860380683
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 0030ba8884080000

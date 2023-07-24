@@ -1,0 +1,141 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: DynamicUITable Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: DynamicUITable
+  m_TableCollectionNameGuidString: bd61162a29d28ea40912687a95cd721e
+  m_Entries:
+  - m_Id: 66185736192
+    m_Key: key_dynamic_gender_field
+    m_Metadata:
+      m_Items: []
+  - m_Id: 212977987584
+    m_Key: key_dynamic_name_field
+    m_Metadata:
+      m_Items: []
+  - m_Id: 363335397376
+    m_Key: key_dynamic_age_field
+    m_Metadata:
+      m_Items: []
+  - m_Id: 521208999936
+    m_Key: key_dynamic_weight_field
+    m_Metadata:
+      m_Items: []
+  - m_Id: 608819621888
+    m_Key: key_dynamic_height_field
+    m_Metadata:
+      m_Items: []
+  - m_Id: 744719265792
+    m_Key: key_dynamic_biometricID_field
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13244953145344
+    m_Key: key_dynamic_gender_male
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13244953145345
+    m_Key: key_dynamic_gender_female
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5391194246492160
+    m_Key: key_dynamic_alive_status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5391194271657984
+    m_Key: key_dynamic_dead_status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5391194271657985
+    m_Key: key_dynamic_missing_status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5391194271657986
+    m_Key: key_dynamic_unknown_status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5413840023597056
+    m_Key: key_dynamic_citation_fine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5419717107527680
+    m_Key: key_dynamic_citation_status_reason
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5423181187395584
+    m_Key: key_dynamic_citation_header
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5423181187395585
+    m_Key: key_dynamic_citation_suspicious_reason
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5423181187395586
+    m_Key: key_dynamic_citation_incorrect_usage_reason
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5423181187395587
+    m_Key: key_dynamic_citation_doppleganger_reason
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5426353368870912
+    m_Key: key_dynamic_citation_field_reason
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5430231900499968
+    m_Key: key_dynamic_citation_outdated_database
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9079838702448640
+    m_Key: key_dynamic_database_status_text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9079838727614464
+    m_Key: key_dynamic_database_days_since_update
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9079838727614465
+    m_Key: key_dynamic_modul_cittation_header
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9079838727614466
+    m_Key: key_dynamic_modul_detective_no_match
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9079838727614467
+    m_Key: key_dynamic_modul_detective_header
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9079838727614468
+    m_Key: key_dynamic_modul_detective_discrepancy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9079838727614469
+    m_Key: key_dynamic_modul_detective_all_ok
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9081625278820352
+    m_Key: key_database_civilian_text
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 5563695531929370678
+  references:
+    version: 2
+    RefIds:
+    - rid: 5563695531929370678
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
+        asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1688047934653
