@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cysharp.Threading.Tasks;
 
 /// <summary>
 /// The main class that is responsible for managing the player input. This class is actually generic and easy to customize 
@@ -40,12 +41,30 @@ public class PlayerInputManager : MonoBehaviour
     private const string EXIT_DETECTIVE_MODE_ACTION = "Exit computer";
     #endregion
 
+    private bool componentsInitialized = false;
+
     // Start is called before the first frame update
-    void Awake()
+    private async void Awake()
     {
+        await InitializeAsync(); 
+    }
+
+
+    private async UniTask InitializeAsync()
+    {
+        await UniTask.Yield(PlayerLoopTiming.Initialization);
+
+        await UniTask.WhenAll(
+                WaitForComponentAsync<PlayerInput>(),
+                WaitForComponentAsync<PlayerMotor>(),
+                WaitForComponentAsync<PlayerLook>()
+                );
+
         playerInput = GetComponent<PlayerInput>();
         motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();
+        
+        
 
         movementAction = playerInput.actions[MOVEMENT_ACTION];
         lookAction = playerInput.actions[MOUSE_LOOK_ACTION];
@@ -58,10 +77,16 @@ public class PlayerInputManager : MonoBehaviour
         enterDetectiveModeAction = playerInput.actions[ENTER_DETECTIVE_MODE_ACTION];
         exitDetectiveModeAction = playerInput.actions[EXIT_DETECTIVE_MODE_ACTION];
 
+        componentsInitialized = true;
+
+        OnEnable();
+
     }
 
     private void Update()
     {
+        if (!componentsInitialized) return;
+
         checkSprint();
     }
 
@@ -69,17 +94,23 @@ public class PlayerInputManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!componentsInitialized) return;
         motor.ProcessMove(movementAction.ReadValue<Vector2>());
     }
 
     private void LateUpdate()
     {
+        if (!componentsInitialized) return;
+
         look.ProcessLook(lookAction.ReadValue<Vector2>());
     }
 
 
     private void OnEnable()
     {
+
+        if (!componentsInitialized) return;
+
         crouchAction.performed += handleCrouch;
         jumpAction.performed += handleJump;
         zoomAction.performed += handleZoom;
@@ -96,6 +127,9 @@ public class PlayerInputManager : MonoBehaviour
 
     private void OnDisable()
     {
+        if (!componentsInitialized) return;
+
+
         crouchAction.performed -= handleCrouch;
         jumpAction.performed -= handleJump;
         zoomAction.performed -= handleZoom;
@@ -131,7 +165,7 @@ public class PlayerInputManager : MonoBehaviour
 
     void checkSprint()
     {
-        if (sprintAction.IsPressed())
+        if (sprintAction.ReadValue<float>() > 0.1f)
         {
             motor.StartSprint();
         }
@@ -164,5 +198,11 @@ public class PlayerInputManager : MonoBehaviour
     void handleExitDetectiveMode(InputAction.CallbackContext context)
     {
        GameEvents.onExitComputerPressed?.Invoke();  
+    }
+
+
+    private async UniTask WaitForComponentAsync<T>() where T : Component
+    {
+        await UniTask.WaitUntil(() => GetComponent<T>() != null);
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 /// <summary>
 /// Main class that is responsible for managing the way the player interacts with the game world
@@ -21,8 +22,16 @@ public class PlayerInteraction : MonoBehaviour
     private const string INTERACT_ACTION = "Interact";
 
 
-    void Start()
+    async void Awake()
     {
+        await IntilializeAsync();
+    }
+
+    private async UniTask IntilializeAsync()
+    {
+        await UniTask.Yield(PlayerLoopTiming.Initialization);
+        await UniTask.WhenAll(WaitUntilComponentAsync<PlayerLook>(), WaitUntilComponentAsync<PlayerInputManager>(), WaitUntilCamAsync());
+
         cam = GetComponent<PlayerLook>().cam;
         playerInputManager = GetComponent<PlayerInputManager>();
     }
@@ -46,5 +55,15 @@ public class PlayerInteraction : MonoBehaviour
                 }
             }
         }
+    }
+
+    private async UniTask WaitUntilComponentAsync<T>() where T: Component
+    {
+        await UniTask.WaitUntil(() => GetComponent<T>() != null);
+    }
+
+    private async UniTask WaitUntilCamAsync()
+    {
+        await UniTask.WaitUntil(() => GetComponent<PlayerLook>().cam != null);
     }
 }

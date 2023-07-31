@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Cysharp.Threading.Tasks;
+
 
 public class UIDragable : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDragHandler
 {
@@ -9,10 +11,12 @@ public class UIDragable : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDragH
     private RectTransform rectTransform;
     private Canvas canvas;
 
-    void Awake()
+    async void Awake()
     {
-        rectTransform = GetComponent<RectTransform>();
-        canvas = GetComponentInParent<Canvas>();
+        await UniTask.WhenAll(
+                WaitForRectTransformAsync(),
+                WaitForCanvasAsync()
+            );
     }
 
 
@@ -30,7 +34,19 @@ public class UIDragable : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDragH
     public void OnEndDrag(PointerEventData eventData)
     {
         
-    }    
+    }
+    
+    private async UniTask WaitForRectTransformAsync()
+    {
+        await UniTask.WaitUntil(() => GetComponent<RectTransform>() != null);
+        rectTransform = GetComponent<RectTransform>();
+    }
+
+    private async UniTask WaitForCanvasAsync()
+    {
+        await UniTask.WaitUntil(() => GetComponentInParent<Canvas>() != null);
+        canvas = GetComponentInParent<Canvas>();
+    }
 
    
 }

@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -87,17 +88,29 @@ public class PlayerMotor : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    async void Awake()
     {
+        await IntilializeAsync();
+    }
+
+    private async UniTask IntilializeAsync()
+    {
+        await UniTask.Yield(PlayerLoopTiming.Initialization);
+        await UniTask.WhenAll(WaitUntilComponentAsync<CharacterController>(), WaitUntilComponentAsync<PlayerLook>(), WaitUntilCamAsync());
+
         characterController = GetComponent<CharacterController>();
         cam = GetComponent<PlayerLook>().cam;
         defaultYPos = cam.transform.localPosition.y;
         speed = walkingSpeed;
+
     }
+
 
     // Update is called once per frame
     void Update()
     {
+        if(characterController == null || cam == null) return;
+
         isGrounded = characterController.isGrounded;
         if (isCrouching)
         {
@@ -194,7 +207,7 @@ public class PlayerMotor : MonoBehaviour
     {
         if (ShouldCrouch)
         {
-            StartCoroutine(CrouchStand());
+            CrouchStandAsync().Forget();
         }
     }
 
@@ -212,14 +225,12 @@ public class PlayerMotor : MonoBehaviour
         }
     }
 
-    private IEnumerator CrouchStand()
+    private async UniTaskVoid CrouchStandAsync()
     {
-
-        if(isCrouching && Physics.Raycast(cam.transform.position, Vector3.up, 1f))
+        if (isCrouching && Physics.Raycast(cam.transform.position, Vector3.up, 1f))
         {
-            yield break;
+            return;
         }
-
 
         duringCrouchAnimation = true;
         float timeElapsed = 0;
@@ -233,7 +244,7 @@ public class PlayerMotor : MonoBehaviour
             characterController.height = Mathf.Lerp(currentHeight, targetHeight, timeElapsed / timeToCrouch);
             characterController.center = Vector3.Lerp(currentCenter, targetCenter, timeElapsed / timeToCrouch);
             timeElapsed += Time.deltaTime;
-            yield return null;
+            await UniTask.DelayFrame(1);
         }
 
         characterController.height = targetHeight;
@@ -242,5 +253,15 @@ public class PlayerMotor : MonoBehaviour
         isCrouching = !isCrouching;
 
         duringCrouchAnimation = false;
+    }
+
+    private async UniTask WaitUntilComponentAsync<T>() where T : Component
+    {
+        await UniTask.WaitUntil(() => GetComponent<T>() != null);
+    }
+
+    private async UniTask WaitUntilCamAsync()
+    {
+        await UniTask.WaitUntil(() => GetComponent<PlayerLook>().cam != null);
     }
 }

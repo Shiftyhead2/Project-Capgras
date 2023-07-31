@@ -1,6 +1,8 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// The main class responsible for handling the mouse movement
@@ -46,12 +48,21 @@ public class PlayerLook : MonoBehaviour
     }
 
 
-    private void Awake()
+    private async void Awake()
     {
+        await IntilializeAsync();
+    }
+
+    private async UniTask IntilializeAsync()
+    {
+        await UniTask.Yield(PlayerLoopTiming.Initialization);
+        await UniTask.WhenAll(WaitUntilCameraAsync());
+
         cam = GetComponentInChildren<Camera>();
         defaultFOV = cam.fieldOfView;
         DisableMouse();
     }
+
 
 
     public void ProcessLook(Vector2 input)
@@ -67,31 +78,29 @@ public class PlayerLook : MonoBehaviour
 
     public void HandleZoom()
     {
-      
         isZooming = !isZooming;
-        
 
-        if(zoomRoutine != null)
+        if (zoomRoutine != null)
         {
             StopCoroutine(zoomRoutine);
             zoomRoutine = null;
         }
 
-        zoomRoutine = StartCoroutine(ToggleZoom(isZooming));
+        zoomRoutine = StartCoroutine(ToggleZoomAsync(isZooming).ToCoroutine());
     }
 
 
-    private IEnumerator ToggleZoom(bool isEnter)
+    private async UniTask ToggleZoomAsync(bool isEnter)
     {
         float targetFOV = isEnter ? zoomF0V : defaultFOV;
         float startingFOV = cam.fieldOfView;
         float timeElapsed = 0f;
 
-        while(timeElapsed < timeToZoom)
+        while (timeElapsed < timeToZoom)
         {
             cam.fieldOfView = Mathf.Lerp(startingFOV, targetFOV, timeElapsed / timeToZoom);
             timeElapsed += Time.deltaTime;
-            yield return null;
+            await UniTask.Yield();
         }
 
         cam.fieldOfView = targetFOV;
@@ -109,5 +118,11 @@ public class PlayerLook : MonoBehaviour
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+    }
+
+
+    private async UniTask WaitUntilCameraAsync()
+    {
+        await UniTask.WaitUntil(() => GetComponentInChildren<Camera>() != null);
     }
 }
