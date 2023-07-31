@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 using UnityEngine.UI;
+using Cysharp.Threading.Tasks;
 
 public class CitzensDatabaseUI : MonoBehaviour
 {
@@ -82,18 +83,19 @@ public class CitzensDatabaseUI : MonoBehaviour
     {
         if(citizensName != string.Empty)
         {
-            searchCoroutine = StartCoroutine(SearchCitizenCouritine());
+            searchCoroutine = StartCoroutine(SearchCitizenCouritine().ToCoroutine());
         }
     }
 
-    private IEnumerator SearchCitizenCouritine()
+    private async UniTask SearchCitizenCouritine()
     {
         fillImage.fillAmount = 0f;
         float waitTime = Random.Range(minWaitTime, maxWaitTime);
         searchPanel.SetActive(false);
         searchingPanel.SetActive(true);
-        Tween imageFillTween = fillImage.DOFillAmount(1f, waitTime);
-        yield return imageFillTween.WaitForCompletion();
+        Tween tween = fillImage.DOFillAmount(1f, waitTime);
+        await tween.ToUniTask();
+
         searchingPanel.SetActive(false);
         statusPanel.SetActive(true);
         referencedStatus = GameEvents.onSearchFinished?.Invoke();

@@ -7,38 +7,40 @@ public class FPSDisplay : MonoBehaviour
 {
     public TextMeshProUGUI fpsText;
 
-    private float poolingTime = 0.5f;
+    private float pollingTime = 0.2f; // Corrected variable name
+
     private float time;
     private int frameCount;
 
 
     private void Start()
     {
-        #if UNITY_EDITOR
-        fpsText.enabled = false;
-        #else
-        fpsText.enabled = true;
-        #endif
-
+#if !UNITY_EDITOR
+        gameObject.SetActive(true);
+        enabled = true;
+#else
+        gameObject.SetActive(false);
+        enabled = false;
+#endif
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        #if !UNITY_EDITOR
+#if !UNITY_EDITOR
         time += Time.unscaledDeltaTime;
 
         frameCount++;
 
-        if(time >= poolingTime)
+        if (time >= pollingTime)
         {
             int frameRate = Mathf.RoundToInt(frameCount / time);
             fpsText.text = $"{frameRate} FPS";
 
-            time -= poolingTime;
+            time -= pollingTime;
             frameCount = 0;
         }
-        #endif
+#endif
     }
 }
