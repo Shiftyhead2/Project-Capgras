@@ -15,3 +15,5 @@ MonoBehaviour:
   statusKey: key_dynamic_missing_status
   statusColor: {r: 1, g: 0.78845626, b: 0, a: 1}
   ID: 102
+  maxChanceToOccur: 0.8
+  minChanceToOccur: 0.5

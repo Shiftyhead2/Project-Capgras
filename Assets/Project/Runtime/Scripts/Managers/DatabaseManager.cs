@@ -146,10 +146,53 @@ public class DatabaseManager : MonoBehaviour
     {
         if (isDoppleganger)
         {
-            return _statusObjects[Random.Range(0, _statusObjects.Count)];
+            float randomValue = Random.Range(0f, 1f); 
+
+            foreach (var statusObject in _statusObjects)
+            {
+                if (randomValue >= statusObject.minChanceToOccur && randomValue <= statusObject.maxChanceToOccur)
+                {
+                    return statusObject;
+                }
+            }
+        }
+        else
+        {
+            float combinedProbability = 0f;
+
+            foreach (var statusObject in _statusObjects)
+            {
+                if (statusObject.ID != 101 && statusObject.ID != 102)
+                {
+                    combinedProbability += statusObject.maxChanceToOccur - statusObject.minChanceToOccur;
+                }
+            }
+
+            float randomValue = Random.Range(0f, combinedProbability); 
+
+ 
+            foreach (var statusObject in _statusObjects)
+            {
+                if (statusObject.ID == 100) 
+                {
+                    if (randomValue < statusObject.maxChanceToOccur - statusObject.minChanceToOccur)
+                    {
+                        return statusObject;
+                    }
+                    randomValue -= statusObject.maxChanceToOccur - statusObject.minChanceToOccur;
+                }
+                else if (statusObject.ID == 103) 
+                {
+                    if (randomValue < statusObject.maxChanceToOccur - statusObject.minChanceToOccur)
+                    {
+                        return statusObject;
+                    }
+                    randomValue -= statusObject.maxChanceToOccur - statusObject.minChanceToOccur;
+                }
+            }
         }
 
-        return _statusObjects[Random.Range(0, 2)];
+        return null;
     }
 
     string getRandomString(int length)

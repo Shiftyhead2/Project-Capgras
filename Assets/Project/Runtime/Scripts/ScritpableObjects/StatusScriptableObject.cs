@@ -9,6 +9,9 @@ public class StatusScriptableObject : ScriptableObject
     public Color statusColor;
     public int ID;
 
+    public float maxChanceToOccur;
+    public float minChanceToOccur;
+
     public string returnStatus()
     {
         return $"<color=#{ColorUtility.ToHtmlStringRGBA(statusColor)}>{GetLocalizedString(LocatilazitionStrings.DYNAMIC_UI_TABLE_NAME,statusKey)}</color>";

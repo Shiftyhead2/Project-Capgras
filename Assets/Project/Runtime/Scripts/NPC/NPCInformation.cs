@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class NPCInformation : MonoBehaviour
 {
+
     [SerializeField]
     private DynamicModelAdjuster modelAdjuster;
 
@@ -70,13 +71,12 @@ public class NPCInformation : MonoBehaviour
     public float begChance = 0.5f;
     public float bribeChance = 0.5f;
 
-    private void Awake()
+    private  void Awake()
     {
         modelAdjuster = GetComponentInChildren<DynamicModelAdjuster>();
         GenerateInformation();
     }
 
-    
 
 
     void GenerateInformation()
@@ -103,6 +103,7 @@ public class NPCInformation : MonoBehaviour
 
     private void OnDisable()
     {
+
         GameEvents.onSearchFinished -= getCurrentStatus;
         GameEvents.onGetName -= getName;
         GameEvents.onPersonInformationGenerationDone -= setUpDays;
