@@ -3,8 +3,8 @@ using UnityEngine;
 public class NPCInformation : MonoBehaviour
 {
 
-    [SerializeField]
-    private DynamicModelAdjuster modelAdjuster;
+    //[SerializeField]
+    //private DynamicModelAdjuster modelAdjuster;
 
 
     [field: SerializeField]
@@ -73,7 +73,7 @@ public class NPCInformation : MonoBehaviour
 
     private  void Awake()
     {
-        modelAdjuster = GetComponentInChildren<DynamicModelAdjuster>();
+        //modelAdjuster = GetComponentInChildren<DynamicModelAdjuster>();
         GenerateInformation();
     }
 
@@ -144,7 +144,7 @@ public class NPCInformation : MonoBehaviour
         _nonStringHeight = (int)GameEvents.onHeightGenerated?.Invoke();
         Height = _nonStringHeight.ToString();
         GameEvents.onUpdateIDFields?.Invoke(4, Height);
-        modelAdjuster.AdjustBaseOffset(_nonStringHeight);
+        //modelAdjuster.AdjustBaseOffset(_nonStringHeight);
     }
 
     void GetBioID()
