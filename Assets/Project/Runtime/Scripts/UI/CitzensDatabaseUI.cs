@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 using TMPro;
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
+using System.Threading;
 
 public class CitzensDatabaseUI : MonoBehaviour
 {
@@ -26,7 +26,9 @@ public class CitzensDatabaseUI : MonoBehaviour
     private string citizensName;
     private int daysSinceLastUpdate;
 
-    private Coroutine searchCoroutine;
+
+    private UniTask searchTask;
+    private CancellationTokenSource searchCancellation;
 
     private StatusScriptableObject referencedStatus;
 
@@ -47,6 +49,14 @@ public class CitzensDatabaseUI : MonoBehaviour
 
     public void disableUI()
     {
+        if (searchCancellation != null && !searchCancellation.Token.IsCancellationRequested)
+        {
+            searchCancellation.Cancel();
+        }
+
+
+
+
         panelEnabler.DisableThisUI();
 
         referencedStatus = null;
@@ -79,22 +89,43 @@ public class CitzensDatabaseUI : MonoBehaviour
     }
 
 
-    public void SearchCitizen()
+    public async void SearchCitizen()
     {
         if(citizensName != string.Empty)
         {
-            searchCoroutine = StartCoroutine(SearchCitizenCouritine().ToCoroutine());
+            if (searchCancellation != null && !searchCancellation.Token.IsCancellationRequested)
+            {
+                searchCancellation.Cancel();
+            }
+
+
+            searchCancellation = new CancellationTokenSource();
+            searchTask = SearchCitizenCouritine(searchCancellation.Token);
+            await searchTask;
         }
     }
 
-    private async UniTask SearchCitizenCouritine()
+    private async UniTask SearchCitizenCouritine(CancellationToken cancellationToken)
     {
         fillImage.fillAmount = 0f;
         float waitTime = Random.Range(minWaitTime, maxWaitTime);
         searchPanel.SetActive(false);
         searchingPanel.SetActive(true);
-        Tween tween = fillImage.DOFillAmount(1f, waitTime);
-        await tween.ToUniTask();
+        float elapsedTime = 0f;
+        while (elapsedTime < waitTime)
+        {
+            if (cancellationToken.IsCancellationRequested)
+            {
+                searchPanel.SetActive(true);
+                searchingPanel.SetActive(false);
+                statusPanel.SetActive(false);
+                return;
+            }
+
+            fillImage.fillAmount = elapsedTime / waitTime;
+            await UniTask.DelayFrame(1);
+            elapsedTime += Time.deltaTime;
+        }
 
         searchingPanel.SetActive(false);
         statusPanel.SetActive(true);

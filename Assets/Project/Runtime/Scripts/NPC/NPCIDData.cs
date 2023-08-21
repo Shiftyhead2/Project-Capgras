@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 /// <summary>
 /// Base class for generating biometric field data
@@ -43,14 +44,26 @@ public class NPCIDData : MonoBehaviour
         GameEvents.onSuspiciousFlag -= FlagSuspicious;
     }
 
+    private async void Awake()
+    {
+        await InitializeAsync();
+    }
+
+    private async UniTask InitializeAsync()
+    {
+        await UniTask.Yield(PlayerLoopTiming.Initialization);
+        await UniTask.WhenAll(WaitForComponentAsync<NPCInformation>());
+
+        npcInformation = GetComponent<NPCInformation>();
+        GenerateFields();
+    }
+
 
     // Start is called before the first frame update
     void Start()
     {
-        npcInformation = GetComponent<NPCInformation>();
         CurrentAmountOfFalseData = 0;
         amountOfFields = 6;
-        GenerateFields();
     }
 
 
@@ -211,6 +224,11 @@ public class NPCIDData : MonoBehaviour
     string GetLocalizedString(string table_key, string string_key)
     {
         return LocalizationEventManager.GetLocalizedString(table_key, string_key);
+    }
+
+    private async UniTask WaitForComponentAsync<T>() where T : Component
+    {
+        await UniTask.WaitUntil(() => GetComponent<T>() != null);
     }
 
 }
