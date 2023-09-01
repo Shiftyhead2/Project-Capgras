@@ -55,9 +55,9 @@ public class PlayerInputManager : MonoBehaviour
         await UniTask.Yield(PlayerLoopTiming.Initialization);
 
         await UniTask.WhenAll(
-                WaitForComponentAsync<PlayerInput>(),
-                WaitForComponentAsync<PlayerMotor>(),
-                WaitForComponentAsync<PlayerLook>()
+                AsyncWaitForComponents.WaitForComponentAsync<PlayerInput>(gameObject),
+                AsyncWaitForComponents.WaitForComponentAsync<PlayerMotor>(gameObject),
+                AsyncWaitForComponents.WaitForComponentAsync<PlayerLook>(gameObject)
                 );
 
         playerInput = GetComponent<PlayerInput>();
@@ -198,11 +198,5 @@ public class PlayerInputManager : MonoBehaviour
     void handleExitDetectiveMode(InputAction.CallbackContext context)
     {
        GameEvents.onExitComputerPressed?.Invoke();  
-    }
-
-
-    private async UniTask WaitForComponentAsync<T>() where T : Component
-    {
-        await UniTask.WaitUntil(() => GetComponent<T>() != null);
     }
 }

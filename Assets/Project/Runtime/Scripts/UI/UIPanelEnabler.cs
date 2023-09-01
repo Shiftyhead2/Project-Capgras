@@ -6,6 +6,15 @@ using UnityEngine;
 public class UIPanelEnabler : MonoBehaviour
 {
     private CanvasGroup canvasGroup;
+
+
+    private async void Awake()
+    {
+        await WaitForCanvasGroupAsync();
+
+        canvasGroup = GetComponent<CanvasGroup>();
+    }
+
     public async void EnableThisUI()
     {
         await WaitForCanvasGroupAsync();
@@ -27,10 +36,6 @@ public class UIPanelEnabler : MonoBehaviour
 
     private async UniTask WaitForCanvasGroupAsync()
     {
-        await UniTask.WaitUntil(() => GetComponent<CanvasGroup>() != null);
-        if(canvasGroup == null)
-        {
-            canvasGroup = GetComponent<CanvasGroup>();
-        }
+        await AsyncWaitForComponents.WaitForComponentAsync<CanvasGroup>(gameObject);
     }
 }

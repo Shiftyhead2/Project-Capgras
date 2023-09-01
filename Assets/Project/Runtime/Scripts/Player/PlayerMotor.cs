@@ -96,7 +96,9 @@ public class PlayerMotor : MonoBehaviour
     private async UniTask IntilializeAsync()
     {
         await UniTask.Yield(PlayerLoopTiming.Initialization);
-        await UniTask.WhenAll(WaitUntilComponentAsync<CharacterController>(), WaitUntilComponentAsync<PlayerLook>(), WaitUntilCamAsync());
+        await UniTask.WhenAll(AsyncWaitForComponents.WaitForComponentAsync<CharacterController>(gameObject), 
+            AsyncWaitForComponents.WaitForComponentAsync<PlayerLook>(gameObject), 
+            AsyncWaitForComponents.WaitForCamAsync<PlayerLook>(gameObject));
 
         characterController = GetComponent<CharacterController>();
         cam = GetComponent<PlayerLook>().cam;
@@ -253,15 +255,5 @@ public class PlayerMotor : MonoBehaviour
         isCrouching = !isCrouching;
 
         duringCrouchAnimation = false;
-    }
-
-    private async UniTask WaitUntilComponentAsync<T>() where T : Component
-    {
-        await UniTask.WaitUntil(() => GetComponent<T>() != null);
-    }
-
-    private async UniTask WaitUntilCamAsync()
-    {
-        await UniTask.WaitUntil(() => GetComponent<PlayerLook>().cam != null);
     }
 }

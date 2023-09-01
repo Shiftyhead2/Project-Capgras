@@ -13,10 +13,15 @@ public class UIDragable : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDragH
 
     async void Awake()
     {
+        await UniTask.Yield(PlayerLoopTiming.Initialization);
+
         await UniTask.WhenAll(
-                WaitForRectTransformAsync(),
-                WaitForCanvasAsync()
+                AsyncWaitForComponents.WaitForComponentAsync<RectTransform>(gameObject),
+                AsyncWaitForComponents.WaitForComponentInParentAsync<Canvas>(gameObject)
             );
+
+        rectTransform = GetComponent<RectTransform>();
+        canvas = GetComponentInParent<Canvas>();
     }
 
 
@@ -35,18 +40,7 @@ public class UIDragable : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDragH
     {
         
     }
-    
-    private async UniTask WaitForRectTransformAsync()
-    {
-        await UniTask.WaitUntil(() => GetComponent<RectTransform>() != null);
-        rectTransform = GetComponent<RectTransform>();
-    }
-
-    private async UniTask WaitForCanvasAsync()
-    {
-        await UniTask.WaitUntil(() => GetComponentInParent<Canvas>() != null);
-        canvas = GetComponentInParent<Canvas>();
-    }
+   
 
    
 }

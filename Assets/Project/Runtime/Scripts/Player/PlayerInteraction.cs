@@ -30,7 +30,9 @@ public class PlayerInteraction : MonoBehaviour
     private async UniTask IntilializeAsync()
     {
         await UniTask.Yield(PlayerLoopTiming.Initialization);
-        await UniTask.WhenAll(WaitUntilComponentAsync<PlayerLook>(), WaitUntilComponentAsync<PlayerInputManager>(), WaitUntilCamAsync());
+        await UniTask.WhenAll(AsyncWaitForComponents.WaitForComponentAsync<PlayerLook>(gameObject), 
+            AsyncWaitForComponents.WaitForComponentAsync<PlayerInputManager>(gameObject), 
+            AsyncWaitForComponents.WaitForCamAsync<PlayerLook>(gameObject));
 
         cam = GetComponent<PlayerLook>().cam;
         playerInputManager = GetComponent<PlayerInputManager>();
@@ -55,15 +57,5 @@ public class PlayerInteraction : MonoBehaviour
                 }
             }
         }
-    }
-
-    private async UniTask WaitUntilComponentAsync<T>() where T: Component
-    {
-        await UniTask.WaitUntil(() => GetComponent<T>() != null);
-    }
-
-    private async UniTask WaitUntilCamAsync()
-    {
-        await UniTask.WaitUntil(() => GetComponent<PlayerLook>().cam != null);
     }
 }

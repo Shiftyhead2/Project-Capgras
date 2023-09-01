@@ -6,23 +6,32 @@ using DG.Tweening;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class BiometricUIField : MonoBehaviour, IPointerClickHandler
+public class BiometricUIField : MonoBehaviour, IPointerClickHandler , IPointerEnterHandler, IPointerExitHandler
 {
     public int fieldID = 0;
     public TextMeshProUGUI fieldText;
     [SerializeField]
     private string fieldValue;
     [SerializeField]
-    private Image image;
+    private Image fillImage;
     [SerializeField]
     private bool selected = false;
+    [SerializeField]
+    private Image bgImage;
+
+    [SerializeField]
+    private Color hoveredColor;
+    [SerializeField]
+    private Color unhoveredColor;
 
     private void OnEnable()
     {
-        image.fillAmount = 0f;
+        fillImage.fillAmount = 0f;
         selected = false;
+        bgImage.color = unhoveredColor;
         GameEvents.onUpdateBiometricFields += UpdateBiometricField;
         GameEvents.onExitDetectiveMode += UnSelect;
+        GameEvents.onExitDetectiveMode += UnHover;
         GameEvents.onDetectiveModalClosed += UnSelect;
     }
 
@@ -30,6 +39,7 @@ public class BiometricUIField : MonoBehaviour, IPointerClickHandler
     {
         GameEvents.onUpdateBiometricFields -= UpdateBiometricField;
         GameEvents.onExitDetectiveMode -= UnSelect;
+        GameEvents.onExitDetectiveMode -= UnHover;
         GameEvents.onDetectiveModalClosed -= UnSelect;
     }
 
@@ -95,11 +105,47 @@ public class BiometricUIField : MonoBehaviour, IPointerClickHandler
     {
         if (selected)
         {
-            image.DOFillAmount(1f, 0.5f);
+            fillImage.DOFillAmount(1f, 0.5f);
         }
         else
         {
-            image.DOFillAmount(0f, 0.5f);
+            fillImage.DOFillAmount(0f, 0.5f);
+        }
+    }
+
+    void UnHover()
+    {
+        TweenColorBackgroundImage(unhoveredColor);
+    }
+
+    void TweenColorBackgroundImage(Color color)
+    {
+        bgImage.DOColor(color, 0.5f);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (GameEvents.onGetDetectiveMode?.Invoke() == null)
+        {
+            return;
+        }
+
+        if(!selected && (bool)GameEvents.onGetDetectiveMode?.Invoke())
+        {
+            TweenColorBackgroundImage(hoveredColor);
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (GameEvents.onGetDetectiveMode?.Invoke() == null)
+        {
+            return;
+        }
+
+        if ((bool)GameEvents.onGetDetectiveMode?.Invoke())
+        {
+            TweenColorBackgroundImage(unhoveredColor);
         }
     }
 }

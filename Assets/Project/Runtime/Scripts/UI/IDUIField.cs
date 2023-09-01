@@ -6,7 +6,7 @@ using DG.Tweening;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class IDUIField : MonoBehaviour, IPointerClickHandler
+public class IDUIField : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler 
 {
     public int fieldID = 0;
 
@@ -15,16 +15,27 @@ public class IDUIField : MonoBehaviour, IPointerClickHandler
     [SerializeField]
     private string fieldValueText;
     [SerializeField]
-    private Image image;
+    private Image fillImage;
     [SerializeField]
     private bool selected = false;
 
+    [SerializeField]
+    private Image bgImage;
+
+    [SerializeField]
+    private Color unHoveredColor;
+    [SerializeField]
+    private Color hoveredColor;
+
     private void OnEnable()
     {
-        image.fillAmount = 0f;
+        fillImage.fillAmount = 0f;
         selected = false;
+
+        bgImage.color = unHoveredColor;
         GameEvents.onUpdateIDFields += UpdateField;
         GameEvents.onExitDetectiveMode += UnSelect;
+        GameEvents.onExitDetectiveMode += UnHover;
         GameEvents.onDetectiveModalClosed += UnSelect;
     }
 
@@ -32,6 +43,7 @@ public class IDUIField : MonoBehaviour, IPointerClickHandler
     {
         GameEvents.onUpdateIDFields -= UpdateField;
         GameEvents.onExitDetectiveMode -= UnSelect;
+        GameEvents.onExitDetectiveMode -= UnHover;
         GameEvents.onDetectiveModalClosed -= UnSelect;
     }
 
@@ -107,20 +119,60 @@ public class IDUIField : MonoBehaviour, IPointerClickHandler
         TweenImage();
     }
 
+    void UnHover()
+    {
+        TweenColorBackgroundImage(unHoveredColor);
+    }
+
+
+    void TweenColorBackgroundImage(Color color)
+    {
+        bgImage.DOColor(color, 0.5f);
+    }
+
     void TweenImage()
     {
         if (selected)
         {
-            image.DOFillAmount(1f, 0.5f);
+            fillImage.DOFillAmount(1f, 0.5f);
         }
         else
         {
-            image.DOFillAmount(0f, 0.5f);
+            fillImage.DOFillAmount(0f, 0.5f);
         }
     }
 
     string GetLocalizedString(string table_key, string string_key)
     {
         return LocalizationEventManager.GetLocalizedString(table_key, string_key);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if(GameEvents.onGetDetectiveMode?.Invoke() == null)
+        {
+            return;
+        }
+
+        if(!selected && (bool)GameEvents.onGetDetectiveMode?.Invoke())
+        {
+            TweenColorBackgroundImage(hoveredColor);
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (GameEvents.onGetDetectiveMode?.Invoke() == null)
+        {
+            return;
+        }
+
+
+
+        if ((bool)GameEvents.onGetDetectiveMode?.Invoke())
+        {
+            TweenColorBackgroundImage(unHoveredColor);
+        }
+        
     }
 }

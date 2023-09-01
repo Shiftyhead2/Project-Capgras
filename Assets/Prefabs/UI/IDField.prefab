@@ -306,8 +306,11 @@ MonoBehaviour:
   fieldID: 0
   fieldText: {fileID: 6552069252839056472}
   fieldValueText: 
-  image: {fileID: 1056407659248603086}
+  fillImage: {fileID: 1056407659248603086}
   selected: 0
+  bgImage: {fileID: 4795532630294719034}
+  unHoveredColor: {r: 0.92549026, g: 0.92549026, b: 0.92549026, a: 1}
+  hoveredColor: {r: 0.7921569, g: 0.7921569, b: 0.7921569, a: 1}
 --- !u!114 &2356143016810069311
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using Cysharp.Threading.Tasks;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class DatabaseManager : MonoBehaviour
@@ -25,9 +26,9 @@ public class DatabaseManager : MonoBehaviour
     private string _generatedLastName;
 
 
-    private void Awake()
+    private async void Awake()
     {
-        GetNames();
+       await GetNames();
     }
 
     private void OnEnable()
@@ -130,11 +131,17 @@ public class DatabaseManager : MonoBehaviour
 
     }
 
-    void GetNames()
+    async UniTask GetNames()
     {
-        Addressables.LoadAssetsAsync<NamesScript>(_femaleNameLabel, _firstFemaleNames.Add);
-        Addressables.LoadAssetsAsync<NamesScript>(_maleNameLabel, _firstMaleNames.Add);
-        Addressables.LoadAssetsAsync<NamesScript>(_surnameLabel, _surNames.Add);
+        AsyncOperationHandle<IList<NamesScript>> loadFemaleNamesTask = Addressables.LoadAssetsAsync<NamesScript>(_femaleNameLabel, _firstFemaleNames.Add);
+        AsyncOperationHandle<IList<NamesScript>> loadMaleNamesTask = Addressables.LoadAssetsAsync<NamesScript>(_maleNameLabel, _firstMaleNames.Add);
+        AsyncOperationHandle<IList<NamesScript>> loadSurnameTask = Addressables.LoadAssetsAsync<NamesScript>(_surnameLabel, _surNames.Add);
+
+        await UniTask.WhenAll(loadFemaleNamesTask.ToUniTask(), loadMaleNamesTask.ToUniTask(), loadSurnameTask.ToUniTask());
+
+        Addressables.Release(loadFemaleNamesTask);
+        Addressables.Release(loadMaleNamesTask);
+        Addressables.Release(loadSurnameTask);
     }
 
     private string ReturnNonDuplicatedName(List<NamesScript> namesList, string currentName)

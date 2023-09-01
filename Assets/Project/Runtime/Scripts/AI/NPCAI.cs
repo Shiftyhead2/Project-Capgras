@@ -49,11 +49,11 @@ public class NPCAI : MonoBehaviour, INPC
     {
         await UniTask.Yield(PlayerLoopTiming.Initialization);
 
-        await UniTask.WhenAll(WaitForFindComponentAsync<Path>(),
-            WaitForComponentAsync<StateMachine>(),
-            WaitForComponentAsync<NavMeshAgent>(),
-            WaitForComponentAsync<NPCInformation>(),
-            WaitForComponentAsync<NPCIDData>());
+        await UniTask.WhenAll(AsyncWaitForComponents.WaitForFindComponentAsync<Path>(),
+            AsyncWaitForComponents.WaitForComponentAsync<StateMachine>(gameObject),
+            AsyncWaitForComponents.WaitForComponentAsync<NavMeshAgent>(gameObject),
+            AsyncWaitForComponents.WaitForComponentAsync<NPCInformation>(gameObject),
+            AsyncWaitForComponents.WaitForComponentAsync<NPCIDData>(gameObject));
 
         path = FindObjectOfType<Path>();
         stateMachine = GetComponent<StateMachine>();
@@ -84,13 +84,5 @@ public class NPCAI : MonoBehaviour, INPC
         approvedForEntry = overrideApproval;
     }
 
-    private async UniTask WaitForComponentAsync<T>() where T : Component
-    {
-        await UniTask.WaitUntil(() => GetComponent<T>() != null);
-    }
-
-    private async UniTask WaitForFindComponentAsync<T>() where T: Component
-    {
-        await UniTask.WaitUntil(() => FindObjectOfType<T>() != null);
-    }
+    
 }
