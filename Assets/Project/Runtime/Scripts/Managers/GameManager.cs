@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class GameManager : MonoBehaviour
 {
@@ -103,13 +102,21 @@ public class GameManager : MonoBehaviour
     private void SpawnObject()
     {
         SpawnedPerson = true;
+
         spawnPrefab.InstantiateAsync(spawnPoint.transform.position, Quaternion.identity).Completed += (asyncOperation) => _spawnedGameObject = asyncOperation.Result;
     }
+
 
     private void DespawnPerson()
     {
         SpawnedPerson = false;
-        spawnPrefab.ReleaseInstance(_spawnedGameObject);
+
+        if (_spawnedGameObject != null)
+        {
+            spawnPrefab.ReleaseInstance(_spawnedGameObject);
+            _spawnedGameObject = null;
+            
+        }
     }
 
     private void onNPCSituation(SituationObject situationObject)

@@ -56,7 +56,7 @@ public class PlayerLook : MonoBehaviour
     private async UniTask IntilializeAsync()
     {
         await UniTask.Yield(PlayerLoopTiming.Initialization);
-        await UniTask.WhenAll(WaitUntilCameraAsync());
+        await UniTask.WhenAll(AsyncWaitForComponents.WaitForComponentInChildrenAsync<Camera>(gameObject));
 
         cam = GetComponentInChildren<Camera>();
         defaultFOV = cam.fieldOfView;
@@ -121,8 +121,5 @@ public class PlayerLook : MonoBehaviour
     }
 
 
-    private async UniTask WaitUntilCameraAsync()
-    {
-        await UniTask.WaitUntil(() => GetComponentInChildren<Camera>() != null);
-    }
+    
 }

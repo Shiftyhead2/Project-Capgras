@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class NPCInformation : MonoBehaviour
@@ -71,9 +72,11 @@ public class NPCInformation : MonoBehaviour
     public float begChance = 0.5f;
     public float bribeChance = 0.5f;
 
-    private  void Awake()
+    private async void Awake()
     {
         //modelAdjuster = GetComponentInChildren<DynamicModelAdjuster>();
+        await UniTask.Yield(PlayerLoopTiming.Initialization);
+        await UniTask.WhenAll(AsyncWaitForComponents.WaitForComponentAsync<NPCIDData>(gameObject));
         GenerateInformation();
     }
 
@@ -159,8 +162,11 @@ public class NPCInformation : MonoBehaviour
         return chance <= 0.3f;
     }
 
-    void setUpDays(int currentAmountOfFalseData)
+    async void setUpDays(int currentAmountOfFalseData)
     {
+        await UniTask.WhenAll(AsyncWaitForComponents.WaitForComponentAsync<NPCIDData>(gameObject));
+
+
         if(currentStatus.ID == 103)
         {
             daysSinceUpdate = -1;
